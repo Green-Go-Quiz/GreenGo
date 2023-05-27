@@ -2,16 +2,26 @@
 #Nome do arquivo: QuizDAO.php
 #Objetivo: classe DAO para o model de Quiz
 
-include_once(__DIR__ . "/../connection/Co
+include_once(__DIR__ . "/../connection/Connection.php");
 
-nnection.php");
 include_once(__DIR__ . "/../model/Quiz.php");
 include_once(__DIR__ . "/../model/Questao.php");
 
 
 class QuizDAO
 {
+    public function list()
+    {
+        echo "chegou";
+        $conn = Connection::getConn();
 
+        $sql = "SELECT * FROM quiz ORDER BY idQuiz";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapQuizzes($result);
+    }
     //Método para buscar um Quiz por seu ID
     public function findById(int $id)
     {
@@ -23,7 +33,7 @@ class QuizDAO
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
-      
+
         $quizzes = $this->mapQuizzes($result);
 
         if (count($quizzes) == 1)
@@ -44,12 +54,12 @@ class QuizDAO
             " VALUES (:id, :maximoPergunta, :nomeQuiz, :comTempo, :quantTempo, :idQuestao)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue("id", $quiz->getId());
+        $stm->bindValue("id", $quiz->getIdQuiz());
         $stm->bindValue("maximoPergunta", $quiz->getMaximoPergunta());
         $stm->bindValue("nomeQuiz", $quiz->getNome());
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
-        $stm->bindValue("idQuestao", $quiz->getQuestao());
+        $stm->bindValue("idQuestao", $quiz->getIdQuestao());
         $stm->execute();
     }
 
@@ -67,8 +77,8 @@ class QuizDAO
         $stm->bindValue("nomeQuiz", $quiz->getNome());
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
-        $stm->bindValue("questao", $quiz->getQuestao());
-        $stm->bindValue("id", $quiz->getId());
+        $stm->bindValue("questao", $quiz->getIdQuestao());
+        $stm->bindValue("id", $quiz->getIdQuiz());
         $stm->execute();
     }
     // Método para excluir um Quiz pelo seu ID
@@ -89,7 +99,7 @@ class QuizDAO
         $quizes = array();
         foreach ($result as $reg) {
             $quiz = new Quiz();
-            $quiz->setId($reg['idQuiz']);
+            $quiz->setIdQuiz($reg['idQuiz']);
             $quiz->setMaximoPergunta($reg['maximoPergunta']);
             $quiz->setNome($reg['nome']);
             $quiz->setComTempo($reg['comTempo']);
