@@ -3,39 +3,45 @@
 
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
-//require_once(__DIR__ . "/../model/Quiz.php");
+require_once(__DIR__ . "/../service/QuizService.php");
 
-class QuizController extends Controller {
+require_once(__DIR__ . "/../model/Quiz.php");
+
+class QuizController extends Controller
+{
     private QuizDAO $quizDao;
+    private QuizService $quizService;
 
-    public function __construct() {
+
+    public function __construct()
+    {
         if (!$this->usuarioLogado())
             exit;
 
-        
-        $this->quizDao = new QuizDAO();
-        //$this->quizoService = new QuizService();
 
-        
+        $this->quizDao = new QuizDAO();
+        $this->quizService = new QuizService();
+
+
         $this->handleAction();
     }
-    
+
     protected function list(string $msgErro = "", string $msgSucesso = "")
-    {    
+    {
         echo "passoou";
         $quizzes = $this->quizDao->list();
         $dados["lista"] = $quizzes;
 
         $this->loadView("quiz/listQuiz.php", $dados, $msgErro, $msgSucesso);
     }
-   
+
 
     protected function create()
     {
         $dados["id"] = 0;
         $this->loadView("quiz/form.php", $dados);
     }
- /*
+
     protected function edit()
     {
         $quiz = $this->findQuizById();
@@ -47,7 +53,7 @@ class QuizController extends Controller {
         } else {
             $this->list("Quiz não encontrado.");
         }
-    } 
+    }
 
     public function save()
     {
@@ -62,13 +68,13 @@ class QuizController extends Controller {
         // Cria objeto Quiz
         $quiz = new Quiz();
         $quiz->setMaximoPergunta($maximoPergunta);
-        $quiz->setNomeQuiz($nomeQuiz);
+        $quiz->setNome($nomeQuiz);
         $quiz->setComTempo($comTempo);
         $quiz->setQuantTempo($quantTempo);
         $quiz->setIdQuestao($idQuestao);
 
         // Valida os dados
-        ///$erros = $this->quizService->validarQuiz($quiz);
+        $erros = $this->quizService->validarQuiz($quiz);
 
         if (empty($erros)) {
             // Persiste o objeto
@@ -89,7 +95,26 @@ class QuizController extends Controller {
             }
         }
     }
-    */
+    public function delete()
+    {
+        $quiz = $this->findQuizById();
+        if ($quiz) {
+            $this->quizDao->deleteById($quiz->getIdQuiz());
+            $this->list("", "Quiz excluído com sucesso!");
+        } else {
+            $this->list("Quiz não encontrado!");
+        }
+    }
+    private function findQuizById()
+    {
+        $id = 0;
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+
+        $quiz = $this->quizDao->findById($id);
+        return $quiz;
+    }
 }
 
 #Criar objeto da classe

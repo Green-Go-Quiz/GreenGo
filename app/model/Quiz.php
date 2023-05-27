@@ -5,32 +5,14 @@
 class Quiz
 {
 
-    private $id;
+    private $idQuiz;
     private $maximoPergunta;
     private $nome;
     private $comTempo;
     private $quantTempo;
-    private $questao;
+    private $idQuestao;
 
-    /**
-     * Get the value of id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
-    /**
-     * Set the value of id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get the value of maximoPergunta
@@ -112,22 +94,44 @@ class Quiz
         return $this;
     }
 
+
+
     /**
-     * Get the value of questao
+     * Get the value of idQuiz
      */
-    public function getQuestao()
+    public function getIdQuiz()
     {
-        return $this->questao;
+        return $this->idQuiz;
     }
 
     /**
-     * Set the value of questao
+     * Set the value of idQuiz
      *
-     * @return self
+     * @return  self
      */
-    public function setQuestao($questao)
+    public function setIdQuiz($idQuiz)
     {
-        $this->questao = $questao;
+        $this->idQuiz = $idQuiz;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idQuestao
+     */
+    public function getIdQuestao()
+    {
+        return $this->idQuestao;
+    }
+
+    /**
+     * Set the value of idQuestao
+     *
+     * @return  self
+     */
+    public function setIdQuestao($idQuestao)
+    {
+        $this->idQuestao = $idQuestao;
 
         return $this;
     }

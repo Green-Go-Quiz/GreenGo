@@ -14,7 +14,7 @@ class QuizService
         if (!$quiz->getMaximoPergunta())
             array_push($erros, "O campo [Máximo de perguntas] é obrigatório.");
 
-        if (!$quiz->getNomeQuiz())
+        if (!$quiz->getNome())
             array_push($erros, "O campo [Nome do quiz] é obrigatório.");
 
         if ($quiz->getComTempo() && !$quiz->getQuantTempo())

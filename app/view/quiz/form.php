@@ -21,31 +21,25 @@ require_once(__DIR__ . "/../include/menu.php");
                 <div class="form-group">
                     <label for="txtMaximoPergunta">Máximo de perguntas:</label>
                     <input class="form-control" type="number" id="txtMaximoPergunta" name="maximoPergunta" min="1" placeholder="Informe o máximo de perguntas do quiz" value="<?php
-                                                                                                                                                                                        echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" />
+                                                                                                                                                                                echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
                     <label for="txtNomeQuiz">Nome do Quiz:</label>
                     <input class="form-control" type="text" id="txtNomeQuiz" name="nomeQuiz" maxlength="45" placeholder="Informe o nome do quiz" value="<?php
-                                                                                                                                                echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" />
+                                                                                                                                                        echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="chkComTempo">Com Tempo:</label>
-                    <input type="checkbox" id="chkComTempo" name="comTempo" value="1" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? "checked" : "" ?>>
+                    <label for="chkComTempo">Limite de tempo:</label>
+                    <input type="checkbox" id="chkComTempo" name="comTempo" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? "checked" : ""; ?>>
                 </div>
 
                 <div class="form-group">
-                    <label for="txtQuantTempo">Quantidade de Tempo:</label>
-                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php
-                                                                                                                                                                    echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() : ''); ?>" />
+                    <label for="txtQuantTempo">Quantidade de Tempo em Minutos:</label>
+                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() * 60 : ''); ?>" />
                 </div>
 
-                <div class="form-group">
-                    <label for="txtIdQuestao">ID da Questão:</label>
-                    <input class="form-control" type="number" id="txtIdQuestao" name="idQuestao" min="1" placeholder="Informe o ID da questão" value="<?php
-                                                                                                                                                    echo (isset($dados["quiz"]) ? $dados["quiz"]->getIdQuestao() : ''); ?>" />
-                </div>
 
                 <input type="hidden" id="hddIdQuiz" name="idQuiz" value="<?= $dados['id']; ?>" />
 
