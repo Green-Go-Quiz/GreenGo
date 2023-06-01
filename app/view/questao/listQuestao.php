@@ -27,8 +27,11 @@ require_once(__DIR__ . "/../include/menu.php");
                         <th>Grau de Dificuldade </th>
                         <th>Pontuação</th>
                         <th>Imagem</th>
+                        <th>alternativa</th>
                         <th>Alterar</th>
+                  
                         <th>Excluir</th>
+                        
                     </tr>
                 </thead>
 
@@ -40,7 +43,9 @@ require_once(__DIR__ . "/../include/menu.php");
                             <td><?= $q->getGrauDificuldadeTexto(); ?></td>
                             <td><?= $q->getPontuacao(); ?></td>
                             <td><?= $q->getImagem(); ?></td>
+                            <td><?= $q->getCamposAlternativa(); ?></td>    
 
+            
                             <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
                                     Alterar</a>
                             </td>

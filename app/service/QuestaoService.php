@@ -20,7 +20,10 @@ class QuestaoService
         if (!$questao->getPontuacao())
             array_push($erros, "O campo [Pontuação] é obrigatório.");
 
-        return $erros;
+  if (!$questao->getcamposAlternativa())
+            array_push($erros, "O campo [alternativa] é obrigatório."); 
+        
+            return $erros;
 
 
         //Deve ser utilizado o Dao nessa circunstância? Ele teria o papel de fazer a atualização dos dados no banco de dados,

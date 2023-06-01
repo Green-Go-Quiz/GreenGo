@@ -66,6 +66,12 @@ class QuestaoController extends Controller
         $grauDificuldade = isset($_POST['grauDificuldade']) ? trim($_POST['grauDificuldade']) : NULL;
         $pontuacao = isset($_POST['pontuacao']) ? trim($_POST['pontuacao']) : NULL;
         $imagem = isset($_POST['imagem']) ? trim($_POST['imagem']) : NULL;
+        $camposAlternativa = isset($_POST['camposAlternativa']) ? trim($_POST['camposAlternativa']) : NULL;
+
+      //  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+          // foreach ($_POST["camposDescricao"] as &$valor) {
+           //    $valor = trim($valor);
+
 
         // Cria objeto Questao
         $questao = new Questao();
@@ -73,6 +79,7 @@ class QuestaoController extends Controller
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
         $questao->setImagem($imagem);
+        $questao->setCamposAlternativa($camposAlternativa);
 
         // Valida os dados
         $erros = $this->questaoService->validarQuestao($questao);
