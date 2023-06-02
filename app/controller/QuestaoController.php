@@ -4,6 +4,7 @@ require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuestaoService.php");
 require_once(__DIR__ . "/../model/Questao.php");
+require_once(__DIR__ . "/../model/Alternativa.php");
 
 class QuestaoController extends Controller
 {
@@ -66,7 +67,7 @@ class QuestaoController extends Controller
         $grauDificuldade = isset($_POST['grauDificuldade']) ? trim($_POST['grauDificuldade']) : NULL;
         $pontuacao = isset($_POST['pontuacao']) ? trim($_POST['pontuacao']) : NULL;
         $imagem = isset($_POST['imagem']) ? trim($_POST['imagem']) : NULL;
-        $camposAlternativa = isset($_POST['camposAlternativa']) ? trim($_POST['camposAlternativa']) : NULL;
+        $campos_alternativa = isset($_POST['campos_alternativa']) ? trim($_POST['campos_alternativa']) : NULL;
 
       //  if ($_SERVER["REQUEST_METHOD"] === "POST") {
           // foreach ($_POST["camposDescricao"] as &$valor) {
@@ -79,7 +80,7 @@ class QuestaoController extends Controller
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
         $questao->setImagem($imagem);
-        $questao->setCamposAlternativa($camposAlternativa);
+        $questao->setCampos_alternativa($campos_alternativa);
 
         // Valida os dados
         $erros = $this->questaoService->validarQuestao($questao);

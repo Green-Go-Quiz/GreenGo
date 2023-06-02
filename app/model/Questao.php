@@ -10,7 +10,7 @@ class Questao
     private $grauDificuldade;
     private $pontuacao;
     private $imagem;
-private $camposAlternativa;
+
 
     /**
      * Get the value of idPergunta
@@ -119,21 +119,5 @@ private $camposAlternativa;
         return $this;
     }
 
-    /**
-     * Get the value of camposDescricao
-     */
-    public function getCamposAlternativa()
-    {
-        return $this->camposAlternativa;
-    }
-
-    /**
-     * Set the value of camposAlternativa
-     */
-    public function setCamposAlternativa($camposAlternativa): self
-    {
-        $this->camposAlternativa = $camposAlternativa;
-
-        return $this;
-    }
+  
 }
