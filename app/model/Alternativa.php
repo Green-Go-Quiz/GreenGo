@@ -2,42 +2,90 @@
 #Nome do arquivo: Alternativa.php
 #Objetivo: classe Model para Alternativa
 
-class campos_alternativa {
+class Alternativa {
     private $idAlternativa;
-    private $descricaoResposta;
-    private $respostaCerta;
-    private $idQuestao;
+    private $descricaoAlternativa;
+    private $alternativaCerta;
+    private $questao;
     
     // Getters e Setters
-    public function getIdAlternativa() {
+    /**
+     * Get the value of idAlternativa
+     */ 
+    public function getIdAlternativa()
+    {
         return $this->idAlternativa;
     }
-    
-    public function setIdAlternativa($idAlternativa) {
+
+    /**
+     * Set the value of idAlternativa
+     *
+     * @return  self
+     */ 
+    public function setIdAlternativa($idAlternativa)
+    {
         $this->idAlternativa = $idAlternativa;
+
+        return $this;
     }
-    
-    public function getDescricaoResposta() {
-        return $this->descricaoResposta;
+
+    /**
+     * Get the value of descricaoAlternativa
+     */ 
+    public function getDescricaoAlternativa()
+    {
+        return $this->descricaoAlternativa;
     }
-    
-    public function setDescricaoResposta($descricaoResposta) {
-        $this->descricaoResposta = $descricaoResposta;
+
+    /**
+     * Set the value of descricaoAlternativa
+     *
+     * @return  self
+     */ 
+    public function setDescricaoAlternativa($descricaoAlternativa)
+    {
+        $this->descricaoAlternativa = $descricaoAlternativa;
+
+        return $this;
     }
-    
-    public function getRespostaCerta() {
-        return $this->respostaCerta;
+
+    /**
+     * Get the value of alternativaCerta
+     */ 
+    public function getAlternativaCerta()
+    {
+        return $this->alternativaCerta;
     }
-    
-    public function setRespostaCerta($respostaCerta) {
-        $this->respostaCerta = $respostaCerta;
+
+    /**
+     * Set the value of alternativaCerta
+     *
+     * @return  self
+     */ 
+    public function setAlternativaCerta($alternativaCerta)
+    {
+        $this->alternativaCerta = $alternativaCerta;
+
+        return $this;
     }
-    
-    public function getIdQuestao() {
-        return $this->idQuestao;
+
+    /**
+     * Get the value of questao
+     */ 
+    public function getQuestao()
+    {
+        return $this->questao;
     }
-    
-    public function setIdQuestao($idQuestao) {
-        $this->idQuestao = $idQuestao;
+
+    /**
+     * Set the value of questao
+     *
+     * @return  self
+     */ 
+    public function setQuestao($questao)
+    {
+        $this->questao = $questao;
+
+        return $this;
     }
 }

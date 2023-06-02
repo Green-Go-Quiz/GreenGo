@@ -64,7 +64,7 @@ class QuizController extends Controller
         $comTempo = isset($_POST['comTempo']) ? (int) $_POST['comTempo'] : 0;
         $quantTempo = isset($_POST['quantTempo']) ? (int) $_POST['quantTempo'] : 0;
         $idQuestao = isset($_POST['idQuestao']) ? (int) $_POST['idQuestao'] : 0;
-
+         echo "salvou: ";
         // Cria objeto Quiz
         $quiz = new Quiz();
         $quiz->setMaximoPergunta($maximoPergunta);
@@ -72,15 +72,15 @@ class QuizController extends Controller
         $quiz->setComTempo($comTempo);
         $quiz->setQuantTempo($quantTempo);
         $quiz->setIdQuestao($idQuestao);
-
+            echo "criou o objeto   ";
         // Valida os dados
         $erros = $this->quizService->validarQuiz($quiz);
-
+       echo   "ta validando";
         if (empty($erros)) {
             // Persiste o objeto
             try {
-                if ($dados["id"] == 0) { // Inserindo
-                    $this->quizDao->insert($quiz);
+                if ($dados["id"] == 0) { // Inserindo  
+                    $this->quizDao->insert($quiz); echo "inseriu"; // trava aqui
                 } else { // Alterando
                     $quiz->setIdQuiz($dados["id"]);
                     $this->quizDao->update($quiz);

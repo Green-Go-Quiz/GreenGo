@@ -20,14 +20,15 @@ require_once(__DIR__ . "/../include/menu.php");
             <form id="frmQuiz" method="POST" action="<?= BASEURL ?>/controller/QuizController.php?action=save">
                 <div class="form-group">
                     <label for="txtMaximoPergunta">Máximo de perguntas:</label>
-                    <input class="form-control" type="number" id="txtMaximoPergunta" name="maximoPergunta" min="1" placeholder="Informe o máximo de perguntas do quiz" value="<?php
-                                                                                                                                                                                echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" />
+                    <input class="form-control" type="number" id="txtMaximoPergunta" name="maximoPergunta" min="1" 
+                    placeholder="Informe o máximo de perguntas do quiz" value="<?php
+                  echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
                     <label for="txtNomeQuiz">Nome do Quiz:</label>
                     <input class="form-control" type="text" id="txtNomeQuiz" name="nomeQuiz" maxlength="45" placeholder="Informe o nome do quiz" value="<?php
-                                                                                                                                                        echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" />
+                  echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
@@ -37,7 +38,8 @@ require_once(__DIR__ . "/../include/menu.php");
 
                 <div class="form-group">
                     <label for="txtQuantTempo">Quantidade de Tempo em Minutos:</label>
-                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() * 60 : ''); ?>" />
+                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" 
+                    value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() * 60 : ''); ?>" />
                 </div>
 
 

@@ -43,7 +43,7 @@ require_once(__DIR__ . "/../include/menu.php");
                             <td><?= $q->getGrauDificuldadeTexto(); ?></td>
                             <td><?= $q->getPontuacao(); ?></td>
                             <td><?= $q->getImagem(); ?></td>
-                            <td><?= $q->getcampos_Alternativa(); ?></td>    
+                            <td><?= $q->getAlternativasTexto(); ?></td>   
 
             
                             <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">

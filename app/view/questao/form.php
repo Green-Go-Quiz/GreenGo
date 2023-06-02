@@ -24,8 +24,9 @@ require_once(__DIR__ . "/../include/menu.php");
             <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controller/QuestaoController.php?action=save">
                 <div class="form-group">
                     <label for="txtDescricaoQ">Descrição:</label>
-                    <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" value="<?php
-                                                                                                                                                                    echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
+                    <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" 
+                        value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
+                </div>
                 <div class="form-group">
                     <label for="txtGrauDificuldade">Grau de dificuldade:</label>
                     <fieldset>
@@ -55,23 +56,21 @@ require_once(__DIR__ . "/../include/menu.php");
                     <label for="txtImagem">Imagem:</label>
                     <input class="form-control" type="text" id="txtImagem" name="imagem" maxlength="255" placeholder="Informe o caminho da imagem" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getImagem() : ''); ?>" />
                 </div>
-
-                <?php
-$camposAlternativa = ["campo1", "campo2", "campo3", "campo4"];
-?>
-
-<form id="frmQuiz" method="POST" action="<?= BASEURL ?>/controller/QuestaoController.php?action=save">
-    <?php foreach ($camposAlternativa as $campo): ?>
-        <div class="form-group">
-            <label for="txt<?= $campo ?>">Alternativa</label>
-            <input class="form-control" type="text" id="txt<?= $campo ?>" name="alternativa[]" maxlength="200" 
-            placeholder="Informe a descrição da alternativa" 
-            value="<?php echo (isset($_POST['camposAlternativa']) && isset($_POST['camposAlternativa'][$campo])) ? $_POST['camposAlternativa'][$campo] : ''; ?>">
-        </div>
-    <?php endforeach; ?>
+                
+                <?php $i=1; ?>
+                <?php foreach ($dados['alternativas'] as $campo): ?>
+                    <div class="form-group">
+                        <label for="txt<?= $campo ?>">Alternativa <?= $i; ?></label>
+                        <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" 
+                        placeholder="Informe a descrição da alternativa" 
+                        value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ? 
+                                    $dados["questao"]->getAlternativas()[$i-1]->getDescricaoAlternativa() : ''); ?>">
+                    </div>
+                    <?php $i++; ?>
+                <?php endforeach; ?>
     
   
-</form>
+
 
 
                 <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />

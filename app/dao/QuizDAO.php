@@ -60,6 +60,7 @@ class QuizDAO
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
         $stm->bindValue("idQuestao", $quiz->getIdQuestao());
+        
         $stm->execute();
     }
 

@@ -5,11 +5,16 @@ require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuestaoService.php");
 require_once(__DIR__ . "/../model/Questao.php");
 require_once(__DIR__ . "/../model/Alternativa.php");
+require_once(__DIR__ . "/../dao/AlternativaDAO.php");
+
 
 class QuestaoController extends Controller
 {
     private QuestaoDAO $questaoDao;
+    private AlternativaDAO $alternativaDao;
     private QuestaoService $questaoService;
+
+    private array $camposAlternativas = ["alternativa1", "alternativa2", "alternativa3", "alternativa4"];
 
     public function __construct()
     {
@@ -23,6 +28,7 @@ class QuestaoController extends Controller
         */
 
         $this->questaoDao = new QuestaoDAO();
+        $this->alternativaDao = new AlternativaDAO();
         $this->questaoService = new QuestaoService();
 
         $this->handleAction();
@@ -32,8 +38,14 @@ class QuestaoController extends Controller
     {
         echo "ta funcionando";
         $questoes = $this->questaoDao->list();
-        $dados["lista"] = $questoes;
 
+        //Adicionar as alternativas em cada questão
+        foreach ($questoes as $questao) {
+            $listaAlt = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
+            $questao->setAlternativas($listaAlt);
+        }
+
+        $dados["lista"] = $questoes;
 
         $this->loadView("questao/listQuestao.php", $dados, $msgErro, $msgSucesso);
     }
@@ -44,6 +56,8 @@ class QuestaoController extends Controller
         //$dados["pontuacao"] = 0;
         $dados["id"] = 0;
         //$dados["grauDificuldade"] = ['facil', 'medio', 'dificil'];
+        
+        $dados['alternativas'] = $this->camposAlternativas;
         $this->loadView("questao/form.php", $dados);
     }
 
@@ -52,7 +66,10 @@ class QuestaoController extends Controller
         $questao = $this->findQuestaoById();
         if ($questao) {
             $dados["id"] = $questao->getIdQuestao();
+            //Carregar as alternativas
+
             $dados["questao"] = $questao;
+            $dados['alternativas'] = $this->camposAlternativas;
 
             $this->loadView("questao/form.php", $dados);
         } else
@@ -67,12 +84,12 @@ class QuestaoController extends Controller
         $grauDificuldade = isset($_POST['grauDificuldade']) ? trim($_POST['grauDificuldade']) : NULL;
         $pontuacao = isset($_POST['pontuacao']) ? trim($_POST['pontuacao']) : NULL;
         $imagem = isset($_POST['imagem']) ? trim($_POST['imagem']) : NULL;
-        $campos_alternativa = isset($_POST['campos_alternativa']) ? trim($_POST['campos_alternativa']) : NULL;
 
-      //  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-          // foreach ($_POST["camposDescricao"] as &$valor) {
-           //    $valor = trim($valor);
-
+        $textoAlternativa = array();
+        foreach($this->camposAlternativas as $campo) {
+            $texto = isset($_POST[$campo]) ? trim($_POST[$campo]) : NULL; 
+            array_push($textoAlternativa, $texto);
+        }
 
         // Cria objeto Questao
         $questao = new Questao();
@@ -80,7 +97,16 @@ class QuestaoController extends Controller
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
         $questao->setImagem($imagem);
-        $questao->setCampos_alternativa($campos_alternativa);
+       // $questao->setCampos_alternativa($campos_alternativa);
+
+        //Criar objetos Alternativa
+        $alternativas = array();
+        foreach ($textoAlternativa as $texto) {
+            $alt = new Alternativa();
+            $alt->setDescricaoAlternativa($texto);
+            $alt->setAlternativaCerta(0);
+            array_push($alternativas, $alt);
+        }
 
         // Valida os dados
         $erros = $this->questaoService->validarQuestao($questao);
@@ -90,10 +116,21 @@ class QuestaoController extends Controller
             // Persiste o objeto
             try {
                 if ($dados["id"] == 0) { // Inserindo
-                    $this->questaoDao->insert($questao);
+                    $idQuestao = $this->questaoDao->insert($questao);
+                    foreach($alternativas as $alt) {
+                        $this->alternativaDao->insert($alt, $idQuestao);
+                    }
+                    
                 } else { // Alterando
                     $questao->setIdQuestao($dados["id"]);
                     $this->questaoDao->update($questao);
+                    
+                    /*
+                    foreach($questao->getAlternativas() as $alt) {
+                        $this->alternativaDao->update($alt, $questao->getIdQuestao());
+                    }
+                    */
+
                 }
 
                 // Enviar mensagem de sucesso
@@ -107,6 +144,7 @@ class QuestaoController extends Controller
 
         // Se há erros, volta para o formulário
         $dados["questao"] = $questao;
+        $dados['alternativas'] = $this->camposAlternativas;
         $msgsErro = implode("<br>", $erros);
         $this->loadView("questao/form.php", $dados, $msgsErro);
     }
@@ -118,6 +156,8 @@ class QuestaoController extends Controller
         $questao = $this->findQuestaoById();
         if ($questao) {
             $this->questaoDao->deleteById($questao->getIdQuestao());
+
+            //$this->alternativaDao->deleteByIdQuestao($questao->getIdQuestao());
            
             $this->list("", "Questão excluída com sucesso!");
         } else {

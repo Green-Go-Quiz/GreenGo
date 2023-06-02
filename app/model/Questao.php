@@ -11,6 +11,8 @@ class Questao
     private $pontuacao;
     private $imagem;
 
+    private $alternativas; //Campo que armazena um array de objetos Alternativa
+
 
     /**
      * Get the value of idPergunta
@@ -119,5 +121,33 @@ class Questao
         return $this;
     }
 
-  
+    /**
+     * Get the value of alternativas
+     */ 
+    public function getAlternativas()
+    {
+        return $this->alternativas;
+    }
+
+    public function getAlternativasTexto() {
+        $str = "";
+        foreach($this->alternativas as $alt) {
+            $str .= $alt->getDescricaoAlternativa() . "\n";
+        }  
+
+        $str = trim($str);
+        return str_replace("\n", "<br>", $str);
+    }
+
+    /**
+     * Set the value of alternativas
+     *
+     * @return  self
+     */ 
+    public function setAlternativas($alternativas)
+    {
+        $this->alternativas = $alternativas;
+
+        return $this;
+    }
 }

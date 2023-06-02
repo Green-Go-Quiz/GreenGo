@@ -62,6 +62,7 @@ class QuestaoDAO
         $stm->bindValue("imagem", $questao->getImagem());
 
         $stm->execute();
+        return $conn->lastInsertId();
     }
 
 

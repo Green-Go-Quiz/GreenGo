@@ -20,8 +20,8 @@ class QuestaoService
         if (!$questao->getPontuacao())
             array_push($erros, "O campo [Pontuação] é obrigatório.");
 
-  //if (!$questao->getcampos_Alternativa())
-           // array_push($erros, "O campo [alternativa] é obrigatório."); 
+        // if (!$questao->getDescricaoResposta())
+         //  array_push($erros, "O campo [alternativa] é obrigatório."); 
         
             return $erros;
 
