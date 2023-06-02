@@ -20,7 +20,7 @@ require_once(__DIR__ . "/../include/menu.php");
             <form id="frmUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=save">
                 <div class="form-group">
                     <label for="txtNome">Nome:</label>
-                    <input class="form-control" type="text" id="txtNome" name="nome" maxlength="70" placeholder="Informe o nome" value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getNome()
+                    <input class="form-control" type="text" id="txtNome" name="nome" maxlength="80" placeholder="Informe o nome" value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getNome()
                                                                                                                                             : ''); ?>" />
                 </div>
 
