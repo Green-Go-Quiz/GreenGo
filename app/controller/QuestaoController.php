@@ -61,7 +61,7 @@ class QuestaoController extends Controller
         $this->loadView("questao/form.php", $dados);
     }
 
-    protected function edit()
+    /*protected function edit()
     {
         $questao = $this->findQuestaoById();
         if ($questao) {
@@ -74,6 +74,22 @@ class QuestaoController extends Controller
             $this->loadView("questao/form.php", $dados);
         } else
             $this->list("Questão não encontrada.");
+    }*/
+    protected function edit()
+    {
+        $questao = $this->findQuestaoById();
+        if ($questao) {
+            $dados["id"] = $questao->getIdQuestao();
+            // Carregar as alternativas
+            $dados["questao"] = $questao;
+            $dados['alternativas'] = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
+
+
+
+            $this->loadView("questao/form.php", $dados);
+        } else {
+            $this->list("Questão não encontrada.");
+        }
     }
 
     public function save()

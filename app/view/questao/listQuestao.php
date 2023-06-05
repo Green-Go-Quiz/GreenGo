@@ -49,10 +49,11 @@ require_once(__DIR__ . "/../include/menu.php");
                             <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
                                     Alterar</a>
                             </td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao() ?>">
-                                    Excluir</a>
+                            <td>
+                       <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao() 
+                       ?>" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+</td>
 
-                            </td>
 
                         </tr>
                     <?php endforeach; ?>

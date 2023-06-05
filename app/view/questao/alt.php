@@ -52,6 +52,11 @@ require_once(__DIR__ . "/../include/menu.php");
                     <label for="txtImagem">Imagem:</label>
                     <input class="form-control" type="text" id="txtImagem" name="imagem" maxlength="255" placeholder="Informe o caminho da imagem" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getImagem() : ''); ?>" />
                 </div>
+                 
+ <!-- teste para alterar a alternativa-->
+  
+
+               
 
 
                 <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />

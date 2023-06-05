@@ -30,10 +30,12 @@ require_once(__DIR__ . "/../include/menu.php");
                     <label for="txtQuantTempo">Quantidade de Tempo:</label>
                     <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() : ''); ?>" />
                 </div>
+                
 
                 <div class="form-group">
                     <label for="txtIdQuestao">ID da Questão:</label>
-                    <input class="form-control" type="number" id="txtIdQuestao" name="idQuestao" min="1" placeholder="Informe o ID da questão" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getIdQuestao() : ''); ?>" />
+                    <input class="form-control" type="number" id="txtIdQuestao" name="idQuestao" min="1" 
+                    placeholder="Informe o ID da questão" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getIdQuestao() : ''); ?>" />
                 </div>
 
                 <input type="hidden" id="hddIdQuiz" name="idQuiz" value="<?= $dados['idQuiz']; ?>" />

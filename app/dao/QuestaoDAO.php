@@ -95,18 +95,34 @@ class QuestaoDAO
         $stm->bindValue("id", $questao->getIdQuestao());
         $stm->execute();
     }
-    // Método para excluir uma Questao pelo seu ID
-    public function deleteById(int $id)
-    {
     
+       // Método para excluir uma Alternativa pelo seu ID
+    public function deleteAlternativasByQuestaoId(int $id)
+    {
         $conn = Connection::getConn();
-
-        $sql = "DELETE FROM questao WHERE idQuestao = :id";
-
+    
+        $sql = "DELETE FROM alternativa WHERE idQuestao = :id";
+    
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $id);
         $stm->execute();
     }
+    
+     
+    // Método para excluir uma Questao pelo seu ID
+    public function deleteById(int $id)
+    {
+        $this->deleteAlternativasByQuestaoId($id);
+    
+        $conn = Connection::getConn();
+    
+        $sql = "DELETE FROM questao WHERE idQuestao = :id";
+    
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id", $id);
+        $stm->execute();
+    }
+    
     // Método para converter um registro da base de dados em um objeto Questao
     private function mapQuestoes($result)
     {
