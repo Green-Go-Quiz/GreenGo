@@ -3,6 +3,7 @@
 
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
+require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuizService.php");
 
 require_once(__DIR__ . "/../model/Quiz.php");
@@ -68,11 +69,19 @@ class QuizController extends Controller
         // Cria objeto Quiz
         $quiz = new Quiz();
         $quiz->setMaximoPergunta($maximoPergunta);
-        $quiz->setNome($nomeQuiz);
+        $quiz->setNomeQuiz($nomeQuiz);
         $quiz->setComTempo($comTempo);
         $quiz->setQuantTempo($quantTempo);
         $quiz->setIdQuestao($idQuestao);
             echo "criou o objeto   ";
+
+        // Verifica se o ID da questão foi selecionado e válido
+        if ($idQuestao > 0) {
+            $quiz->setIdQuestao($idQuestao); // Define o ID da questão no objeto Quiz
+        } else {
+            $erros[] = "Selecione uma questão.";
+        }
+
         // Valida os dados
         $erros = $this->quizService->validarQuiz($quiz);
        echo   "ta validando";
@@ -91,10 +100,16 @@ class QuizController extends Controller
                 $this->list("", $msg);
                 exit;
             } catch (PDOException $e) {
-                $erros = "[Erro ao salvar o quiz na base de dados.]";
+                $erros[] = "Erro ao salvar o quiz na base de dados.";
             }
         }
+
+        // Enviar mensagem de erro
+        $msgErro = implode("<br>", $erros);
+        $this->list($msgErro);
     }
+
+
     public function delete()
     {
         $quiz = $this->findQuizById();

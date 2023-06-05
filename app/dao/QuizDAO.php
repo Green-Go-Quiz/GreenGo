@@ -45,24 +45,25 @@ class QuizDAO
             " - Erro: mais de um quiz encontrado.");
     }
 
-    //Método para inserir um Quiz
+    // QuizDAO.php
     public function insert(Quiz $quiz)
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO quiz (idQuiz, maximoPergunta, nomeQuiz, comTempo, quantTempo, idQuestao)" .
-            " VALUES (:id, :maximoPergunta, :nomeQuiz, :comTempo, :quantTempo, :idQuestao)";
+        $sql = "INSERT INTO quiz (maximoPergunta, nomeQuiz, comTempo, quantTempo, idQuestao)" .
+            " VALUES (:maximoPergunta, :nomeQuiz, :comTempo, :quantTempo, :idQuestao)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue("id", $quiz->getIdQuiz());
         $stm->bindValue("maximoPergunta", $quiz->getMaximoPergunta());
-        $stm->bindValue("nomeQuiz", $quiz->getNome());
+        $stm->bindValue("nomeQuiz", $quiz->getNomeQuiz());
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
         $stm->bindValue("idQuestao", $quiz->getIdQuestao());
         
         $stm->execute();
     }
+
+
 
     //Método para atualizar um Quiz
     public function update(Quiz $quiz)
@@ -75,13 +76,14 @@ class QuizDAO
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("maximoPergunta", $quiz->getMaximoPergunta());
-        $stm->bindValue("nomeQuiz", $quiz->getNome());
+        $stm->bindValue("nomeQuiz", $quiz->getNomeQuiz()); // Corrigido: use getNomeQuiz() em vez de getNome()
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
-        $stm->bindValue("questao", $quiz->getIdQuestao());
+        $stm->bindValue("idQuestao", $quiz->getIdQuestao());
         $stm->bindValue("id", $quiz->getIdQuiz());
         $stm->execute();
     }
+
     // Método para excluir um Quiz pelo seu ID
     public function deleteById(int $id)
     {
@@ -102,7 +104,7 @@ class QuizDAO
             $quiz = new Quiz();
             $quiz->setIdQuiz($reg['idQuiz']);
             $quiz->setMaximoPergunta($reg['maximoPergunta']);
-            $quiz->setNome($reg['nome']);
+            $quiz->setNomeQuiz($reg['nomeQuiz']);
             $quiz->setComTempo($reg['comTempo']);
             $quiz->setQuantTempo($reg['quantTempo']);
             array_push($quizes, $quiz);
