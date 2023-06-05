@@ -7,7 +7,7 @@ class Quiz
 
     private $idQuiz;
     private $maximoPergunta;
-    private $nome;
+    private $nomeQuiz;
     private $comTempo;
     private $quantTempo;
     private $idQuestao;
@@ -34,25 +34,6 @@ class Quiz
         return $this;
     }
 
-    /**
-     * Get the value of nome
-     */
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    /**
-     * Set the value of nome
-     *
-     * @return self
-     */
-    public function setNome($nome)
-    {
-        $this->nome = $nome;
-
-        return $this;
-    }
 
     /**
      * Get the value of comTempo
@@ -132,6 +113,26 @@ class Quiz
     public function setIdQuestao($idQuestao)
     {
         $this->idQuestao = $idQuestao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nomeQuiz
+     */
+    public function getNomeQuiz()
+    {
+        return $this->nomeQuiz;
+    }
+
+    /**
+     * Set the value of nomeQuiz
+     *
+     * @return  self
+     */
+    public function setNomeQuiz($nomeQuiz)
+    {
+        $this->nomeQuiz = $nomeQuiz;
 
         return $this;
     }

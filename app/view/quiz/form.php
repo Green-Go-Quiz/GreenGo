@@ -4,6 +4,12 @@
 
 require_once(__DIR__ . "/../include/header.php");
 require_once(__DIR__ . "/../include/menu.php");
+require_once(__DIR__ . "/../../dao/QuestaoDAO.php"); // Importando o DAO de Questão
+
+// Obter a lista de perguntas para exibição no dropdown
+$questaoDAO = new QuestaoDAO();
+$perguntas = $questaoDAO->list();
+
 ?>
 
 <h3 class="text-center">
@@ -31,14 +37,58 @@ require_once(__DIR__ . "/../include/menu.php");
                 </div>
 
                 <div class="form-group">
-                    <label for="chkComTempo">Limite de tempo:</label>
-                    <input type="checkbox" id="chkComTempo" name="comTempo" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? "checked" : ""; ?>>
+                    <label for="radComTempo">Com Limite de Tempo:</label>
+
+                    <!-- 0 representa "não", enquanto 1 representa "sim".
+                        Foi optado para ser feito desta maneira por conta do fato de que o atributo comTempo
+                    é um tinyint !-->
+
+                    <input type="radio" id="radComTempoSim" name="comTempo" value="1" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? "checked" : ""; ?>>
+                    <label for="radComTempoSim">Sim</label>
+                    <input type="radio" id="radComTempoNao" name="comTempo" value="0" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 0) ? "checked" : ""; ?>>
+                    <label for="radComTempoNao">Não</label>
+                </div>
+
+                <div class="form-group" id="divQuantTempo" style="<?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? 'block' : 'none'; ?>">
+                    <label for="txtQuantTempo">Quantidade de Tempo:</label>
+                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() * 60 : ''); ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="txtQuantTempo">Quantidade de Tempo em Minutos:</label>
-                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() * 60 : ''); ?>" />
+                    <label>Perguntas:</label>
+                    <?php foreach ($perguntas as $pergunta) : ?>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $pergunta->getDescricaoQ() ?></h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="pergunta<?= $pergunta->getIdQuestao() ?>" name="perguntas[]" value="<?= $pergunta->getIdQuestao() ?>" <?php echo (isset($dados["quiz"]) && in_array($pergunta->getIdQuestao(), $dados["quiz"]->getPerguntas())) ? "checked" : ""; ?>>
+                                    <label class="form-check-label" for="pergunta<?= $pergunta->getIdQuestao() ?>">Selecionar</label>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
+
+
+                <script>
+                    var radComTempoSim = document.getElementById('radComTempoSim');
+                    var radComTempoNao = document.getElementById('radComTempoNao');
+                    var divQuantTempo = document.getElementById('divQuantTempo');
+
+                    function toggleQuantTempo() {
+                        if (radComTempoSim.checked) {
+                            divQuantTempo.style.display = 'block';
+                        } else {
+                            divQuantTempo.style.display = 'none';
+                        }
+                    }
+
+                    radComTempoSim.addEventListener('change', toggleQuantTempo);
+                    radComTempoNao.addEventListener('change', toggleQuantTempo);
+
+                    // Chamar a função inicialmente para definir o estado inicial
+                    toggleQuantTempo();
+                </script>
 
 
                 <input type="hidden" id="hddIdQuiz" name="idQuiz" value="<?= $dados['id']; ?>" />

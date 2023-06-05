@@ -23,9 +23,9 @@ require_once(__DIR__ . "/../include/menu.php");
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Máximo de Perguntas</th>
+                        <th>Máximo de Questões</th>
                         <th>Nome do Quiz</th>
-                        <th>Com Tempo</th>
+                        <th>Com Limite de Tempo</th>
                         <th>Quantidade de Tempo</th>
                         <th>ID da Questão</th>
                         <th>Alterar</th>
@@ -39,16 +39,19 @@ require_once(__DIR__ . "/../include/menu.php");
                             <td><?php echo $quiz->getIdQuiz(); ?></td>
                             <td><?= $quiz->getMaximoPergunta(); ?></td>
                             <td><?= $quiz->getNomeQuiz(); ?></td>
-                            <td><?= $quiz->getComTempo(); ?></td>
+                            <td><?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></td>
                             <td><?= $quiz->getQuantTempo(); ?></td>
                             <td><?= $quiz->getIdQuestao(); ?></td>
 
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>">
-                                    Alterar</a>
+                            <td>
+                                <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>">
+                                    Alterar
+                                </a>
                             </td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>">
-                                    Excluir</a>
-
+                            <td>
+                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controller/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>">
+                                    Excluir
+                                </a>
                             </td>
 
                         </tr>
