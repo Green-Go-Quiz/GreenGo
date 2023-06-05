@@ -28,7 +28,7 @@
                     <div class="navbar-nav">
 
                         <a class="nav-item nav-link" id="projeto-menu" href="http://localhost/GreenGo/app/controller/QuizController.php?action=list"> Quiz </a>
-                        <a class="nav-item nav-link" id="projeto-menu" href="..\view\questao\listQuestao.php"> Questão </a>
+                        <a class="nav-item nav-link" id="projeto-menu" href="http://localhost/GreenGo/app/controller/QuestaoController.php?action=list"> Questão </a>
                         <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php"> Projeto </a>
                         <a class="nav-item nav-link" id="mapa-menu" href="..\controllers\EspecieController.php?action=EspeciesMapa"> Mapa</a>
                         <a class="nav-item nav-link" id="itemmenu" href="./PlantaController.php?action=formIdentificarPlanta"> Jogar </a>

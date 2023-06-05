@@ -2,9 +2,14 @@
 #Nome do arquivo: quiz/list.php
 #Objetivo: interface para listagem dos quizzes do sistema
 
-require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../include/menu.php");
+require_once(__DIR__ . "/../../bootstrap/header.php");
+require_once(__DIR__ . "/../../bootstrap/nav.php");
+
+
 ?>
+<link rel="stylesheet" href="../css/index.css">
+<link rel="stylesheet" href="../css/cabecalho.css">
+
 <h3 class="text-center">Lista de Quizzes</h3>
 <div class="container">
     <div class="row">
