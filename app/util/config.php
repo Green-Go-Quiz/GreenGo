@@ -28,3 +28,6 @@ define('LOGOUT_PAGE', BASEURL . '/controller/LoginController.php?action=logout')
 define('SESSAO_USUARIO_ID', "usuarioLogadoId");
 define('SESSAO_USUARIO_NOME', "usuarioLogadoNome");
 define('SESSAO_USUARIO_PAPEIS', "usuarioLogadoPapeis");
+
+//Caminho do diretório para salvar imagens
+define('PATH_ARQUIVOS', __DIR__ . '/../../arquivos');

@@ -56,7 +56,7 @@ class QuestaoController extends Controller
         //$dados["pontuacao"] = 0;
         $dados["id"] = 0;
         //$dados["grauDificuldade"] = ['facil', 'medio', 'dificil'];
-        
+
         $dados['alternativas'] = $this->camposAlternativas;
         $this->loadView("questao/form.php", $dados);
     }
@@ -99,11 +99,11 @@ class QuestaoController extends Controller
         $descricao = isset($_POST['descricao']) ? trim($_POST['descricao']) : NULL;
         $grauDificuldade = isset($_POST['grauDificuldade']) ? trim($_POST['grauDificuldade']) : NULL;
         $pontuacao = isset($_POST['pontuacao']) ? trim($_POST['pontuacao']) : NULL;
-        $imagem = isset($_POST['imagem']) ? trim($_POST['imagem']) : NULL;
+        $imagem = isset($_FILES["imagem"]) ? $_FILES["imagem"] : NULL;
 
         $textoAlternativa = array();
-        foreach($this->camposAlternativas as $campo) {
-            $texto = isset($_POST[$campo]) ? trim($_POST[$campo]) : NULL; 
+        foreach ($this->camposAlternativas as $campo) {
+            $texto = isset($_POST[$campo]) ? trim($_POST[$campo]) : NULL;
             array_push($textoAlternativa, $texto);
         }
 
@@ -112,8 +112,8 @@ class QuestaoController extends Controller
         $questao->setDescricaoQ($descricao);
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
-        $questao->setImagem($imagem);
-       // $questao->setCampos_alternativa($campos_alternativa);
+        //$questao->setImagem($imagem);
+        // $questao->setCampos_alternativa($campos_alternativa);
 
         //Criar objetos Alternativa
         $alternativas = array();
@@ -125,37 +125,51 @@ class QuestaoController extends Controller
         }
 
         // Valida os dados
-        $erros = $this->questaoService->validarQuestao($questao);
+        $erros = $this->questaoService->validarQuestao($questao, $imagem);
+
+
 
 
         if (empty($erros)) {
-            // Persiste o objeto
-            try {
-                if ($dados["id"] == 0) { // Inserindo
-                    $idQuestao = $this->questaoDao->insert($questao);
-                    foreach($alternativas as $alt) {
-                        $this->alternativaDao->insert($alt, $idQuestao);
-                    }
-                    
-                } else { // Alterando
-                    $questao->setIdQuestao($dados["id"]);
-                    $this->questaoDao->update($questao);
-                    
-                    /*
-                    foreach($questao->getAlternativas() as $alt) {
-                        $this->alternativaDao->update($alt, $questao->getIdQuestao());
-                    }
-                    */
+            $arquivoNome = explode('.', $imagem['name']);
+            $arquivoExtensao = $arquivoNome[1];
 
+            $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+            $nomeArquivoSalvar = "imagem_" . $uuid . "." . $arquivoExtensao;
+
+            //Salva o arquivo no diretório defindo em $PATH_ARQUIVOS
+            if (move_uploaded_file($imagem["tmp_name"], PATH_ARQUIVOS . "/" . $nomeArquivoSalvar)) {
+                $questao->setImagem($nomeArquivoSalvar);
+                try {
+                    if ($dados["id"] == 0) { // Inserindo
+                        $idQuestao = $this->questaoDao->insert($questao);
+                        foreach ($alternativas as $alt) {
+                            $this->alternativaDao->insert($alt, $idQuestao);
+                        }
+                    } else { // Alterando
+                        $questao->setIdQuestao($dados["id"]);
+                        $this->questaoDao->update($questao);
+
+                        /*
+                        foreach($questao->getAlternativas() as $alt) {
+                            $this->alternativaDao->update($alt, $questao->getIdQuestao());
+                        }
+                        */
+                    }
+
+                    // Enviar mensagem de sucesso
+                    $msg = "Questão salva com sucesso.";
+                    $this->list("", $msg);
+                    exit;
+                } catch (PDOException $e) {
+                    $erros = ["Erro ao salvar a questão na base de dados."];
                 }
-
-                // Enviar mensagem de sucesso
-                $msg = "Questão salva com sucesso.";
-                $this->list("", $msg);
-                exit;
-            } catch (PDOException $e) {
-                $erros = "[Erro ao salvar a questão na base de dados.]";
+            } else {
+                //Caso não consega salvar, exibe o erro
+                echo ["Erro, o arquivo n&atilde;o pode ser enviado."];
             }
+            // Persiste o objeto
+
         }
 
         // Se há erros, volta para o formulário
@@ -166,18 +180,18 @@ class QuestaoController extends Controller
     }
 
     public function delete()
-    { 
-   
-     //   var_dump($_GET['id']);
+    {
+
+        //   var_dump($_GET['id']);
         $questao = $this->findQuestaoById();
         if ($questao) {
             $this->questaoDao->deleteById($questao->getIdQuestao());
 
             //$this->alternativaDao->deleteByIdQuestao($questao->getIdQuestao());
-           
+
             $this->list("", "Questão excluída com sucesso!");
         } else {
-            $this->list("Questão não encontrada!"); 
+            $this->list("Questão não encontrada!");
         }
     }
 
@@ -190,7 +204,7 @@ class QuestaoController extends Controller
         }
 
         $questao = $this->questaoDao->findById($id);
-     //   var_dump($questao);
+        //   var_dump($questao);
         return $questao;
     }
 }
