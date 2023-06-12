@@ -6,7 +6,7 @@ class QuestaoService
 {
 
     /* Método para atualizar uma questão no banco de dados */
-    public function validarQuestao(Questao $questao)
+    public function validarQuestao(Questao $questao, $imagem)
     {
         $erros = array();
 
@@ -21,9 +21,12 @@ class QuestaoService
             array_push($erros, "O campo [Pontuação] é obrigatório.");
 
         // if (!$questao->getDescricaoResposta())
-         //  array_push($erros, "O campo [alternativa] é obrigatório."); 
-        
-            return $erros;
+        //  array_push($erros, "O campo [alternativa] é obrigatório."); 
+
+        if ($imagem['size'] <= 0) {
+            array_push($erros, "O campo [Imagem] está inválido ou não foi enviado.");
+        }
+        return $erros;
 
 
         //Deve ser utilizado o Dao nessa circunstância? Ele teria o papel de fazer a atualização dos dados no banco de dados,

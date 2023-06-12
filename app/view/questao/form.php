@@ -21,11 +21,10 @@ require_once(__DIR__ . "/../include/menu.php");
     <div class="row" style="margin-top: 10px;">
 
         <div class="col-6">
-            <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controller/QuestaoController.php?action=save">
+            <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controller/QuestaoController.php?action=save" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="txtDescricaoQ">Descrição:</label>
-                    <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" 
-                        value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
+                    <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
                 </div>
                 <div class="form-group">
                     <label for="txtGrauDificuldade">Grau de dificuldade:</label>
@@ -53,23 +52,27 @@ require_once(__DIR__ . "/../include/menu.php");
                 </div>
 
                 <div class="form-group">
-                    <label for="txtImagem">Imagem:</label>
-                    <input class="form-control" type="text" id="txtImagem" name="imagem" maxlength="255" placeholder="Informe o caminho da imagem" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getImagem() : ''); ?>" />
+                    <label for="uplImagem">Selecione o arquivo:</label>
+                    <br>
+                    <input class="form-control" type="file" name="imagem" id="uplImagem" accept="image/*" />
+
                 </div>
-                
-                <?php $i=1; ?>
-                <?php foreach ($dados['alternativas'] as $campo): ?>
+
+
+                <input type="hidden" id="hddId" name="id" value="<?php echo (isset($dados[" questao"]) ? $dados["questao"]->getImagem() : ''); ?>" />
+
+
+                <?php $i = 1; ?>
+                <?php foreach ($dados['alternativas'] as $campo) : ?>
                     <div class="form-group">
                         <label for="txt<?= $campo ?>">Alternativa <?= $i; ?></label>
-                        <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" 
-                        placeholder="Informe a descrição da alternativa" 
-                        value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ? 
-                                    $dados["questao"]->getAlternativas()[$i-1]->getDescricaoAlternativa() : ''); ?>">
+                        <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" placeholder="Informe a descrição da alternativa" value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ?
+                                                                                                                                                                                        $dados["questao"]->getAlternativas()[$i - 1]->getDescricaoAlternativa() : ''); ?>">
                     </div>
                     <?php $i++; ?>
                 <?php endforeach; ?>
-    
-  
+
+
 
 
 
