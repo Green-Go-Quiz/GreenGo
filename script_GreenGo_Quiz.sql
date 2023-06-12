@@ -21,7 +21,7 @@ USE `green_go` ;
 -- Table `green_go`.`especie`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`especie` (
-  `idEspecie` INT NOT NULL,
+  `idEspecie` INT NOT NULL AUTO_INCREMENT,
   `nomePop` VARCHAR(100) NOT NULL,
   `nomeCie` VARCHAR(100) NOT NULL,
   `descricao` VARCHAR(1000) NOT NULL,
@@ -40,7 +40,7 @@ ENGINE = MyISAM;
 -- Table `green_go`.`quiz`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`quiz` (
-  `idQuiz` INT NOT NULL,
+  `idQuiz` INT NOT NULL AUTO_INCREMENT,
   `maximoPergunta` INT NOT NULL,
   `nomeQuiz` VARCHAR(45) NOT NULL,
   `comTempo` TINYINT NOT NULL,
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`zona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`zona` (
-  `idZona` INT NOT NULL,
+  `idZona` INT NOT NULL AUTO_INCREMENT,
   `qntPlantas` INT NOT NULL,
   `pontoZona` INT NOT NULL,
   `nomeZona` VARCHAR(100) NOT NULL,
@@ -71,7 +71,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`usuario` (
-  `idUsuario` INT NOT NULL,
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
   `nomeUsuario` VARCHAR(100) NOT NULL,
   `genero` VARCHAR(40) NOT NULL,
   `escolaridade` VARCHAR(80) NOT NULL,
@@ -86,7 +86,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`equipe`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`equipe` (
-  `idEquipe` INT NOT NULL,
+  `idEquipe` INT NOT NULL AUTO_INCREMENT,
   `nomeEquipe` VARCHAR(100) NOT NULL,
   `codEntrada` INT NOT NULL,
   `cor` VARCHAR(50) NOT NULL,
@@ -94,41 +94,16 @@ CREATE TABLE IF NOT EXISTS `green_go`.`equipe` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `green_go`.`planta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `green_go`.`planta` (
-  `idPlanta` INT NOT NULL,
-  `idZona` INT NOT NULL,
-  `idEspecie` INT NOT NULL,
-  `codNumerico` INT NOT NULL,
-  `codQR` VARCHAR(5000) NOT NULL,
-  `nomeSocial` VARCHAR(45) NOT NULL,
-  `historia` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idPlanta`),
-  CONSTRAINT `fk_planta_1`
-    FOREIGN KEY (`idZona`)
-    REFERENCES `green_go`.`zona` (`idZona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planta_2`
-    FOREIGN KEY (`idEspecie`)
-    REFERENCES `green_go`.`especie` (`idEspecie`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `green_go`.`equipe_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`equipe_usuario` (
-  `idEquipeUsuario` INT NOT NULL,
+  `idEquipeUsuario` INT NOT NULL AUTO_INCREMENT,
   `idUsuario` INT NOT NULL,
   `idEquipe` INT NOT NULL,
   PRIMARY KEY (`idEquipeUsuario`),
-  INDEX `fk_myuser_has_equipe_equipe1_idx` (`idEquipe` ASC) VISIBLE,
-  INDEX `fk_myuser_has_equipe_myuser1_idx` (`idUsuario` ASC) VISIBLE,
   CONSTRAINT `fk_myuser_has_equipe_myuser1`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `green_go`.`usuario` (`idUsuario`)
@@ -146,7 +121,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`partida`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`partida` (
-  `idPartida` INT NOT NULL,
+  `idPartida` INT NOT NULL AUTO_INCREMENT,
   `dataInicio` DATETIME NOT NULL,
   `dataFim` DATETIME NOT NULL,
   `idQuiz` INT NOT NULL,
@@ -163,10 +138,10 @@ ENGINE = InnoDB;
 -- Table `green_go`.`questao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`questao` (
-  `idQuestao` INT NOT NULL,
+  `idQuestao` INT NOT NULL AUTO_INCREMENT,
   `descricaoQ` VARCHAR(200) NOT NULL,
   `grauDifilculdade` ENUM("facil", "medio", "dificil") NOT NULL,
-  `pontuacao` INT NOT NULL AUTO_INCREMENT,
+  `pontuacao` INT NOT NULL,
   `imagem` VARCHAR(255) NULL,
   PRIMARY KEY (`idQuestao`))
 ENGINE = InnoDB;
@@ -204,7 +179,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`resp_usua`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`resp_usua` (
-  `idRespUsua` INT NOT NULL,
+  `idRespUsua` INT NOT NULL AUTO_INCREMENT,
   `idUsuario` INT NOT NULL,
   `idQuestao` INT NOT NULL,
   `idAlternativaEscolhida` INT NOT NULL,
@@ -232,7 +207,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`partida_zona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`partida_zona` (
-  `idPartidaZona` INT NOT NULL,
+  `idPartidaZona` INT NOT NULL AUTO_INCREMENT,
   `idZona` INT NOT NULL,
   `idPartida` INT NOT NULL,
   PRIMARY KEY (`idPartidaZona`),
@@ -253,7 +228,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`partida_equipe`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`partida_equipe` (
-  `idPartidaEquipe` INT NOT NULL,
+  `idPartidaEquipe` INT NOT NULL AUTO_INCREMENT,
   `idEquipe` INT NOT NULL,
   `idPartida` INT NOT NULL,
   `pontuacao` INT NOT NULL,
@@ -275,7 +250,7 @@ ENGINE = InnoDB;
 -- Table `green_go`.`quiz_has_questao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `green_go`.`quiz_has_questao` (
-  `quiz_idQuiz` INT NOT NULL,
+  `quiz_idQuiz` INT NOT NULL AUTO_INCREMENT,
   `questao_idQuestao` INT NOT NULL,
   PRIMARY KEY (`quiz_idQuiz`, `questao_idQuestao`),
   CONSTRAINT `fk_quiz_has_questao_quiz1`
