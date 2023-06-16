@@ -1,0 +1,61 @@
+const controls = document.querySelectorAll(".control");
+let currentItem = 0;
+const items = document.querySelectorAll(".item");
+const maxItems = items.length;
+
+controls.forEach((control) => {
+  control.addEventListener("click", (e) => {
+    isLeft = e.target.classList.contains("arrow-left");
+
+    if (isLeft) {
+      currentItem -= 1;
+    } else {
+      currentItem += 1;
+    }
+
+    if (currentItem >= maxItems) {
+      currentItem = 0;
+    }
+
+    if (currentItem < 0) {
+      currentItem = maxItems - 1;
+    }
+
+    items.forEach((item) => item.classList.remove("current-item"));
+
+    items[currentItem].scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest"
+    });
+
+    items[currentItem].classList.add("current-item");
+  });
+});
+
+
+var btnClose = document.querySelector('.close-preview-js');
+var output = document.getElementById("new");
+var loaderFile = function(event){
+var reader = new FileReader();
+  reader.onload = function() {
+    output.style.display = "block";
+    btnClose.style.display = "block";
+    output.style.backgroundImage = "url("+reader.result+")";
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+var editarAvatar = document.querySelector(".editar-content");
+var buttonFile = document.getElementById("file-preview-js");
+
+editarAvatar.addEventListener("click", function(){
+  buttonFile.click();
+});
+
+btnClose.addEventListener("click", function(){
+  btnClose.style.display = "none";
+  output.style.backgroundImage = "url('')";
+  document.getElementById("file-preview-js").value = "";
+});
+   
