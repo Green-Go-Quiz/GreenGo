@@ -1,14 +1,14 @@
 <?php
 # Classe controller para Questão
-require_once(__DIR__ . "/Controller.php");
+require_once(__DIR__ . "/Controllers.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuestaoService.php");
-require_once(__DIR__ . "/../model/Questao.php");
-require_once(__DIR__ . "/../model/Alternativa.php");
+require_once(__DIR__ . "/../models/Questao.php");
+require_once(__DIR__ . "/../models/Alternativa.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 
 
-class QuestaoController extends Controller
+class QuestaoController extends Controllers
 {
     private QuestaoDAO $questaoDao;
     private AlternativaDAO $alternativaDao;

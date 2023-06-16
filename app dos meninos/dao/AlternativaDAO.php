@@ -64,7 +64,7 @@ class AlternativaDAO
 # Objetivo: classe DAO para o modelo de CamposAlternativa
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../model/Alternativa.php");
+include_once(__DIR__ . "/../models/Alternativa.php");
 
 class AlternativaDAO
 {

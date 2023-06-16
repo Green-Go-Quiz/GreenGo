@@ -4,8 +4,8 @@
 
 include_once(__DIR__ . "/../connection/Connection.php");
 
-include_once(__DIR__ . "/../model/Quiz.php");
-include_once(__DIR__ . "/../model/Questao.php");
+include_once(__DIR__ . "/../models/Quiz.php");
+include_once(__DIR__ . "/../models/Questao.php");
 
 
 class QuizDAO

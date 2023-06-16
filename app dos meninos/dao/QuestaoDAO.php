@@ -3,7 +3,7 @@
 #Objetivo: classe DAO para o model de Questao
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../model/Questao.php");
+include_once(__DIR__ . "/../models/Questao.php");
 
 class QuestaoDAO
 {
