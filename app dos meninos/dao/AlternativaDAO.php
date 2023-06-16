@@ -59,17 +59,18 @@ class AlternativaDAO
 
 }*/
 
- 
+
 # Nome do arquivo: CamposAlternativaDAO.php
 # Objetivo: classe DAO para o modelo de CamposAlternativa
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../models/Alternativa.php");
+include_once(__DIR__ . "/../models/AlternativaModel.php");
 
 class AlternativaDAO
 {
     // Método para inserir um CamposAlternativa
-    public function insert(Alternativa $alternativa, int $idQuestao) {
+    public function insert(Alternativa $alternativa, int $idQuestao)
+    {
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO alternativa (descricaoAlternativa, alternativaCerta, idQuestao)" .
@@ -84,7 +85,8 @@ class AlternativaDAO
     }
 
     // Método para atualizar um CamposAlternativa
-    public function update(Alternativa $alternativa) {
+    public function update(Alternativa $alternativa)
+    {
         $conn = Connection::getConn();
 
         $sql = "UPDATE alternativa SET descricaoAlternativa = :descricaoAlternativa, alternativaCerta = :alternativaCerta WHERE idAlternativa = :idAlternativa";

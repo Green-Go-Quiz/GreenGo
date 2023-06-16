@@ -3,7 +3,7 @@
 #Objetivo: classe DAO para o model de Questao
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../models/Questao.php");
+include_once(__DIR__ . "/../models/QuestaoModel.php");
 
 class QuestaoDAO
 {
@@ -32,9 +32,9 @@ class QuestaoDAO
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
-         // Depuração: verificar a consulta SQL e o resultado da consulta
-    //var_dump($sql);    // Exibir a consulta SQL
-   // var_dump($result); // Exibir o resultado da consulta
+        // Depuração: verificar a consulta SQL e o resultado da consulta
+        //var_dump($sql);    // Exibir a consulta SQL
+        // var_dump($result); // Exibir o resultado da consulta
 
         $questoes = $this->mapQuestoes($result);
 
@@ -95,34 +95,34 @@ class QuestaoDAO
         $stm->bindValue("id", $questao->getIdQuestao());
         $stm->execute();
     }
-    
-       // Método para excluir uma Alternativa pelo seu ID
+
+    // Método para excluir uma Alternativa pelo seu ID
     public function deleteAlternativasByQuestaoId(int $id)
     {
         $conn = Connection::getConn();
-    
+
         $sql = "DELETE FROM alternativa WHERE idQuestao = :id";
-    
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $id);
         $stm->execute();
     }
-    
-     
+
+
     // Método para excluir uma Questao pelo seu ID
     public function deleteById(int $id)
     {
         $this->deleteAlternativasByQuestaoId($id);
-    
+
         $conn = Connection::getConn();
-    
+
         $sql = "DELETE FROM questao WHERE idQuestao = :id";
-    
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $id);
         $stm->execute();
     }
-    
+
     // Método para converter um registro da base de dados em um objeto Questao
     private function mapQuestoes($result)
     {
