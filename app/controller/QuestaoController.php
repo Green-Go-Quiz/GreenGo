@@ -1,18 +1,14 @@
 <?php
 # Classe controller para Questão
-require_once(__DIR__ . "/Controllers.php");
+require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuestaoService.php");
-require_once(__DIR__ . "/../models/Questao.php");
-<<<<<<< Updated upstream
-require_once(__DIR__ . "/../models/Alternativa.php");
-=======
-require_once(__DIR__ . "/../models/AlternativaModel.php");
->>>>>>> Stashed changes
+require_once(__DIR__ . "/../model/QuestaoModel.php");
+require_once(__DIR__ . "/../model/Alternativa.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 
 
-class QuestaoController extends Controllers
+class QuestaoController extends Controller
 {
     private QuestaoDAO $questaoDao;
     private AlternativaDAO $alternativaDao;
