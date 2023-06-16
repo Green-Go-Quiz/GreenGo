@@ -2,16 +2,17 @@
 #Nome do arquivo: Alternativa.php
 #Objetivo: classe Model para Alternativa
 
-class Alternativa {
+class Alternativa
+{
     private $idAlternativa;
     private $descricaoAlternativa;
     private $alternativaCerta;
     private $questao;
-    
+
     // Getters e Setters
     /**
      * Get the value of idAlternativa
-     */ 
+     */
     public function getIdAlternativa()
     {
         return $this->idAlternativa;
@@ -21,7 +22,7 @@ class Alternativa {
      * Set the value of idAlternativa
      *
      * @return  self
-     */ 
+     */
     public function setIdAlternativa($idAlternativa)
     {
         $this->idAlternativa = $idAlternativa;
@@ -31,7 +32,7 @@ class Alternativa {
 
     /**
      * Get the value of descricaoAlternativa
-     */ 
+     */
     public function getDescricaoAlternativa()
     {
         return $this->descricaoAlternativa;
@@ -41,7 +42,7 @@ class Alternativa {
      * Set the value of descricaoAlternativa
      *
      * @return  self
-     */ 
+     */
     public function setDescricaoAlternativa($descricaoAlternativa)
     {
         $this->descricaoAlternativa = $descricaoAlternativa;
@@ -51,7 +52,7 @@ class Alternativa {
 
     /**
      * Get the value of alternativaCerta
-     */ 
+     */
     public function getAlternativaCerta()
     {
         return $this->alternativaCerta;
@@ -61,7 +62,7 @@ class Alternativa {
      * Set the value of alternativaCerta
      *
      * @return  self
-     */ 
+     */
     public function setAlternativaCerta($alternativaCerta)
     {
         $this->alternativaCerta = $alternativaCerta;
@@ -71,7 +72,7 @@ class Alternativa {
 
     /**
      * Get the value of questao
-     */ 
+     */
     public function getQuestao()
     {
         return $this->questao;
@@ -81,7 +82,7 @@ class Alternativa {
      * Set the value of questao
      *
      * @return  self
-     */ 
+     */
     public function setQuestao($questao)
     {
         $this->questao = $questao;

@@ -4,8 +4,8 @@
 
 include_once(__DIR__ . "/../connection/Connection.php");
 
-include_once(__DIR__ . "/../models/Quiz.php");
-include_once(__DIR__ . "/../models/Questao.php");
+include_once(__DIR__ . "/../models/QuizModel.php");
+include_once(__DIR__ . "/../models/QuestaoModel.php");
 
 
 class QuizDAO
@@ -59,7 +59,7 @@ class QuizDAO
         $stm->bindValue("comTempo", $quiz->getComTempo());
         $stm->bindValue("quantTempo", $quiz->getQuantTempo());
         $stm->bindValue("idQuestao", $quiz->getIdQuestao());
-        
+
         $stm->execute();
     }
 
