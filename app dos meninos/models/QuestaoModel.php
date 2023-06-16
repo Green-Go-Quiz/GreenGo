@@ -57,13 +57,14 @@ class Questao
         return $this->grauDificuldade;
     }
 
-    public function getGrauDificuldadeTexto() {
+    public function getGrauDificuldadeTexto()
+    {
         $grau = '';
-        if($this->grauDificuldade == 'facil')
+        if ($this->grauDificuldade == 'facil')
             $grau = 'Fácil';
-        elseif($this->grauDificuldade == 'medio')
+        elseif ($this->grauDificuldade == 'medio')
             $grau = 'Médio';
-        elseif($this->grauDificuldade == 'dificil')
+        elseif ($this->grauDificuldade == 'dificil')
             $grau = 'Difícil';
 
         return $grau;
@@ -123,17 +124,18 @@ class Questao
 
     /**
      * Get the value of alternativas
-     */ 
+     */
     public function getAlternativas()
     {
         return $this->alternativas;
     }
 
-    public function getAlternativasTexto() {
+    public function getAlternativasTexto()
+    {
         $str = "";
-        foreach($this->alternativas as $alt) {
+        foreach ($this->alternativas as $alt) {
             $str .= $alt->getDescricaoAlternativa() . "\n";
-        }  
+        }
 
         $str = trim($str);
         return str_replace("\n", "<br>", $str);
@@ -143,7 +145,7 @@ class Questao
      * Set the value of alternativas
      *
      * @return  self
-     */ 
+     */
     public function setAlternativas($alternativas)
     {
         $this->alternativas = $alternativas;
