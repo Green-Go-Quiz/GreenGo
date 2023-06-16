@@ -2,8 +2,8 @@
 #Nome do arquivo: questao/form.php
 #Objetivo: interface para cadastro de questões
 
-require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../include/menu.php");
+//require_once(__DIR__ . "/../include/header.php");
+// nao sei pq da erro, tem q incluir o  menu  include_once(__DIR__ . "/../views/menu.php");
 
 
 
