@@ -1,33 +1,25 @@
-<div class="col-xs-12" id="nav-container">
-
-    <div id="itensmenu">
-
-            <nav class="navbar navbar-expand-lg " id="menu">
-                <a href="../indexADM.php" class="nav-brand">
-                    <div class="row justify-content-md-left">
-                        <div id="imgmenu">
-                            <img class="img-responsive"  id="logo" >
-                        </div>
-                    </div>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links"
-                    aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"> <img src="../public/menu.svg" id="menuicon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
-                    <div class="navbar-nav" id="navbar-links">
-                        <a class="nav-item nav-link" id="projeto-menu" href="../projetoADM.php"> Projeto </a>
-                        <a class="nav-item nav-link" id="mapa-menu" href="..\controllers\EspecieControllerADM.php?action=EspeciesMapa"> Mapa</a>
-                        <a class="nav-item nav-link" id="equipe-menu" href="../equipes/listEquipes.php"> Equipes</a>
-                        <a class="nav-item nav-link" id="itemmenu" href="../plantas/listPlantas.php"> Plantas </a>
-                        <a class="nav-item nav-link" id="zonas-menu" href="../zones/listZonas.php"> Zonas </a>
-                        <a class="nav-item nav-link" id="especies-menu" href="../especies/listEspecies.php"> Espécies </a>
-                        <a class="nav-item nav-link" id="usuarios-menu" href="./UserController.php?action=findAll"> Usuários </a>
-                        <a class="nav-item nav-link" id="perfil-menu" href="./perfil.php"> Perfil </a>
-                        <a class="nav-item nav-link" id="botaoentrar" href="../controllers/UserController.php?action=sair"> Sair  </a>
-                    </div>
-                </div>
-            </nav>
+<nav class="navbar navbar-expand-lg">
+    <a href="indexADM.php" class="navbar-brand">
+        <div class="row align-items-center">
+            <div id="imgmenu">
+                <img class="img-responsive" id="logo">
+            </div>
         </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links"
+        aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img src="../../public/menu.svg" id="menuicon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-links">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="../projetoADM.php">Projeto</a></li>
+            <li class="nav-item"><a class="nav-link" href="../equipes/listEquipes.php">Equipes</a></li>
+            <li class="nav-item"><a class="nav-link" href="../plantas/listPlantas.php">Plantas</a></li>
+            <li class="nav-item"><a class="nav-link" href="../zones/listZonas.php">Zonas</a></li>
+            <li class="nav-item"><a class="nav-link" href="../especies/listEspecies.php">Espécies</a></li>
+            <li class="nav-item"><a class="nav-item nav-link" id="botaoentrar" href="../users/sair.php"> <?php echo $nomeADM; ?> </a></li>
+        </ul>
     </div>
+</nav>
