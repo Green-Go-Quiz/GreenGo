@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "/../models/Quiz.php");
+require_once(__DIR__ . "/../QuizModel.php");
 
 class QuizService
 {
