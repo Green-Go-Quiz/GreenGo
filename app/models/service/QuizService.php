@@ -5,7 +5,7 @@ require_once(__DIR__ . "/../models/Quiz.php");
 class QuizService
 {
     /* Método para validar os dados do quiz */
-    public function validarDados(Quiz $quiz)
+    public function validarQuiz(Quiz $quiz)
     {
         $erros = array();
 
@@ -21,9 +21,6 @@ class QuizService
 
         if ($quiz->getComTempo() && !$quiz->getQuantTempo())
             array_push($erros, "O campo [Quantidade de Tempo] é obrigatório quando [Com Tempo] é selecionado.");
-
-        if (!$quiz->getIdZona())
-            array_push($erros, "O campo [ID da Zona] é obrigatório.");
 
         return $erros;
     }

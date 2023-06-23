@@ -2,8 +2,8 @@
 #Nome do arquivo: questao/form.php
 #Objetivo: interface para cadastro de questões
 
-require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../include/menu.php");
+//require_once(__DIR__ . "/../include/header.php");
+// nao sei pq da erro, tem q incluir o  menu  include_once(__DIR__ . "/../views/menu.php");
 
 
 
@@ -21,7 +21,7 @@ require_once(__DIR__ . "/../include/menu.php");
     <div class="row" style="margin-top: 10px;">
 
         <div class="col-6">
-            <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controller/QuestaoController.php?action=save" enctype="multipart/form-data">
+            <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controllers/QuestaoController.php?action=save" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="txtDescricaoQ">Descrição:</label>
                     <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
@@ -90,7 +90,7 @@ require_once(__DIR__ . "/../include/menu.php");
 
     <div class="row" style="margin-top: 30px;">
         <div class="col-12">
-            <a class="btn btn-secondary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=list">Voltar</a>
+            <a class="btn btn-secondary" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=list">Voltar</a>
         </div>
     </div>
 </div>

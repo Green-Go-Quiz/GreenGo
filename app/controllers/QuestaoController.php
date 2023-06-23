@@ -4,6 +4,11 @@ require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../service/QuestaoService.php");
 require_once(__DIR__ . "/../models/Questao.php");
+
+require_once(__DIR__ . "/../controllers/Controller.php");
+require_once(__DIR__ . "/../dao/QuestaoDAO.php");
+require_once(__DIR__ . "/../service/QuestaoService.php");
+require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/AlternativaModel.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 

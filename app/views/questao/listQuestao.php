@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../include/menu.php");
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <a class="btn btn-success" href="<?= BASEURL ?>/controller/QuestaoController.php?action=create">
+            <a class="btn btn-success" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
                 Inserir</a>
         </div>
 
@@ -29,9 +29,9 @@ require_once(__DIR__ . "/../include/menu.php");
                         <th>Imagem</th>
                         <th>alternativa</th>
                         <th>Alterar</th>
-                  
+
                         <th>Excluir</th>
-                        
+
                     </tr>
                 </thead>
 
@@ -43,16 +43,16 @@ require_once(__DIR__ . "/../include/menu.php");
                             <td><?= $q->getGrauDificuldadeTexto(); ?></td>
                             <td><?= $q->getPontuacao(); ?></td>
                             <td><?= $q->getImagem(); ?></td>
-                            <td><?= $q->getAlternativasTexto(); ?></td>   
+                            <td><?= $q->getAlternativasTexto(); ?></td>
 
-            
+
                             <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
                                     Alterar</a>
                             </td>
                             <td>
-                       <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao() 
-                       ?>" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
-</td>
+                                <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao()
+                                                                                                                                    ?>" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                            </td>
 
 
                         </tr>

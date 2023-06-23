@@ -8,10 +8,23 @@ class Quiz
     private $nomeQuiz;
     private $comTempo;
     private $quantTempo;
+    private $questoes; // Array para armazenar as questões relacionadas
     private $idZona;
 
     // Propriedade relacionada com a tabela "zona"
-    private $zona;
+    //private $zona;
+
+    // Métodos getter e setter para cada propriedade
+
+    public function addQuestao(Questao $questao)
+    {
+        $this->questoes[] = $questao;
+    }
+
+    public function getQuestoes()
+    {
+        return $this->questoes;
+    }
 
     /**
      * Get the value of idQuiz
@@ -114,6 +127,26 @@ class Quiz
     }
 
     /**
+     * Get the value of zona
+     
+    public function getZona()
+    {
+        return $this->zona;
+    }
+
+    /**
+     * Set the value of zona
+     *
+     *
+    public function setZona($zona)
+    {
+        $this->zona = $zona;
+
+        return $this;
+    }
+     */
+
+    /**
      * Get the value of idZona
      */
     public function getIdZona()
@@ -124,31 +157,11 @@ class Quiz
     /**
      * Set the value of idZona
      *
-     * @return self
+     * @return  self
      */
     public function setIdZona($idZona)
     {
         $this->idZona = $idZona;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of zona
-     */
-    public function getZona()
-    {
-        return $this->zona;
-    }
-
-    /**
-     * Set the value of zona
-     *
-     * @return self
-     */
-    public function setZona($zona)
-    {
-        $this->zona = $zona;
 
         return $this;
     }

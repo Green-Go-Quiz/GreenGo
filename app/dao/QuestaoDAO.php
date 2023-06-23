@@ -80,6 +80,7 @@ class QuestaoDAO
 
         return $this->mapQuestoes($result);
     }
+
     public function update(Questao $questao)
     {
         $conn = Connection::getConn();

@@ -1,6 +1,6 @@
 <?php
 #Classe controller para Usuário
-require_once(__DIR__ . "/Controllers.php");
+require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/../service/UsuarioService.php");
 require_once(__DIR__ . "/../models/UsuarioModel");
