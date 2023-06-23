@@ -54,7 +54,8 @@
 
     <div class="collapse navbar-collapse" id="navbar-links">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="projeto.php">Projeto</a></li>
+            <li class="nav-item"><a class="nav-link" href="projeto.php">Projo</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.php">Entrar</a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="users/login.php">Entrar</a></li> -->
         </ul>
     </div>
