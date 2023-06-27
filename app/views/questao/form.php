@@ -2,9 +2,7 @@
 #Nome do arquivo: questao/form.php
 #Objetivo: interface para cadastro de questões
 
-//require_once(__DIR__ . "/../include/header.php");
-// nao sei pq da erro, tem q incluir o  menu  include_once(__DIR__ . "/../views/menu.php");
-
+require_once(__DIR__ . "/../../bootstrap/header.php");
 
 
 
@@ -84,7 +82,7 @@
         </div>
 
         <div class="col-6">
-            <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+            <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
         </div>
     </div>
 
@@ -94,9 +92,3 @@
         </div>
     </div>
 </div>
-
-
-<?php
-
-require_once(__DIR__ . "/../include/footer.php");
-?>

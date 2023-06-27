@@ -2,8 +2,7 @@
 #Nome do arquivo: usuario/list.php
 #Objetivo: interface para listagem dos usuários do sistema
 
-require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../include/menu.php");
+require_once(__DIR__ . "/../../bootstrap/header.php");
 ?>
 <h3 class="text-center">Lista de Questões</h3>
 <div class="container">
@@ -14,7 +13,7 @@ require_once(__DIR__ . "/../include/menu.php");
         </div>
 
         <div class="col-9">
-            <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+            <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
@@ -62,6 +61,3 @@ require_once(__DIR__ . "/../include/menu.php");
         </div>
     </div>
 </div>
-<?php
-require_once(__DIR__ . "/../include/footer.php");
-?>

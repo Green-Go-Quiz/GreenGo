@@ -41,7 +41,7 @@ class Controller
         //print_r($dados);
         //exit;
 
-        $caminho = __DIR__ . "/../view/" . $path;
+        $caminho = __DIR__ . "/../views/" . $path;
         //echo $caminho;
         if (file_exists($caminho)) {
             require $caminho;

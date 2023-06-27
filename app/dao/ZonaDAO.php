@@ -4,13 +4,15 @@
 include_once(__DIR__ . "/../connection/Connection.php");
 include_once(__DIR__ . "/../models/ZonaModel.php");
 
-class zonaDAO {
-    private const SQL_ZONA = "SELECT z.*, s.nomeZona AS nomeZona FROM zona z".
-    " JOIN zona s ON s.idZona= z.idZona";
+class ZonaDAO
+{
+    private const SQL_ZONA = "SELECT z.*, s.nomeZona AS nomeZona FROM zona z" .
+        " JOIN zona s ON s.idZona= z.idZona";
 
-    private function mapZonas($resultSql) {
+    private function mapZonas($resultSql)
+    {
         $zonas = array();
-        foreach ($resultSql as $reg):
+        foreach ($resultSql as $reg) :
 
             $zona = new Zona();
             $zona->setIdZona($reg['idZona']);
@@ -24,21 +26,22 @@ class zonaDAO {
         return $zonas;
     }
 
-    public function list() {
-        $conn = conectar_db();
+    public function list()
+    {
+        $conn = Connection::getConn();
 
         $sql = "SELECT z.idZona, z.nomeZona, COUNT(p.idPlanta) AS qntPlantas, SUM(p.pontuacaoPlanta) AS pontoZona
         FROM zona z 
         LEFT JOIN planta p ON z.idZona = p.idZona 
         GROUP BY z.idZona, z.nomeZona
         ORDER BY z.idZona";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
 
         $zonas = array();
-        foreach ($result as $reg):
-            $zona = 
+        foreach ($result as $reg) :
+            $zona =
                 new Zona($reg['idZona'], $reg['nomeZona'], $reg['qntPlantas'], $reg['pontoZona']);
             array_push($zonas, $zona);
         endforeach;
@@ -46,11 +49,12 @@ class zonaDAO {
         return $zonas;
     }
 
-    public function findById($idZona) {
-        $conn = conectar_db();
+    public function findById($idZona)
+    {
+        $conn = Connection::getConn();
 
-        $sql = zonaDAO::SQL_ZONA . 
-                " WHERE z.idZona = ?";
+        $sql = zonaDAO::SQL_ZONA .
+            " WHERE z.idZona = ?";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute([$idZona]);
@@ -59,44 +63,42 @@ class zonaDAO {
         //Criar o objeto stand
         $zonas = $this->mapZonas($result);
 
-        if(count($zonas) == 1)
+        if (count($zonas) == 1)
             return $zonas[0];
-        elseif(count($zonas) == 0)
+        elseif (count($zonas) == 0)
             return null;
 
-        die("zonaDAO.findById - Erro: mais de um Zona".
-                " encontrado para o ID ".$idZona);
+        die("zonaDAO.findById - Erro: mais de um Zona" .
+            " encontrado para o ID " . $idZona);
     }
 
 
-    public function save(Zona $zona) {
-        $conn = conectar_db();
+    public function save(Zona $zona)
+    {
+        $conn = Connection::getConn();
 
-        $sql = "INSERT INTO zona (nomeZona)".
-        " VALUEs (?)";
+        $sql = "INSERT INTO zona (nomeZona)" .
+            " VALUEs (?)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$zona->getNomeZona()]);
     }
 
-    public function update(Zona $zona) {
-        $conn = conectar_db();
-    
+    public function update(Zona $zona)
+    {
+        $conn = Connection::getConn();
+
         $sql = "UPDATE zona SET nomeZona = ? WHERE idZona = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$zona->getNomeZona(), $zona->getIdZona()]);
     }
 
-    
-    public function delete(Zona $zona) {
-    $conn = conectar_db();
 
-    $sql = "DELETE FROM zona WHERE idZona = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$zona->getIdZona()]);
+    public function delete(Zona $zona)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "DELETE FROM zona WHERE idZona = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$zona->getIdZona()]);
+    }
 }
-    
-}
-
-
-
-?>

@@ -10,12 +10,14 @@ include_once(__DIR__ . "/../models/ZonaModel.php");
 
 class QuizDAO
 {
+    const SQL_QUIZ = "SELECT q.*, z.nomeZona FROM quiz q JOIN zona z ON (q.idZona = z.idZona)";
+
     public function list()
     {
         echo "chegou";
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM quiz ORDER BY idQuiz";
+        $sql = QuizDAO::SQL_QUIZ . " ORDER BY idQuiz";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
@@ -27,12 +29,11 @@ class QuizDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM quiz q" .
+        $sql = QuizDAO::SQL_QUIZ .
             " WHERE q.idQuiz = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
-
 
         $quizzes = $this->mapQuizzes($result);
 
@@ -78,10 +79,10 @@ class QuizDAO
         $stm->execute();
 
         // Obter o ID gerado para o novo quiz
-        $quizId = $conn->lastInsertId();
+        //$quizId = $conn->lastInsertId();
 
         // Inserir as associações entre quiz e questões
-        $this->insertQuizQuestaoAssociations($quizId, $quiz->getQuestoes());
+        //$this->insertQuizQuestaoAssociations($quizId, $quiz->getQuestoes());
     }
 
 
@@ -142,13 +143,16 @@ class QuizDAO
             $quiz->setNomeQuiz($row['nomeQuiz']);
             $quiz->setComTempo($row['comTempo']);
             $quiz->setQuantTempo($row['quantTempo']);
+            $quiz->setIdZona($row['idZona']);
+
 
             // Criar objeto Zona e setar os valores correspondentes
             $zona = new Zona();
             $zona->setIdZona($row['idZona']);
+            $zona->setNomeZona($row['nomeZona']);
             // Definir outras propriedades da zona, se houver
 
-            $quiz->setIdZona($zona); // Associar o objeto Zona ao Quiz
+            $quiz->setZona($zona); // Associar o objeto Zona ao Quiz
 
             array_push($quizzes, $quiz);
         }

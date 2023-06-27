@@ -2,8 +2,8 @@
 #Nome do arquivo: quiz/list.php
 #Objetivo: interface para listagem dos quizzes do sistema
 
-require_once(__DIR__ . "/../bootstrap/header.php");
-require_once(__DIR__ . "/../bootstrap/nav.php");
+require_once(__DIR__ . "/../../bootstrap/header.php");
+require_once(__DIR__ . "/../../bootstrap/nav.php");
 
 
 ?>
@@ -14,12 +14,12 @@ require_once(__DIR__ . "/../bootstrap/nav.php");
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <a class="btn btn-success" href="<?= BASEURL ?>/controller/QuizController.php?action=create">
+            <a class="btn btn-success" href="<?= BASEURL ?>/controllers/QuizController.php?action=create">
                 Inserir</a>
         </div>
 
         <div class="col-9">
-            <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+            <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
@@ -28,11 +28,13 @@ require_once(__DIR__ . "/../bootstrap/nav.php");
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Máximo de Questões</th>
                         <th>Nome do Quiz</th>
+                        <th>Nome da Zona</th>
+
+                        <th>Máximo de Questões</th>
+
                         <th>Com Limite de Tempo</th>
                         <th>Quantidade de Tempo</th>
-                        <th>ID da Questão</th>
                         <th>Alterar</th>
                         <th>Excluir</th>
                     </tr>
@@ -42,19 +44,20 @@ require_once(__DIR__ . "/../bootstrap/nav.php");
                     <?php foreach ($dados['lista'] as $quiz) : ?>
                         <tr>
                             <td><?php echo $quiz->getIdQuiz(); ?></td>
-                            <td><?= $quiz->getMaximoPergunta(); ?></td>
                             <td><?= $quiz->getNomeQuiz(); ?></td>
+                            <td><?= $quiz->getZona()->getNomeZona(); ?></td>
+
+                            <td><?= $quiz->getMaximoPergunta(); ?></td>
                             <td><?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></td>
                             <td><?= $quiz->getQuantTempo(); ?></td>
-                            <td><?= $quiz->getIdQuestao(); ?></td>
 
                             <td>
-                                <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>">
+                                <a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>">
                                     Alterar
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controller/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>">
+                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" onclick="return confirm('Confirma a exclusão?');">
                                     Excluir
                                 </a>
                             </td>
@@ -67,5 +70,5 @@ require_once(__DIR__ . "/../bootstrap/nav.php");
     </div>
 </div>
 <?php
-require_once(__DIR__ . "/../include/footer.php");
+//require_once(__DIR__ . "/../include/footer.php");
 ?>

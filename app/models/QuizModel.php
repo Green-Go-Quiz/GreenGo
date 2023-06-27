@@ -12,7 +12,7 @@ class Quiz
     private $idZona;
 
     // Propriedade relacionada com a tabela "zona"
-    //private $zona;
+    private $zona;
 
     // Métodos getter e setter para cada propriedade
 
@@ -126,9 +126,9 @@ class Quiz
         return $this;
     }
 
-    /**
+    /**=
      * Get the value of zona
-     
+     */
     public function getZona()
     {
         return $this->zona;
@@ -137,14 +137,14 @@ class Quiz
     /**
      * Set the value of zona
      *
-     *
+     */
     public function setZona($zona)
     {
         $this->zona = $zona;
 
         return $this;
     }
-     */
+
 
     /**
      * Get the value of idZona

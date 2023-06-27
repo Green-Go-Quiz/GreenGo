@@ -3,7 +3,7 @@
 
 require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
-require_once(__DIR__ . "/../models/service/QuestaoService.php");
+require_once(__DIR__ . "/../service/QuestaoService.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/AlternativaModel.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
@@ -163,7 +163,7 @@ class QuestaoController extends Controller
                     $this->list("", $msg);
                     exit;
                 } catch (PDOException $e) {
-                    $erros = ["Erro ao salvar a questão na base de dados."];
+                    $erros = ["Erro ao salvar a questão na base de dados." . $e];
                 }
             } else {
                 //Caso não consega salvar, exibe o erro

@@ -2,17 +2,18 @@
 # Classe controller para Qui
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
-require_once(__DIR__ . "/../models/service/QuizService.php");
+require_once(__DIR__ . "/../service/QuizService.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
+require_once(__DIR__ . "/../dao/ZonaDAO.php");
 require_once(__DIR__ . "/../models/QuizModel.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
-
 
 class QuizController extends Controller
 {
     private QuizDAO $quizDao;
     private QuestaoDAO $questaoDao;
     private QuizService $quizService;
+    private ZonaDAO $zonaDao;
 
 
     public function __construct()
@@ -23,6 +24,7 @@ class QuizController extends Controller
 
         $this->quizDao = new QuizDAO();
         //$this->quizService = new QuizService();
+        $this->zonaDao = new ZonaDAO();
 
 
         $this->handleAction();
@@ -41,6 +43,7 @@ class QuizController extends Controller
     protected function create()
     {
         $dados["id"] = 0;
+        $dados['zonas'] = $this->zonaDao->list();
         $this->loadView("quiz/form.php", $dados);
     }
 
@@ -49,6 +52,7 @@ class QuizController extends Controller
         $quiz = $this->findQuizById();
         if ($quiz) {
             $dados["id"] = $quiz->getIdQuiz();
+            $dados['zonas'] = $this->zonaDao->list();
             $dados["quiz"] = $quiz;
 
             $this->loadView("quiz/form.php", $dados);
@@ -114,12 +118,12 @@ class QuizController extends Controller
     public function save()
     {
         // Captura os dados do formulário
-        $dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
+        $dados["id"] = isset($_POST['idQuiz']) ? $_POST['idQuiz'] : 0;
         $maximoPergunta = isset($_POST['maximoPergunta']) ? (int) $_POST['maximoPergunta'] : 0;
         $nomeQuiz = isset($_POST['nomeQuiz']) ? trim($_POST['nomeQuiz']) : "";
         $comTempo = isset($_POST['comTempo']) ? (int) $_POST['comTempo'] : 0;
         $quantTempo = isset($_POST['quantTempo']) ? (int) $_POST['quantTempo'] : 0;
-        $idQuestoes = isset($_POST['idQuestoes']) ? $_POST['idQuestoes'] : array(); // Array de IDs das questões selecionadas
+        $idZona = isset($_POST['zona']) ? $_POST['zona'] : array(); // Array de IDs das questões selecionadas
 
         // Cria objeto Quiz
         $quiz = new Quiz();
@@ -127,18 +131,19 @@ class QuizController extends Controller
         $quiz->setNomeQuiz($nomeQuiz);
         $quiz->setComTempo($comTempo);
         $quiz->setQuantTempo($quantTempo);
+        $quiz->setIdZona($idZona);
 
         // Adiciona as questões ao objeto Quiz
-        foreach ($idQuestoes as $idQuestao) {
+        /*foreach ($idQuestoes as $idQuestao) {
             // Recupera a questão do banco de dados (supondo que você tenha uma função para isso)
             $questao = $this->questaoDao->findById($idQuestao);
             if ($questao) {
                 $quiz->addQuestao($questao);
             }
-        }
+        }*/
 
         // Valida os dados
-        $erros = $this->quizService->validarQuiz($quiz);
+        $erros = []; //$this->quizService->validarQuiz($quiz);
 
         if (empty($erros)) {
             // Persiste o objeto
@@ -161,6 +166,9 @@ class QuizController extends Controller
 
         // Enviar mensagem de erro
         $msgErro = implode("<br>", $erros);
+        $dados['zonas'] = $this->zonaDao->list();
+        $dados["quiz"] = $quiz;
+        $this->loadView("quiz/form.php", $dados);
         $this->list($msgErro);
     }
 
