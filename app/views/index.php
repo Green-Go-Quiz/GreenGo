@@ -58,7 +58,23 @@
                 <!-- <li class="nav-item"><a class="nav-link" href="users/login.php">Entrar</a></li> -->
             </ul>
         </div>
+        <<<<<<< HEAD </nav>
+            =======
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><img src="../public/menu.svg" id="menuicon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-links">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="projeto.php">Projeto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.php">Entrar</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="users/login.php">Entrar</a></li> -->
+                </ul>
+            </div>
     </nav>
+    >>>>>>> ccbb4e94dc1bfef052b00ad69601b23c4e2621f4
 
     <div class="container">
         <div class="row justify-content-md-left">
