@@ -19,8 +19,8 @@ class QuestaoController extends Controller
 
     public function __construct()
     {
-        if (!$this->usuarioLogado())
-            exit;
+        //if (!$this->usuarioLogado())
+        //    exit;
         /*
         if (!$this->usuarioPossuiPapel([UsuarioPapel::ADMINISTRADOR])) {
             echo "Acesso negado";
@@ -53,29 +53,15 @@ class QuestaoController extends Controller
 
     protected function create()
     {
-        //$dados["descricaoQ"] = " ";
-        //$dados["pontuacao"] = 0;
-        $dados["id"] = 0;
-        //$dados["grauDificuldade"] = ['facil', 'medio', 'dificil'];
 
+        $dados["id"] = 0;
+        
         $dados['alternativas'] = $this->camposAlternativas;
         $this->loadView("questao/form.php", $dados);
     }
 
-    /*protected function edit()
-    {
-        $questao = $this->findQuestaoById();
-        if ($questao) {
-            $dados["id"] = $questao->getIdQuestao();
-            //Carregar as alternativas
-
-            $dados["questao"] = $questao;
-            $dados['alternativas'] = $this->camposAlternativas;
-
-            $this->loadView("questao/form.php", $dados);
-        } else
-            $this->list("Questão não encontrada.");
-    }*/
+ 
+    
     protected function edit()
     {
         $questao = $this->findQuestaoById();

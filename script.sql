@@ -274,7 +274,7 @@ ALTER TABLE `planta`
 CREATE TABLE IF NOT EXISTS `questao` (
   `idQuestao` INT NOT NULL AUTO_INCREMENT,
   `descricaoQ` VARCHAR(200) NOT NULL,
-  `grauDifilculdade` ENUM("facil", "medio", "dificil") NOT NULL,
+  `grauDificuldade` ENUM("facil", "medio", "dificil") NOT NULL,
   `pontuacao` INT NOT NULL,
   `imagem` VARCHAR(255) NULL,
   PRIMARY KEY (`idQuestao`))

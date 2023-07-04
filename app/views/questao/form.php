@@ -8,9 +8,16 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 
 ?>
 
+<!--< class="text-center">
+  <?php //if ($dados['id'] == 0) echo "Inserir";
+ //   else echo "Alterar"; ?> 
+    Questão
+</h3> -->
+
+
 <h3 class="text-center">
-    <?php if ($dados['id'] == 0) echo "Inserir";
-    else echo "Alterar"; ?>
+<?php if ($dados['id'] == 0) echo "Inserir";
+    else echo "Alterar"; ?> 
     Questão
 </h3>
 
