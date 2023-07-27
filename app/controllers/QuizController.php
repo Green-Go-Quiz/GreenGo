@@ -18,9 +18,9 @@ class QuizController extends Controller
 
     public function __construct()
     {
-        if (!$this->usuarioLogado())
+        /*if (!$this->usuarioLogado())
             exit;
-
+        */
 
         $this->quizDao = new QuizDAO();
         //$this->quizService = new QuizService();

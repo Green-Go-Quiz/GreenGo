@@ -59,7 +59,7 @@ class Controller
     }
 
     //Método que verifica se o usuário está logado
-    protected function usuarioLogado()
+    /*protected function usuarioLogado()
     {
         //Habilitar o recurso de sessão no PHP nesta página
         session_start();
@@ -70,7 +70,7 @@ class Controller
         }
 
         return true;
-    }
+    }*/
 
     //Método que verifica se o usuário possui um papel necessário
     public function usuarioPossuiPapel(array $papeisNecessarios)

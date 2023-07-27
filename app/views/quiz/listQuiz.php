@@ -57,7 +57,8 @@ require_once(__DIR__ . "/../../bootstrap/nav.php");
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" onclick="return confirm('Confirma a exclusão?');">
+                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>
+                                " onclick="return confirm('Confirma a exclusão?');">
                                     Excluir
                                 </a>
                             </td>

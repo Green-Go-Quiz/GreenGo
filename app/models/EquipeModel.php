@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-Class Equipe {
+class Equipe
+{
 
     private $idEquipe;
     private $nomeEquipe;
@@ -10,7 +11,7 @@ Class Equipe {
 
     /**
      * Get the value of idEquipe
-     */ 
+     */
     public function getIdEquipe()
     {
         return $this->idEquipe;
@@ -20,7 +21,7 @@ Class Equipe {
      * Set the value of idEquipe
      *
      * @return  self
-     */ 
+     */
     public function setIdEquipe($idEquipe)
     {
         $this->idEquipe = $idEquipe;
@@ -30,7 +31,7 @@ Class Equipe {
 
     /**
      * Get the value of nomeEquipe
-     */ 
+     */
     public function getNomeEquipe()
     {
         return $this->nomeEquipe;
@@ -40,7 +41,7 @@ Class Equipe {
      * Set the value of nomeEquipe
      *
      * @return  self
-     */ 
+     */
     public function setNomeEquipe($nomeEquipe)
     {
         $this->nomeEquipe = $nomeEquipe;
@@ -50,7 +51,7 @@ Class Equipe {
 
     /**
      * Get the value of codEntrada
-     */ 
+     */
     public function getCodEntrada()
     {
         return $this->codEntrada;
@@ -60,7 +61,7 @@ Class Equipe {
      * Set the value of codEntrada
      *
      * @return  self
-     */ 
+     */
     public function setCodEntrada($codEntrada)
     {
         $this->codEntrada = $codEntrada;
@@ -70,7 +71,7 @@ Class Equipe {
 
     /**
      * Get the value of corEquipe
-     */ 
+     */
     public function getCorEquipe()
     {
         return $this->corEquipe;
@@ -80,7 +81,7 @@ Class Equipe {
      * Set the value of corEquipe
      *
      * @return  self
-     */ 
+     */
     public function setCorEquipe($corEquipe)
     {
         $this->corEquipe = $corEquipe;
@@ -90,7 +91,7 @@ Class Equipe {
 
     /**
      * Get the value of iconeEquipe
-     */ 
+     */
     public function getIconeEquipe()
     {
         return $this->iconeEquipe;
@@ -100,7 +101,7 @@ Class Equipe {
      * Set the value of iconeEquipe
      *
      * @return  self
-     */ 
+     */
     public function setIconeEquipe($iconeEquipe)
     {
         $this->iconeEquipe = $iconeEquipe;
