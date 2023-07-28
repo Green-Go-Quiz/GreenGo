@@ -83,6 +83,18 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 
 
 
+
+
+
+
+<label>Selecione a alternativa correta:</label><br>
+<input type="radio" name="alternativa_correta" value="0">Alternativa 1<br>
+<input type="radio" name="alternativa_correta" value="1">Alternativa 2<br>
+<input type="radio" name="alternativa_correta" value="2">Alternativa 3<br>
+<input type="radio" name="alternativa_correta" value="3">Alternativa 4<br>
+
+
+
                 <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />
 
                 <button type="submit" class="btn btn-success">Gravar</button>
