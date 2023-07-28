@@ -14,7 +14,6 @@ class QuizDAO
 
     public function list()
     {
-        echo "chegou";
         $conn = Connection::getConn();
 
         $sql = QuizDAO::SQL_QUIZ . " ORDER BY idQuiz";

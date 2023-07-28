@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  }
+  "scripts": {
+    "fix-cs": ["prettier src/**/* --write", "php-cs-fixer fix"]
+}
+}
+

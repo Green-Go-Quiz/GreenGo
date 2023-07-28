@@ -2,74 +2,68 @@
 #Nome do arquivo: quiz/list.php
 #Objetivo: interface para listagem dos quizzes do sistema
 
-require_once(__DIR__ . "/../../bootstrap/header.php");
-require_once(__DIR__ . "/../../bootstrap/nav.php");
-
-
 ?>
-<link rel="stylesheet" href="../css/index.css">
-<link rel="stylesheet" href="../css/cabecalho.css">
 
-<h3 class="text-center">Lista de Quizzes</h3>
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <a class="btn btn-success" href="<?= BASEURL ?>/controllers/QuizController.php?action=create">
-                Inserir</a>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="col-9">
-            <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
+<head>
+    <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
+
+
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/cabecalho.css">
+
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/listQuiz.css">
+</head>
+
+<body>
+    <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
+
+    <h3 class="title-margin text-left">Lista de Quizzes</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="card mb-4 shadow-sm w-100">
+                    <div class="card-body">
+                        <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center" href="<?= BASEURL ?>/controllers/QuizController.php?action=create">
+                            Inserir Novo Quiz
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <?php foreach ($dados['lista'] as $quiz) : ?>
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $quiz->getNomeQuiz(); ?></h5>
+                            <p><span class="labelQuiz">Nome do Quiz:</span> <?= $quiz->getNomeQuiz(); ?></p>
+                            <p><strong>Nome da Zona:</strong> <?= $quiz->getZona()->getNomeZona(); ?></p>
+                            <p><strong>Máximo de Questões:</strong> <?= $quiz->getMaximoPergunta(); ?></p>
+                            <p><strong>Com Limite de Tempo:</strong> <?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></p>
+                            <?php if ($quiz->getComTempo() == 1) : ?>
+                                <p><strong>Quantidade de Tempo (em minutos):</strong> <?= $quiz->getQuantTempo(); ?></p>
+                            <?php endif; ?>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-12">
-            <table id="tabQuizzes" class='table table-striped table-bordered'>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome do Quiz</th>
-                        <th>Nome da Zona</th>
 
-                        <th>Máximo de Questões</th>
+    <?php
+    //require_once(__DIR__ . "/../include/footer.php");
+    ?>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/registro.js"></script>
+</body>
 
-                        <th>Com Limite de Tempo</th>
-                        <th>Quantidade de Tempo</th>
-                        <th>Alterar</th>
-                        <th>Excluir</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php foreach ($dados['lista'] as $quiz) : ?>
-                        <tr>
-                            <td><?php echo $quiz->getIdQuiz(); ?></td>
-                            <td><?= $quiz->getNomeQuiz(); ?></td>
-                            <td><?= $quiz->getZona()->getNomeZona(); ?></td>
-
-                            <td><?= $quiz->getMaximoPergunta(); ?></td>
-                            <td><?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></td>
-                            <td><?= $quiz->getQuantTempo(); ?></td>
-
-                            <td>
-                                <a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>">
-                                    Alterar
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-secondary" href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>
-                                " onclick="return confirm('Confirma a exclusão?');">
-                                    Excluir
-                                </a>
-                            </td>
-
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<?php
-//require_once(__DIR__ . "/../include/footer.php");
-?>
+</html>

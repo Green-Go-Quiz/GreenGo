@@ -1,20 +1,32 @@
 <?php
 #Nome do arquivo: quiz/form.php
 #Objetivo: interface para cadastro/alteração de quizzes
-
-require_once(__DIR__ . "/../../bootstrap/header.php");
-require_once(__DIR__ . "/../../bootstrap/nav.php");
+include_once("../bootstrap/header.php");
 
 ?>
+
+<head>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cabecalho.css">
+
+</head>
+
+<nav>
+
+    <?php include_once("../bootstrap/navADMMeninas.php"); ?>
+
+</nav>
+
+
 <h3 class="text-center">
     <?php if ($dados['id'] == 0) echo "Inserir";
-    else echo "Alterar"; ?>
+    else echo "Alterar";
+    ?>
+
     Quiz
 </h3>
 
-<link rel="stylesheet" href="../css/adicionarplanta.css">
-    <link rel="stylesheet" href="../css/plantas.css">
-    <link rel="stylesheet" href="../css/listPlanta.css">
 <div class="container">
 
     <div class="row" style="margin-top: 10px;">
@@ -24,13 +36,12 @@ require_once(__DIR__ . "/../../bootstrap/nav.php");
 
                 <div class="form-group">
                     <label for="txtNomeQuiz">Nome do Quiz:</label>
-                    <input class="form-control" type="text" id="txtNomeQuiz" name="nomeQuiz" maxlength="45" placeholder="Informe o nome do quiz" value="
-                    <?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" required />
+                    <input class="form-control" type="text" id="txtNomeQuiz" name="nomeQuiz" maxlength="45" placeholder="Informe o nome do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getNomeQuiz() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
                     <label for="selectZona">Zona:</label>
-                    <select class="form-control" id="selectZona" name="zona" required>
+                    <select class="form-control" id="selectZona" name="zona">
                         <option value="">Selecione a zona</option>
                         <?php foreach ($dados['zonas'] as $zona) : ?>
                             <option value="<?php echo $zona->getIdZona(); ?>" <?php echo (isset($dados["quiz"]) && $dados["quiz"]->getIdZona() == $zona->getIdZona() ? 'selected' : '') ?>>
@@ -41,9 +52,8 @@ require_once(__DIR__ . "/../../bootstrap/nav.php");
                 </div>
 
                 <div class="form-group">
-                    <label for="txtMaximoPergunta">Máximo de perguntas:</label>
-                    <input class="form-control" type="number" id="txtMaximoPergunta" name="maximoPergunta" min="1" placeholder="Informe o máximo de perguntas do quiz" value="
-                    <?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" required />
+                    <label for="txtMaximoPergunta">Máximo de perguntas: </label>
+                    <input class="form-control" type="number" id="txtMaximoPergunta" name="maximoPergunta" placeholder="Informe o máximo de perguntas do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getMaximoPergunta() : ''); ?>" />
                 </div>
 
                 <div class="form-group">
@@ -54,17 +64,15 @@ require_once(__DIR__ . "/../../bootstrap/nav.php");
                 é um tinyint !-->
 
                     <input type="radio" id="radComTempoSim" name="comTempo" value="1" <?php echo (isset($dados["quiz"])
-                                                                                            && $dados["quiz"]->getComTempo() == 1) ? "checked" : ""; ?> required>
+                                                                                            && $dados["quiz"]->getComTempo() == 1) ? "checked" : ""; ?>>
                     <label for="radComTempoSim">Sim</label>
-                    <input type="radio" id="radComTempoNao" name="comTempo" value="0" <?php echo (isset($dados["quiz"])
-                                                                                            && $dados["quiz"]->getComTempo() == 0) ? "checked" : ""; ?> required>
+                    <input type="radio" id="radComTempoNao" name="comTempo" value="0" <?php echo ((!isset($dados["quiz"])) || (!$dados["quiz"]->getComTempo() == 1)) ? "checked" : ""; ?>>
                     <label for="radComTempoNao">Não</label>
                 </div>
 
-                <div class="form-group" id="divQuantTempo" style="<?php echo (isset($dados[" quiz"]) && $dados["quiz"]->getComTempo() == 1) ? 'block' : 'none'; ?>">
-                    <label for="txtQuantTempo">Quantidade de Tempo (em minutos):</label>
-                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" min="1" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados[" quiz"]) ?
-                                                                                                                                                                            $dados["quiz"]->getQuantTempo() : ''); ?>" />
+                <div class="form-group" id="divQuantTempo" style="<?php echo (isset($dados["quiz"]) && $dados["quiz"]->getComTempo() == 1) ? 'block' : 'none'; ?>">
+                    <label for="txtQuantTempo">Quantidade de Tempo (em minutos): </label>
+                    <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() : ''); ?>" />
                 </div>
 
 
@@ -109,3 +117,5 @@ require_once(__DIR__ . "/../../bootstrap/nav.php");
     // Chamar a função inicialmente para definir o estado inicial
     toggleQuantTempo();
 </script>
+
+<script src="../bootstrap/bootstrap.min.js"></script>

@@ -16,8 +16,8 @@ class QuizService
         if (!$quiz->getNomeQuiz())
             array_push($erros, "O campo [Nome do Quiz] é obrigatório.");
 
-        if (!$quiz->getComTempo())
-            array_push($erros, "O campo [Com Tempo] é obrigatório.");
+        if (!$quiz->getIdZona())
+            array_push($erros, "O campo [Zona] é obrigatório.");
 
         if ($quiz->getComTempo() && !$quiz->getQuantTempo())
             array_push($erros, "O campo [Quantidade de Tempo] é obrigatório quando [Com Tempo] é selecionado.");

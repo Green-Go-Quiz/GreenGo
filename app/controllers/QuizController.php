@@ -23,7 +23,7 @@ class QuizController extends Controller
         */
 
         $this->quizDao = new QuizDAO();
-        //$this->quizService = new QuizService();
+        $this->quizService = new QuizService();
         $this->zonaDao = new ZonaDAO();
 
 
@@ -32,7 +32,6 @@ class QuizController extends Controller
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        echo "passoou";
         $quizzes = $this->quizDao->list();
         $dados["lista"] = $quizzes;
 
@@ -119,11 +118,11 @@ class QuizController extends Controller
     {
         // Captura os dados do formulário
         $dados["id"] = isset($_POST['idQuiz']) ? $_POST['idQuiz'] : 0;
-        $maximoPergunta = isset($_POST['maximoPergunta']) ? (int) $_POST['maximoPergunta'] : 0;
+        $maximoPergunta = isset($_POST['maximoPergunta']) ? (int) $_POST['maximoPergunta'] : null;
         $nomeQuiz = isset($_POST['nomeQuiz']) ? trim($_POST['nomeQuiz']) : "";
         $comTempo = isset($_POST['comTempo']) ? (int) $_POST['comTempo'] : 0;
-        $quantTempo = isset($_POST['quantTempo']) ? (int) $_POST['quantTempo'] : 0;
-        $idZona = isset($_POST['zona']) ? $_POST['zona'] : array(); // Array de IDs das questões selecionadas
+        $quantTempo = isset($_POST['quantTempo']) ? (int) $_POST['quantTempo'] : null;
+        $idZona = isset($_POST['zona']) ? $_POST['zona'] : 0; // Array de IDs das questões selecionadas
 
         // Cria objeto Quiz
         $quiz = new Quiz();
@@ -143,7 +142,7 @@ class QuizController extends Controller
         }*/
 
         // Valida os dados
-        $erros = []; //$this->quizService->validarQuiz($quiz);
+        $erros = $this->quizService->validarQuiz($quiz);
 
         if (empty($erros)) {
             // Persiste o objeto
@@ -160,7 +159,7 @@ class QuizController extends Controller
                 $this->list("", $msg);
                 exit;
             } catch (PDOException $e) {
-                $erros[] = "Erro ao salvar o quiz na base de dados.";
+                $erros[] = "Erro ao salvar o quiz na base de dados." . $e;
             }
         }
 
@@ -168,8 +167,8 @@ class QuizController extends Controller
         $msgErro = implode("<br>", $erros);
         $dados['zonas'] = $this->zonaDao->list();
         $dados["quiz"] = $quiz;
-        $this->loadView("quiz/form.php", $dados);
-        $this->list($msgErro);
+        $this->loadView("quiz/form.php", $dados, $msgErro);
+        //$this->list($msgErro);
     }
 
 
