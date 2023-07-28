@@ -152,4 +152,17 @@ class Questao
 
         return $this;
     }
+  
+
+public function getAlternativaCertaTexto()
+{
+    $alternativas = $this->getAlternativas();
+    foreach ($alternativas as $alternativa) {
+        if ($alternativa->getAlternativaCerta() == 1) {
+            return $alternativa->getDescricaoAlternativa();
+        }
+    }
+    return "Nenhuma alternativa correta definida.";
+}
+
 }

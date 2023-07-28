@@ -53,6 +53,18 @@ require_once(__DIR__ . "/../include/menu.php");
                  
  <!-- teste para alterar a alternativa-->
   
+ <?php foreach ($dados['alternativas'] as $index => $alternativa) : ?>
+            <div class="form-group">
+                <label for="alternativa<?= $index + 1 ?>">Alternativa <?= $index + 1 ?>:</label>
+                <input class="form-control" type="text" id="alternativa<?= $index + 1 ?>" name="alternativa<?= $index + 1 ?>" maxlength="200" placeholder="Informe a alternativa" value="<?= $alternativa->getDescricaoAlternativa() ?>" />
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="alternativa_correta<?= $index + 1 ?>" name="alternativa_correta" value="<?= $index ?>" <?php echo ($alternativa->isAlternativaCerta()) ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="alternativa_correta<?= $index + 1 ?>">É a alternativa correta?</label>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+     
 
                
 

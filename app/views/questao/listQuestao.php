@@ -27,8 +27,8 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                         <th>Pontuação</th>
                         <th>Imagem</th>
                         <th>alternativa</th>
+                        <th>Alternativa Correta</th>
                         <th>Alterar</th>
-
                         <th>Excluir</th>
 
                     </tr>
@@ -43,13 +43,12 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                             <td><?= $q->getPontuacao(); ?></td>
                             <td><?= $q->getImagem(); ?></td>
                             <td><?= $q->getAlternativasTexto(); ?></td>
-
-
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
+                            <td><?= $q->getAlternativaCertaTexto(); ?></td>
+                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
                                     Alterar</a>
                             </td>
                             <td>
-                                <a class="btn btn-primary" href="<?= BASEURL ?>/controller/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao()
+                                <a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao()
                                                                                                                                     ?>" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
                             </td>
 
