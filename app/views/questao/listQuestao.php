@@ -1,62 +1,50 @@
-<?php
-#Nome do arquivo: usuario/list.php
-#Objetivo: interface para listagem dos usuários do sistema
+<!DOCTYPE html>
+<html lang="en">
 
-require_once(__DIR__ . "/../../bootstrap/header.php");
-?>
-<h3 class="text-center">Lista de Questões</h3>
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <a class="btn btn-success" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
-                Inserir</a>
-        </div>
+<head>
+    <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/listQuestao.css">
+</head>
 
-        <div class="col-9">
-            <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-12">
-            <table id="tabUsuarios" class='table table-striped table-bordered'>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descrição da Questão</th>
-                        <th>Grau de Dificuldade </th>
-                        <th>Pontuação</th>
-                        <th>Imagem</th>
-                        <th>alternativa</th>
-                        <th>Alternativa Correta</th>
-                        <th>Alterar</th>
-                        <th>Excluir</th>
+<body>
+    <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
 
-                    </tr>
-                </thead>
+    <h3 class="title-margin">Lista de Questões</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="card mb-4 shadow-sm w-100">
+                    <div class="card-body">
+                        <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
+                            Inserir Nova Questão
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-                <tbody>
-                    <?php foreach ($dados['lista'] as $q) : ?>
-                        <tr>
-                            <td><?php echo $q->getIdQuestao(); ?></td>
-                            <td><?= $q->getDescricaoQ(); ?></td>
-                            <td><?= $q->getGrauDificuldadeTexto(); ?></td>
-                            <td><?= $q->getPontuacao(); ?></td>
-                            <td><?= $q->getImagem(); ?></td>
-                            <td><?= $q->getAlternativasTexto(); ?></td>
-                            <td><?= $q->getAlternativaCertaTexto(); ?></td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $q->getIdQuestao() ?>">
-                                    Alterar</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $q->getIdQuestao()
-                                                                                                                                    ?>" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
-                            </td>
+            <?php foreach ($dados['lista'] as $questao) : ?>
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $questao->getDescricaoQ(); ?></h5>
+                            <p><span class="labelQuestao">Grau de Dificuldade:</span> <?= $questao->getGrauDificuldadeTexto(); ?></p>
+                            <p><span class="labelQuestao">Pontuação:</span> <?= $questao->getPontuacao(); ?></p>
+                            <p><span class="labelQuestao">Imagem:</span> <?= $questao->getImagem(); ?></p>
+                            <p><span class="labelQuestao">Alternativas:</span> <?= $questao->getAlternativasTexto(); ?></p>
+                            <p><span class="labelQuestao">Alternativa Correta:</span> <?= $questao->getAlternativaCertaTexto(); ?></p>
 
-
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-primary">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
-</div>
+</body>
+
+</html>

@@ -11,7 +11,6 @@
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
 
 
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/cabecalho.css">
 
     <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/listQuiz.css">
 </head>
@@ -38,12 +37,13 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $quiz->getNomeQuiz(); ?></h5>
                             <p><span class="labelQuiz">Nome do Quiz:</span> <?= $quiz->getNomeQuiz(); ?></p>
-                            <p><strong>Nome da Zona:</strong> <?= $quiz->getZona()->getNomeZona(); ?></p>
-                            <p><strong>Máximo de Questões:</strong> <?= $quiz->getMaximoPergunta(); ?></p>
-                            <p><strong>Com Limite de Tempo:</strong> <?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></p>
+                            <p><span class="labelQuiz">Nome da Zona:</span> <?= $quiz->getZona()->getNomeZona(); ?></p>
+                            <p><span class="labelQuiz">Máximo de Questões:</span> <?= $quiz->getMaximoPergunta(); ?></p>
+                            <p><span class="labelQuiz">Com Limite de Tempo:</span> <?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></p>
                             <?php if ($quiz->getComTempo() == 1) : ?>
-                                <p><strong>Quantidade de Tempo (em minutos):</strong> <?= $quiz->getQuantTempo(); ?></p>
+                                <p><span class="labelQuiz">Tempo em minutos:</span> <?= $quiz->getQuantTempo(); ?></p>
                             <?php endif; ?>
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary">Alterar</a>

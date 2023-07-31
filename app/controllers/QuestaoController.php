@@ -37,7 +37,6 @@ class QuestaoController extends Controller
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        echo "ta funcionando";
         $questoes = $this->questaoDao->list();
 
         //Adicionar as alternativas em cada questão
@@ -55,13 +54,13 @@ class QuestaoController extends Controller
     {
 
         $dados["id"] = 0;
-        
+
         $dados['alternativas'] = $this->camposAlternativas;
         $this->loadView("questao/form.php", $dados);
     }
 
- 
-    
+
+
     protected function edit()
     {
         $questao = $this->findQuestaoById();
@@ -90,9 +89,8 @@ class QuestaoController extends Controller
         foreach ($this->camposAlternativas as $campo) {
             $texto = isset($_POST[$campo]) ? trim($_POST[$campo]) : NULL;
             array_push($textoAlternativa, $texto);
-           // Captura a alternativa correta
-$indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa_correta'] : -1;
-
+            // Captura a alternativa correta
+            $indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa_correta'] : -1;
         }
 
         // Cria objeto Questao
@@ -112,18 +110,17 @@ $indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa
             array_push($alternativas, $alt);
 
             // Captura o índice da alternativa correta do campo "alternativa_correta" enviado pelo formulário
-$indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa_correta'] : -1;
+            $indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa_correta'] : -1;
 
-// Define a alternativa correta no array de alternativas
-foreach ($alternativas as $index => $alt) {
-    $alt->setAlternativaCerta($index === $indiceCorreta ? 1 : 0);
-}
-
-}
+            // Define a alternativa correta no array de alternativas
+            foreach ($alternativas as $index => $alt) {
+                $alt->setAlternativaCerta($index === $indiceCorreta ? 1 : 0);
+            }
+        }
         // Valida os dados
         $erros = $this->questaoService->validarQuestao($questao, $imagem);
 
-         if (empty($erros)) {
+        if (empty($erros)) {
             $arquivoNome = explode('.', $imagem['name']);
             $arquivoExtensao = $arquivoNome[1];
 
@@ -139,8 +136,11 @@ foreach ($alternativas as $index => $alt) {
                         foreach ($alternativas as $alt) {
                             $this->alternativaDao->insert($alt, $idQuestao);
                         }
-                    } 
-                       else { // Alterando
+                    } //else { // Alterando
+                    // $questao->setIdQuestao($dados["id"]);
+                    // $this->questaoDao->update($questao);
+        
+                    else { // Alterando
                         $this->questaoDao->update($questao);
                         $idQuestao = $dados["id"];
                         foreach ($alternativas as $index => $alt) {
@@ -154,7 +154,7 @@ foreach ($alternativas as $index => $alt) {
                                 $this->alternativaDao->update($alt);
                             }
                         }
-                       }
+                    }
 
                     // Enviar mensagem de sucesso
                     $msg = "Questão salva com sucesso.";
