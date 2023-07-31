@@ -139,9 +139,7 @@ foreach ($alternativas as $index => $alt) {
                         foreach ($alternativas as $alt) {
                             $this->alternativaDao->insert($alt, $idQuestao);
                         }
-                    } //else { // Alterando
-                       // $questao->setIdQuestao($dados["id"]);
-                       // $this->questaoDao->update($questao);
+                    } 
                        else { // Alterando
                         $this->questaoDao->update($questao);
                         $idQuestao = $dados["id"];

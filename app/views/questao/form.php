@@ -93,7 +93,13 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 <input type="radio" name="alternativa_correta" value="2">Alternativa 3<br>
 <input type="radio" name="alternativa_correta" value="3">Alternativa 4<br>
 
-
+<label for="quiz_id">Selecione um Quiz:</label>
+<select name="quiz_id" id="quiz_id">
+    <option value="">-- Selecione um Quiz --</option>
+    <?php foreach ($quizzes as $quiz) : ?>
+        <option value="<?= $quiz->getIdQuiz(); ?>"><?= $quiz->getNomeQuiz(); ?></option>
+    <?php endforeach; ?>
+</select>
 
                 <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />
 

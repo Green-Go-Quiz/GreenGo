@@ -45,22 +45,7 @@ class QuizDAO
             " - Erro: mais de um quiz encontrado.");
     }
 
-    /*public function insert(Quiz $quiz)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "INSERT INTO quiz (maximoPergunta, nomeQuiz, comTempo, quantTempo, idZona)" .
-            " VALUES (:maximoPergunta, :nomeQuiz, :comTempo, :quantTempo, :idZona)";
-
-        $stm = $conn->prepare($sql);
-        $stm->bindValue(":maximoPergunta", $quiz->getMaximoPergunta());
-        $stm->bindValue(":nomeQuiz", $quiz->getNomeQuiz());
-        $stm->bindValue(":comTempo", $quiz->getComTempo());
-        $stm->bindValue(":quantTempo", $quiz->getQuantTempo());
-        $stm->bindValue(":idZona", $quiz->getZona()->getIdZona());
-
-        $stm->execute();
-    }*/
+  
 
     public function insert(Quiz $quiz)
     {
@@ -77,11 +62,7 @@ class QuizDAO
         $stm->bindValue(":idZona", $quiz->getIdZona());
         $stm->execute();
 
-        // Obter o ID gerado para o novo quiz
-        //$quizId = $conn->lastInsertId();
-
-        // Inserir as associações entre quiz e questões
-        //$this->insertQuizQuestaoAssociations($quizId, $quiz->getQuestoes());
+      
     }
 
 
@@ -186,4 +167,3 @@ class QuizDAO
     }
 }
 
-    //Método para converter um registro da base de dados
