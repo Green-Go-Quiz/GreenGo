@@ -10,7 +10,7 @@ class Questao
     private $grauDificuldade;
     private $pontuacao;
     private $imagem;
-
+    
     private $alternativas; //Campo que armazena um array de objetos Alternativa
 
 
@@ -154,15 +154,25 @@ class Questao
     }
   
 
-public function getAlternativaCertaTexto()
-{
-    $alternativas = $this->getAlternativas();
-    foreach ($alternativas as $alternativa) {
-        if ($alternativa->getAlternativaCerta() == 1) {
-            return $alternativa->getDescricaoAlternativa();
+    public function getAlternativaCertaTexto()
+    {
+        $alternativas = $this->getAlternativas();
+        foreach ($alternativas as $alternativa) {
+            if ($alternativa->getAlternativaCerta() == 1) {
+                return $alternativa->getDescricaoAlternativa();
+            }
         }
+        return "Nenhuma alternativa correta definida.";
     }
-    return "Nenhuma alternativa correta definida.";
-}
 
+    public function isAlternativaCerta($idx) {
+        $alternativas = $this->getAlternativas();
+        if(isset($alternativas[$idx]) and $alternativas[$idx]->getAlternativaCerta())
+            return true;
+
+        return false;
+    }
+
+
+   
 }

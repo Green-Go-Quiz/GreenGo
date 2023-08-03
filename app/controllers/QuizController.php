@@ -70,7 +70,7 @@ class QuizController extends Controller
         $nomeQuiz = isset($_POST['nomeQuiz']) ? trim($_POST['nomeQuiz']) : "";
         $comTempo = isset($_POST['comTempo']) ? (int) $_POST['comTempo'] : 0;
         $quantTempo = isset($_POST['quantTempo']) ? (int) $_POST['quantTempo'] : null;
-        $idZona = isset($_POST['zona']) ? $_POST['zona'] : 0; // Array de IDs das questões selecionadas
+        $idZona = isset($_POST['zona']) ? $_POST['zona'] : 0; // Array de IDs das zonas selecionadas
 
         // Cria objeto Quiz
         $quiz = new Quiz();
@@ -80,14 +80,7 @@ class QuizController extends Controller
         $quiz->setQuantTempo($quantTempo);
         $quiz->setIdZona($idZona);
 
-        // Adiciona as questões ao objeto Quiz
-        /*foreach ($idQuestoes as $idQuestao) {
-            // Recupera a questão do banco de dados (supondo que você tenha uma função para isso)
-            $questao = $this->questaoDao->findById($idQuestao);
-            if ($questao) {
-                $quiz->addQuestao($questao);
-            }
-        }*/
+        
 
         // Valida os dados
         $erros = $this->quizService->validarQuiz($quiz);

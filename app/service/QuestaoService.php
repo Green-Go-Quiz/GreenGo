@@ -6,7 +6,7 @@ class QuestaoService
 {
 
     /* Método para atualizar uma questão no banco de dados */
-    public function validarQuestao(Questao $questao, $imagem)
+    public function validarQuestao(Questao $questao, $imagem, $alternativas)
     {
         $erros = array();
 
@@ -20,12 +20,27 @@ class QuestaoService
         if (!$questao->getPontuacao())
             array_push($erros, "O campo [Pontuação] é obrigatório.");
 
-        // if (!$questao->getDescricaoResposta())
-        //  array_push($erros, "O campo [alternativa] é obrigatório."); 
+        
 
-        if ($imagem['size'] <= 0) {
-            array_push($erros, "O campo [Imagem] está inválido ou não foi enviado.");
-        }
+        $idxQuestao = 1;
+        $possuiCorreta = false;
+        foreach ($alternativas as $alt) {
+            if (!$alt->getDescricaoAlternativa())
+                array_push($erros, "O campo [Alternativa ". $idxQuestao ."] é obrigatório.");
+
+            if($alt->getAlternativaCerta())
+                $possuiCorreta = true;
+
+            $idxQuestao++;
+         }
+
+         if(! $possuiCorreta)
+            array_push($erros, "O campo [Alternativa Correta] é obrigatório.");
+
+            
+     //   if ($imagem['size'] <= 0) {
+           // array_push($erros, "O campo [Imagem] está inválido ou não foi enviado.");
+        //}
         return $erros;
 
 

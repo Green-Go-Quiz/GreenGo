@@ -68,45 +68,33 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                         <label for="uplImagem">Selecione o arquivo:</label>
                         <br>
                         <input class="form-control" type="file" name="imagem" id="uplImagem" accept="image/*" />
-
                     </div>
-
-
-                    <input type="hidden" id="hddId" name="id" value="<?php echo (isset($dados[" questao"]) ? $dados["questao"]->getImagem() : ''); ?>" />
 
 
                     <?php $i = 1; ?>
                     <?php foreach ($dados['alternativas'] as $campo) : ?>
                         <div class="form-group">
                             <label for="txt<?= $campo ?>">Alternativa <?= $i; ?></label>
-                            <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" placeholder="Informe a descrição da alternativa" value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ?
-                                                                                                                                                                                            $dados["questao"]->getAlternativas()[$i - 1]->getDescricaoAlternativa() : ''); ?>">
+                            <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" placeholder="Informe a descrição da alternativa" 
+                                value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ? $dados["questao"]->getAlternativas()[$i - 1]->getDescricaoAlternativa() : ''); ?>">
                         </div>
                         <?php $i++; ?>
                     <?php endforeach; ?>
 
 
+                    <div class="form-group">
 
-
-
-
-
-
-
-                    <label>Selecione a alternativa correta:</label><br>
-                    <input type="radio" name="alternativa_correta" value="0">Alternativa 1<br>
-                    <input type="radio" name="alternativa_correta" value="1">Alternativa 2<br>
-                    <input type="radio" name="alternativa_correta" value="2">Alternativa 3<br>
-                    <input type="radio" name="alternativa_correta" value="3">Alternativa 4<br>
-
-<label for="quiz_id">Selecione um Quiz:</label>
-<select name="quiz_id" id="quiz_id">
-    <option value="">-- Selecione um Quiz --</option>
-    <?php foreach ($quizzes as $quiz) : ?>
-        <option value="<?= $quiz->getIdQuiz(); ?>"><?= $quiz->getNomeQuiz(); ?></option>
-    <?php endforeach; ?>
-</select>
-
+                        <label>Selecione a alternativa correta:</label><br>
+                        <input type="radio" name="alternativa_correta" value="0" 
+                                <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>  >Alternativa 1<br>
+                        <input type="radio" name="alternativa_correta" value="1" 
+                                <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(1) ? 'checked' : '') ?> >Alternativa 2<br>
+                        <input type="radio" name="alternativa_correta" value="2" 
+                                <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(2) ? 'checked' : '') ?> >Alternativa 3<br>
+                        <input type="radio" name="alternativa_correta" value="3" 
+                                <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(3) ? 'checked' : '') ?> >Alternativa 4<br>
+                    </div>
+                    
                     <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />
 
                     <button type="submit" class="btn btn-success">Gravar</button>

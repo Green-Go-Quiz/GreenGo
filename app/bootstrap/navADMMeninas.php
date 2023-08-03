@@ -1,7 +1,7 @@
 <div class="col-xs-12" id="nav-container">
     <div id="itensmenu">
         <nav class="navbar navbar-expand-lg " id="menu">
-            <a href="../index.php" class="nav-brand">
+            <a href="<?php echo BASEURL; ?>/views/index.php" class="nav-brand">
                 <div class="row justify-content-md-left">
                     <div id="imgmenu">
                         <img class="img-responsive" src="../public/logo-green.svg" id="logo">

@@ -7,6 +7,7 @@ require_once(__DIR__ . "/../service/QuestaoService.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/AlternativaModel.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
+require_once(__DIR__ . "/../dao/QuizDAO.php");
 
 
 class QuestaoController extends Controller
@@ -14,24 +15,16 @@ class QuestaoController extends Controller
     private QuestaoDAO $questaoDao;
     private AlternativaDAO $alternativaDao;
     private QuestaoService $questaoService;
-
+    private QuizDAO $quizDao;
     private array $camposAlternativas = ["alternativa1", "alternativa2", "alternativa3", "alternativa4"];
 
     public function __construct()
     {
-        //if (!$this->usuarioLogado())
-        //    exit;
-        /*
-        if (!$this->usuarioPossuiPapel([UsuarioPapel::ADMINISTRADOR])) {
-            echo "Acesso negado";
-            exit;
-        }
-        */
 
         $this->questaoDao = new QuestaoDAO();
         $this->alternativaDao = new AlternativaDAO();
         $this->questaoService = new QuestaoService();
-
+        $this->quizDao = new QuizDAO();
         $this->handleAction();
     }
 
@@ -56,6 +49,7 @@ class QuestaoController extends Controller
         $dados["id"] = 0;
 
         $dados['alternativas'] = $this->camposAlternativas;
+        
         $this->loadView("questao/form.php", $dados);
     }
 
@@ -65,11 +59,14 @@ class QuestaoController extends Controller
     {
         $questao = $this->findQuestaoById();
         if ($questao) {
+            //CARREGAR AS ALTERNATIVAS
+            $questao->setAlternativas($this->alternativaDao->findAllByQuestao($questao->getIdQuestao()));
+
             $dados["id"] = $questao->getIdQuestao();
             // Carregar as alternativas
             $dados["questao"] = $questao;
-            $dados['alternativas'] = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
-
+            $dados['alternativas'] = $this->camposAlternativas;
+            
             $this->loadView("questao/form.php", $dados);
         } else {
             $this->list("Questão não encontrada.");
@@ -84,7 +81,6 @@ class QuestaoController extends Controller
         $grauDificuldade = isset($_POST['grauDificuldade']) ? trim($_POST['grauDificuldade']) : NULL;
         $pontuacao = isset($_POST['pontuacao']) ? trim($_POST['pontuacao']) : NULL;
         $imagem = isset($_FILES["imagem"]) ? $_FILES["imagem"] : NULL;
-
         $textoAlternativa = array();
         foreach ($this->camposAlternativas as $campo) {
             $texto = isset($_POST[$campo]) ? trim($_POST[$campo]) : NULL;
@@ -102,7 +98,8 @@ class QuestaoController extends Controller
         // $questao->setCampos_alternativa($campos_alternativa);
 
         //Criar objetos Alternativa
-        $alternativas = array();
+        //$alternativas = array();
+        $alternativas = $this->alternativaDao->findAllByQuestao($dados["id"]);
         foreach ($textoAlternativa as $texto) {
             $alt = new Alternativa();
             $alt->setDescricaoAlternativa($texto);
@@ -117,8 +114,10 @@ class QuestaoController extends Controller
                 $alt->setAlternativaCerta($index === $indiceCorreta ? 1 : 0);
             }
         }
+        $questao->setAlternativas($alternativas);
+
         // Valida os dados
-        $erros = $this->questaoService->validarQuestao($questao, $imagem);
+        $erros = $this->questaoService->validarQuestao($questao, $imagem, $alternativas);
 
         if (empty($erros)) {
             $arquivoNome = explode('.', $imagem['name']);
@@ -159,6 +158,7 @@ class QuestaoController extends Controller
                     // Enviar mensagem de sucesso
                     $msg = "Questão salva com sucesso.";
                     $this->list("", $msg);
+                    
                     exit;
                 } catch (PDOException $e) {
                     $erros = ["Erro ao salvar a questão na base de dados." . $e];
