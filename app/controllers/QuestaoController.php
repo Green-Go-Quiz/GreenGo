@@ -151,11 +151,8 @@ class QuestaoController extends Controller
                     foreach ($alternativas as $alt) {
                         $this->alternativaDao->insert($alt, $idQuestao);
                     }
-                } //else { // Alterando
-                // $questao->setIdQuestao($dados["id"]);
-                // $this->questaoDao->update($questao);
-    
-                else { // Alterando
+                } else { // Alterando
+                    $questao->setIdQuestao($dados["id"]);
                     $this->questaoDao->update($questao);
                     foreach ($alternativas as $alt) {
                         $this->alternativaDao->update($alt);

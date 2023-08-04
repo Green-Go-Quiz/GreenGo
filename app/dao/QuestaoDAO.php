@@ -110,11 +110,12 @@ class QuestaoDAO
     }
 
 
+
+
     // Método para excluir uma Questao pelo seu ID
     public function deleteById(int $id)
     {
-        $this->deleteAlternativasByQuestaoId($id);
-
+        
         $conn = Connection::getConn();
 
         $sql = "DELETE FROM questao WHERE idQuestao = :id";
@@ -123,6 +124,7 @@ class QuestaoDAO
         $stm->bindValue("id", $id);
         $stm->execute();
     }
+
 
     // Método para converter um registro da base de dados em um objeto Questao
     private function mapQuestoes($result)
