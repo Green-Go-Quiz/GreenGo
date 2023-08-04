@@ -6,6 +6,9 @@ como pegar o id da questao para conseguir assim alterar ela no alt?
 
 como fazer com que o form não fique reclamando que o campo descrição está vazio (dar uma olhada no controller de questão)
 
+
+
+
 Em quiz devo armazenar apenas o Id de Zona ou o objeto Zona por inteiro? 
 Dica de como utilizar o service de quiz para a propriedade de zona.
 
