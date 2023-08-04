@@ -35,10 +35,33 @@
 }
 
 .labelQuiz {
-  font-weight: bold;
-  background-color: aqua;
-  color: #edd33e;
+  font-weight: 700;
+  color: var(--verdao);
+  font-family: "Poppins";
 }
 
-  
+.nomeQuiz {
+  font-weight: 900;
+  color: var(--verdao);
+  font-family: "Poppins";
+}
 
+.dadosQuiz {
+  font-weight: 500;
+
+  color: var(--verdao);
+  font-family: "Poppins-regular";
+}
+
+.tituloQuiz {
+  font-weight: 900;
+  color: var(--principal);
+  font-family: "Poppins";
+}
+
+.botaoInserir {
+  font-weight: 900;
+  font-size: xx-large;
+  color: var(--principal);
+  font-family: "Poppins";
+}
