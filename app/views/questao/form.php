@@ -70,6 +70,10 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                         <input class="form-control" type="file" name="imagem" id="uplImagem" accept="image/*" />
                     </div>
 
+                    <?php if(isset($dados["questao"]) && $dados["questao"]->getImagem()): ?>
+                        <img src="<?= BASEURL_ARQUIVOS . "/" . $dados["questao"]->getImagem() ?>" 
+                            style="width: 100px; height: auto;" />
+                    <?php endif; ?>
 
                     <?php $i = 1; ?>
                     <?php foreach ($dados['alternativas'] as $campo) : ?>

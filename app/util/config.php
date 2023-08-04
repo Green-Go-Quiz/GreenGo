@@ -31,3 +31,4 @@ define('SESSAO_USUARIO_PAPEIS', "usuarioLogadoPapeis");
 
 //Caminho do diretório para salvar imagens
 define('PATH_ARQUIVOS', __DIR__ . '/../../arquivos');
+define('BASEURL_ARQUIVOS', BASEURL . '/../arquivos');

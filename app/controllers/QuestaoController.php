@@ -100,11 +100,18 @@ class QuestaoController extends Controller
         //Criar objetos Alternativa
         //$alternativas = array();
         $alternativas = $this->alternativaDao->findAllByQuestao($dados["id"]);
-        foreach ($textoAlternativa as $texto) {
-            $alt = new Alternativa();
+        foreach ($textoAlternativa as $idx => $texto) {
+            $alt = null;
+            if($idx < count($alternativas))
+                $alt = $alternativas[$idx];
+            else
+                $alt = new Alternativa();
+            
             $alt->setDescricaoAlternativa($texto);
             $alt->setAlternativaCerta(0);
-            array_push($alternativas, $alt);
+            
+            if(! $alt->getIdAlternativa())
+                array_push($alternativas, $alt);
 
             // Captura o índice da alternativa correta do campo "alternativa_correta" enviado pelo formulário
             $indiceCorreta = isset($_POST['alternativa_correta']) ? (int)$_POST['alternativa_correta'] : -1;
@@ -120,55 +127,49 @@ class QuestaoController extends Controller
         $erros = $this->questaoService->validarQuestao($questao, $imagem, $alternativas);
 
         if (empty($erros)) {
-            $arquivoNome = explode('.', $imagem['name']);
-            $arquivoExtensao = $arquivoNome[1];
+            if($imagem['size'] > 0) {
+                $arquivoNome = explode('.', $imagem['name']);
+                $arquivoExtensao = $arquivoNome[1];
 
-            $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
-            $nomeArquivoSalvar = "imagem_" . $uuid . "." . $arquivoExtensao;
+                $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+                $nomeArquivoSalvar = "imagem_" . $uuid . "." . $arquivoExtensao;
 
-            //Salva o arquivo no diretório defindo em $PATH_ARQUIVOS
-            if (move_uploaded_file($imagem["tmp_name"], PATH_ARQUIVOS . "/" . $nomeArquivoSalvar)) {
-                $questao->setImagem($nomeArquivoSalvar);
-                try {
-                    if ($dados["id"] == 0) { // Inserindo
-                        $idQuestao = $this->questaoDao->insert($questao);
-                        foreach ($alternativas as $alt) {
-                            $this->alternativaDao->insert($alt, $idQuestao);
-                        }
-                    } //else { // Alterando
-                    // $questao->setIdQuestao($dados["id"]);
-                    // $this->questaoDao->update($questao);
-        
-                    else { // Alterando
-                        $this->questaoDao->update($questao);
-                        $idQuestao = $dados["id"];
-                        foreach ($alternativas as $index => $alt) {
-                            $idAlternativa = isset($dados["alternativasIds"][$index]) ? $dados["alternativasIds"][$index] : 0;
-                            if ($idAlternativa == 0) {
-                                // Caso não exista ID da alternativa, insere uma nova
-                                $this->alternativaDao->insert($alt, $idQuestao);
-                            } else {
-                                // Caso exista ID da alternativa, atualiza a alternativa existente
-                                $alt->setIdAlternativa($idAlternativa);
-                                $this->alternativaDao->update($alt);
-                            }
-                        }
-                    }
-
-                    // Enviar mensagem de sucesso
-                    $msg = "Questão salva com sucesso.";
-                    $this->list("", $msg);
-                    
-                    exit;
-                } catch (PDOException $e) {
-                    $erros = ["Erro ao salvar a questão na base de dados." . $e];
+                //Salva o arquivo no diretório defindo em $PATH_ARQUIVOS
+                if (move_uploaded_file($imagem["tmp_name"], PATH_ARQUIVOS . "/" . $nomeArquivoSalvar)) {
+                    $questao->setImagem($nomeArquivoSalvar);
+                } else {
+                    //Caso não consega salvar, exibe o erro
+                    $erros = ["Erro, o arquivo n&atilde;o pode ser enviado."];
                 }
-            } else {
-                //Caso não consega salvar, exibe o erro
-                echo ["Erro, o arquivo n&atilde;o pode ser enviado."];
             }
-            // Persiste o objeto
+        }
 
+        if (empty($erros)) {
+            try {
+                if ($dados["id"] == 0) { // Inserindo
+                    $idQuestao = $this->questaoDao->insert($questao);
+                    foreach ($alternativas as $alt) {
+                        $this->alternativaDao->insert($alt, $idQuestao);
+                    }
+                } //else { // Alterando
+                // $questao->setIdQuestao($dados["id"]);
+                // $this->questaoDao->update($questao);
+    
+                else { // Alterando
+                    $this->questaoDao->update($questao);
+                    foreach ($alternativas as $alt) {
+                        $this->alternativaDao->update($alt);
+                    }
+                }
+
+                // Enviar mensagem de sucesso
+                $msg = "Questão salva com sucesso.";
+                $this->list("", $msg);
+                
+                exit;
+            } catch (PDOException $e) {
+                $erros = ["Erro ao salvar a questão na base de dados." . $e];
+            }
         }
 
         // Se há erros, volta para o formulário
