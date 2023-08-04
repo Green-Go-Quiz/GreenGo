@@ -32,15 +32,15 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
     <div class="container">
 
         <div class="row" style="margin-top: 10px;">
-
+   
             <div class="col-6">
                 <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controllers/QuestaoController.php?action=save" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="txtDescricaoQ">Descrição:</label>
+                        <label for="txtDescricaoQ">* Descrição:</label>
                         <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
                     </div>
                     <div class="form-group">
-                        <label for="txtGrauDificuldade">Grau de dificuldade:</label>
+                        <label for="txtGrauDificuldade">* Grau de dificuldade:</label>
                         <fieldset>
                             <div>
                                 <input type="radio" id="facil" name="grauDificuldade" value="facil" <?php echo (isset($dados["questao"]) && $dados["questao"]->getGrauDificuldade() == "facil") ? "checked" : "" ?>>
@@ -60,7 +60,7 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label for="txtPontuacao">Pontuação:</label>
+                        <label for="txtPontuacao">* Pontuação:</label>
                         <input class="form-control" type="number" id="txtPontuacao" name="pontuacao" min="1" max="100" placeholder="Informe a pontuação da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getPontuacao() : ''); ?>" />
                     </div>
 
@@ -78,24 +78,26 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                     <?php $i = 1; ?>
                     <?php foreach ($dados['alternativas'] as $campo) : ?>
                         <div class="form-group">
-                            <label for="txt<?= $campo ?>">Alternativa <?= $i; ?></label>
+                            <label for="txt<?= $campo ?>">* Alternativa <?= $i; ?></label>
                             <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" placeholder="Informe a descrição da alternativa" 
                                 value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ? $dados["questao"]->getAlternativas()[$i - 1]->getDescricaoAlternativa() : ''); ?>">
                         </div>
                         <?php $i++; ?>
                     <?php endforeach; ?>
 
+ 
 
-                    <div class="form-group">
+                    
+                    <div class="form-group" >
 
-                        <label>Selecione a alternativa correta:</label><br>
-                        <input type="radio" name="alternativa_correta" value="0" 
+                        <label>* Selecione a alternativa correta:</label><br>
+                        <input type="radio" name="alternativa_correta" value="0" style="margin-bottom: 20px"
                                 <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>  >Alternativa 1<br>
-                        <input type="radio" name="alternativa_correta" value="1" 
+                        <input type="radio" name="alternativa_correta" value="1" style="margin-bottom: 20px"
                                 <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(1) ? 'checked' : '') ?> >Alternativa 2<br>
-                        <input type="radio" name="alternativa_correta" value="2" 
+                        <input type="radio" name="alternativa_correta" value="2" style="margin-bottom: 20px"
                                 <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(2) ? 'checked' : '') ?> >Alternativa 3<br>
-                        <input type="radio" name="alternativa_correta" value="3" 
+                        <input type="radio" name="alternativa_correta" value="3" style="margin-bottom: 20px"
                                 <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(3) ? 'checked' : '') ?> >Alternativa 4<br>
                     </div>
                     

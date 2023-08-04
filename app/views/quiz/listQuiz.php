@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
+       <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
 
 
 
@@ -35,10 +35,11 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
+
                             <h5 class="card-title"><?= $quiz->getNomeQuiz(); ?></h5>
-                            <p><span class="labelQuiz">Nome do Quiz:</span> <?= $quiz->getNomeQuiz(); ?></p>
-                            <p><span class="labelQuiz">Nome da Zona:</span> <?= $quiz->getZona()->getNomeZona(); ?></p>
-                            <p><span class="labelQuiz">Máximo de Questões:</span> <?= $quiz->getMaximoPergunta(); ?></p>
+                            <p><span class="labelQuiz">* Nome do Quiz:</span> <?= $quiz->getNomeQuiz(); ?></p>
+                             <p><span class="labelQuiz">* Nome da Zona:</span> <?= $quiz->getZona()->getNomeZona(); ?></p>
+                            <p><span class="labelQuiz">* Máximo de Questões:</span> <?= $quiz->getMaximoPergunta(); ?></p>
                             <p><span class="labelQuiz">Com Limite de Tempo:</span> <?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></p>
                             <?php if ($quiz->getComTempo() == 1) : ?>
                                 <p><span class="labelQuiz">Tempo em minutos:</span> <?= $quiz->getQuantTempo(); ?></p>

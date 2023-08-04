@@ -187,7 +187,7 @@ class QuestaoController extends Controller
         if ($questao) {
             $this->questaoDao->deleteById($questao->getIdQuestao());
 
-            //$this->alternativaDao->deleteByIdQuestao($questao->getIdQuestao());
+         
 
             $this->list("", "Questão excluída com sucesso!");
         } else {

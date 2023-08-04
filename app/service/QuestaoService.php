@@ -17,8 +17,18 @@ class QuestaoService
         if (!$questao->getGrauDificuldade())
             array_push($erros, "O campo [Grau de dificuldade] é obrigatório.");
 
-        if (!$questao->getPontuacao())
-            array_push($erros, "O campo [Pontuação] é obrigatório.");
+        //if (!$questao->getPontuacao())
+            //array_push($erros, "O campo [Pontuação] é obrigatório.");
+
+            if (!$questao->getPontuacao()) {
+                array_push($erros, "O campo [Pontuação] é obrigatório.");
+            } else {
+                $pontuacao = $questao->getPontuacao();
+                if ($pontuacao < 1 || $pontuacao > 99) {
+                    array_push($erros, "A pontuação deve estar entre 1 e 99.");
+                }
+            }
+            
 
         
 
