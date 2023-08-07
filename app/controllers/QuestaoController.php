@@ -151,11 +151,8 @@ class QuestaoController extends Controller
                     foreach ($alternativas as $alt) {
                         $this->alternativaDao->insert($alt, $idQuestao);
                     }
-                } //else { // Alterando
-                // $questao->setIdQuestao($dados["id"]);
-                // $this->questaoDao->update($questao);
-    
-                else { // Alterando
+                } else { // Alterando
+                    $questao->setIdQuestao($dados["id"]);
                     $this->questaoDao->update($questao);
                     foreach ($alternativas as $alt) {
                         $this->alternativaDao->update($alt);
@@ -187,7 +184,7 @@ class QuestaoController extends Controller
         if ($questao) {
             $this->questaoDao->deleteById($questao->getIdQuestao());
 
-            //$this->alternativaDao->deleteByIdQuestao($questao->getIdQuestao());
+         
 
             $this->list("", "Questão excluída com sucesso!");
         } else {
