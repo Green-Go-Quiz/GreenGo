@@ -57,6 +57,7 @@
                                 <div class="btn-group">
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary">Alterar</a>
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success">Questões</a>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,10 @@ class QuizQuestao
     private $idQuiz;
     private $idQuestao;
 
+    private $quiz;
+    private $questao;
+
+
     /**
      * Get the value of idQuiz
      */
@@ -64,6 +68,46 @@ class QuizQuestao
     public function setIdQuizQuestao($idQuizQuestao)
     {
         $this->idQuizQuestao = $idQuizQuestao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of quiz
+     */
+    public function getQuiz()
+    {
+        return $this->quiz;
+    }
+
+    /**
+     * Set the value of quiz
+     *
+     * @return  self
+     */
+    public function setQuiz($quiz)
+    {
+        $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of questao
+     */
+    public function getQuestao()
+    {
+        return $this->questao;
+    }
+
+    /**
+     * Set the value of questao
+     *
+     * @return  self
+     */
+    public function setQuestao($questao)
+    {
+        $this->questao = $questao;
 
         return $this;
     }
