@@ -1,10 +1,12 @@
+    <?php include_once(__DIR__ . "/../util/config.php"); ?>
+   
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Go</title>
 
     <!--FAVICON-->
-    <link rel="icon" href="../public/favicon.svg">
+    <!--link rel="icon" href="../public/favicon.svg--">
     <!-- Fonte -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
     <!--BOOTSTRAP-->
