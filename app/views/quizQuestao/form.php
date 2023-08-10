@@ -43,7 +43,9 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                           
 
+              
                 <!-- Include the Quiz ID as a hidden input field -->
                 <input type="hidden" name="quiz_id" value="<?= $dados['quiz_id'] ?>">
 

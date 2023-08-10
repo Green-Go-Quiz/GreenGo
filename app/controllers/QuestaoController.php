@@ -94,11 +94,9 @@ class QuestaoController extends Controller
         $questao->setDescricaoQ($descricao);
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
-        //$questao->setImagem($imagem);
-        // $questao->setCampos_alternativa($campos_alternativa);
+        $questao->setImagem("greengo\app\arquivos.jpg");
+   
 
-        //Criar objetos Alternativa
-        //$alternativas = array();
         $alternativas = $this->alternativaDao->findAllByQuestao($dados["id"]);
         foreach ($textoAlternativa as $idx => $texto) {
             $alt = null;
@@ -179,13 +177,15 @@ class QuestaoController extends Controller
     public function delete()
     {
 
+
         //   var_dump($_GET['id']);
         $questao = $this->findQuestaoById();
         if ($questao) {
+            
+            $this->questaoDao->deleteImage($questao->getImagem());
+
             $this->questaoDao->deleteById($questao->getIdQuestao());
-
-         
-
+           
             $this->list("", "Questão excluída com sucesso!");
         } else {
             $this->list("Questão não encontrada!");
@@ -201,7 +201,6 @@ class QuestaoController extends Controller
         }
 
         $questao = $this->questaoDao->findById($id);
-        //   var_dump($questao);
         return $questao;
     }
 }

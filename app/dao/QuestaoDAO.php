@@ -115,7 +115,7 @@ class QuestaoDAO
     // Método para excluir uma Questao pelo seu ID
     public function deleteById(int $id)
     {
-        
+        $this->deleteAlternativasByQuestaoId($id);
         $conn = Connection::getConn();
 
         $sql = "DELETE FROM questao WHERE idQuestao = :id";
@@ -126,6 +126,16 @@ class QuestaoDAO
     }
 
 
+    
+    public function deleteImage(string $img_del)
+    {
+
+        $path =__DIR__ . "/../../arquivos/$img_del";
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
     // Método para converter um registro da base de dados em um objeto Questao
     private function mapQuestoes($result)
     {
