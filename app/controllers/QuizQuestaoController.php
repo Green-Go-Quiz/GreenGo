@@ -4,18 +4,20 @@
 require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
+require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
 
 class QuizQuestaoController extends Controller
 {
     private QuizQuestaoDAO $quizQuestaoDao;
     private QuizDAO $quizDao;
-
+    private QuestaoDAO $questaoDao;
 
     public function __construct()
     {
         $this->quizQuestaoDao = new QuizQuestaoDAO();
         $this->quizDao = new QuizDAO();
+        $this->questaoDao = new QuestaoDAO();
         $this->handleAction();
     }
 
@@ -31,7 +33,7 @@ class QuizQuestaoController extends Controller
         $quiz = $this->findQuizById();
         if ($quiz) {
             $dados["quiz"] = $quiz;
-            $dados["listaQuestoes"] = array();
+            $dados["listaQuestoes"] = $this->questaoDao->list();
             $this->loadView("quizQuestao/form.php", $dados);
         }
 
@@ -40,6 +42,8 @@ class QuizQuestaoController extends Controller
         //$dados["id"] = 0;
 
     }
+
+    
 
     private function findQuizById()
     {

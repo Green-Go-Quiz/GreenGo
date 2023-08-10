@@ -54,14 +54,14 @@
 }
 
 .tituloQuiz {
-  font-weight: 900;
+  font-weight: 600;
   color: var(--principal);
   font-family: "Poppins";
 }
 
 .botaoInserir {
-  font-weight: 900;
-  font-size: xx-large;
+  font-weight: 60;
+  font-size:small;
   color: var(--principal);
   font-family: "Poppins";
 }

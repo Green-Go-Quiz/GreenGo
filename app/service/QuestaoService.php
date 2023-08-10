@@ -28,10 +28,6 @@ class QuestaoService
                     array_push($erros, "A pontuação deve estar entre 1 e 99.");
                 }
             }
-            
-
-        
-
         $idxQuestao = 1;
         $possuiCorreta = false;
         foreach ($alternativas as $alt) {
@@ -48,14 +44,9 @@ class QuestaoService
             array_push($erros, "O campo [Alternativa Correta] é obrigatório.");
 
             
-     //   if ($imagem['size'] <= 0) {
-           // array_push($erros, "O campo [Imagem] está inválido ou não foi enviado.");
-        //}
+    
         return $erros;
 
-
-        //Deve ser utilizado o Dao nessa circunstância? Ele teria o papel de fazer a atualização dos dados no banco de dados,
-        //retornando um método true
 
     }
 }

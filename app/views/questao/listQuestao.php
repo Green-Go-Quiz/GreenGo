@@ -30,8 +30,8 @@
                             <p><span class="labelQuestao">Grau de Dificuldade:</span> <?= $questao->getGrauDificuldadeTexto(); ?></p>
                             <p><span class="labelQuestao">Pontuação:</span> <?= $questao->getPontuacao(); ?></p>
                             <p><span class="labelQuestao">Imagem:<br></span> <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem();?>" alt="" width="100px"></p>
-                            <p><span class="labelQuestao">Alternativas:</span> <?= $questao->getAlternativasTexto(); ?></p>
-                            <p><span class="labelQuestao">Alternativa Correta:</span> <?= $questao->getAlternativaCertaTexto(); ?></p>
+                            <p><span class="labelQuestao">Alternativas:<br></span> <?= $questao->getAlternativasTexto(); ?></p>
+                            <p><span class="labelQuestao">Alternativa Correta:<br></span> <?= $questao->getAlternativaCertaTexto(); ?></p>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
