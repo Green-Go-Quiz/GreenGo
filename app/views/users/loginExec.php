@@ -1,5 +1,6 @@
 <?php
 
+include_once(__DIR__ . "/../../util/config.php");
 include_once(__DIR__ . "/../../connection/Connection.php");
 
 
@@ -8,7 +9,7 @@ $senha = $_POST['senha'];
 
 if (isset($_POST['email']) && isset($_POST['senha'])) {
 
-
+    $conexao = Connection::getConn();
     $query = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
     $stmt = $conexao->prepare($query);
     $stmt->execute();

@@ -129,7 +129,7 @@ CREATE TABLE `usuario` (
   `loginUsuario` varchar(30) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
   `senha` varchar(100) DEFAULT NULL,
-  `tipoUsuario` tinyint(1) NOT NULL
+  `tipoUsuario` tinyint(1) NOT NULL --1=NORMAL, 2=ADM, 3=PROFESSOR
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -139,6 +139,10 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
 (19, 'Gabriel', 'Masculino', 'Ensino Superior', 'mandelas', 'gabriel.mandellicardoso@gmail.com', '12345678', 1),
 (20, 'gabriel', 'Masculino', 'Ensino Médio', 'gabriel', 'gabriel.mandellicardoso@gmail.com', 'eu12345678', 1);
+
+INSERT INTO `usuario` ( `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
+('Juliana', 'Feminino', 'Ensino Superior', 'juuj', 'juujsantana@gmail.com', '12345678', 2);
+
 
 -- --------------------------------------------------------
 

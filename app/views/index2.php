@@ -4,6 +4,7 @@
 <head>
     <?php include_once(__DIR__ . "/../bootstrap/header.php"); ?>
     <link rel="stylesheet" href="css/index.css">
+    <!--link rel="stylesheet" href="css/cabecalho.css" -->
     <style>
         /* Adicione estilos personalizados aqui, se necessário */
         body {
@@ -56,8 +57,8 @@
         <div class="collapse navbar-collapse" id="navbar-links">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="projeto.php">Projeto</a></li>
-                <!--li class="nav-item"><a class="nav-link" href="login.php">Entrar</a></li-->
-                <li class="nav-item"><a class="nav-link" href="users/login.php">Entrar</a></li> 
+                <li class="nav-item"><a class="nav-link" href="login.php">Entrar</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="users/login.php">Entrar</a></li> -->
             </ul>
         </div>
     </nav>
