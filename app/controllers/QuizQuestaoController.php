@@ -37,10 +37,6 @@ class QuizQuestaoController extends Controller
             $this->loadView("quizQuestao/form.php", $dados);
         }
 
-
-        // Apenas renderiza o formulário de criação de QuizQuestao
-        //$dados["id"] = 0;
-
     }
 
     

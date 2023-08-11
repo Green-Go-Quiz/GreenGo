@@ -8,7 +8,7 @@ class ZonaController {
     private $ZonaDAO;
 
     public function __construct() {
-        $this->zonaDAO = new ZonaDAO();
+        $this->ZonaDAO = new ZonaDAO();
     }
 
     public function listar() {

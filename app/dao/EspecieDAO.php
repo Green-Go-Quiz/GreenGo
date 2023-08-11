@@ -33,7 +33,7 @@ class EspecieDAO {
 }
 
     public function list() {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = EspecieDAO::SQL_ESPECIE . 
                 " ORDER BY e.nomeCie";
@@ -45,7 +45,7 @@ class EspecieDAO {
     }
 
     public function findById($idEspecie) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = EspecieDAO::SQL_ESPECIE . 
                 " WHERE n.idEspecie = ?";
@@ -68,7 +68,7 @@ class EspecieDAO {
 
 
     public function save(Especie $especie) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = "INSERT INTO especie (nomePop, nomeCie, descricao, imagemEspecie, frutifera, comestivel, raridade, medicinal, toxidade, exotica)".
         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -78,8 +78,7 @@ class EspecieDAO {
     }
 
     public function update(Especie $especie) {
-        $conn = conectar_db();
-    
+        $conn = Connection::getConn();
         $sql = "UPDATE especie SET nomePop = ?, nomeCie = ?, descricao = ?, imagemEspecie = ?, frutifera = ?, comestivel = ?, raridade = ?, medicinal = ?, toxidade = ?, exotica = ? WHERE idEspecie = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$especie->getNomePopular(), $especie->getNomeCientifico(), $especie->getDescricao(), $especie->getImagemEspecie(),
@@ -88,8 +87,7 @@ class EspecieDAO {
 
     
     public function delete(Especie $especie) {
-    $conn = conectar_db();
-    
+        $conn = Connection::getConn();
 
     $sql = "DELETE FROM especie WHERE idEspecie = ?";
     $arquivo_del = $especie->getImagemEspecie();
