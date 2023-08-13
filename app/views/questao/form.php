@@ -18,13 +18,14 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/createquestao.css">
 </head>
 
 
 
 <body>
     <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
-    <h3 class="text-center">
+    <h3 id="quest"class=" text-center">
         <?php if ($dados['id'] == 0) echo "Inserir";
         else echo "Alterar";
         ?>
@@ -35,39 +36,39 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 
         <div class="row" style="margin-top: 10px;">
 
-            <div class="col-6">
+            <div class="col-6" >
                 <form id="frmQuestao" method="POST" action="<?= BASEURL ?>/controllers/QuestaoController.php?action=save" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="txtDescricaoQ">* Descrição:</label>
-                        <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200" placeholder="Informe a descrição da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
+                        <label  class=" nomeantes" for="txtDescricaoQ"  >* Descrição:</label>
+                        <input class="form-control" type="text" id="txtDescricaoQ" name="descricao" maxlength="200"  placeholder="Informe a descrição da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getDescricaoQ() : ''); ?>" />
                     </div>
                     <div class="form-group">
-                        <label for="txtGrauDificuldade">* Grau de dificuldade:</label>
+                        <label  class=" nomeantes" for="txtGrauDificuldade">* Grau de dificuldade:</label>
                         <fieldset>
                             <div>
                                 <input type="radio" id="facil" name="grauDificuldade" value="facil" <?php echo (isset($dados["questao"]) && $dados["questao"]->getGrauDificuldade() == "facil") ? "checked" : "" ?>>
-                                <label for="facil">Fácil</label>
+                                <label  class=" nomeantes" for="facil">Fácil</label>
                             </div>
 
                             <div>
                                 <input type="radio" id="medio" name="grauDificuldade" value="medio" <?php echo (isset($dados["questao"]) && $dados["questao"]->getGrauDificuldade() == "medio") ? "checked" : "" ?>>
-                                <label for="medio">Médio</label>
+                                <label class=" nomeantes" for="medio">Médio</label>
                             </div>
 
                             <div>
                                 <input type="radio" id="dificil" name="grauDificuldade" value="dificil" <?php echo (isset($dados["questao"]) && $dados["questao"]->getGrauDificuldade() == "dificil") ? "checked" : "" ?>>
-                                <label for="dificil">Difícil</label>
+                                <label  class=" nomeantes" for="dificil">Difícil</label>
                             </div>
                         </fieldset>
                     </div>
 
                     <div class="form-group">
-                        <label for="txtPontuacao">* Pontuação:</label>
-                        <input class="form-control" type="number" id="txtPontuacao" name="pontuacao" placeholder="Informe a pontuação da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getPontuacao() : ''); ?>" />
+                        <label class=" nomeantes" for="txtPontuacao">* Pontuação:</label>
+                        <input  class="form-control" type="number" id="txtPontuacao" name="pontuacao" placeholder="Informe a pontuação da questão" value="<?php echo (isset($dados["questao"]) ? $dados["questao"]->getPontuacao() : ''); ?>" />
                     </div>
 
                     <div class="form-group">
-                        <label for="uplImagem">Selecione o arquivo:</label>
+                        <label for="uplImagem" class=" nomeantes">Selecione o arquivo:</label>
                         <br>
                         <input class="form-control" type="file" name="imagem" id="uplImagem" accept="image/*" />
                     </div>
@@ -79,7 +80,7 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                     <?php $i = 1; ?>
                     <?php foreach ($dados['alternativas'] as $campo) : ?>
                         <div class="form-group">
-                            <label for="txt<?= $campo ?>">* Alternativa <?= $i; ?></label>
+                            <label   class=" nomeantes" for="txt<?= $campo ?>">* Alternativa <?= $i; ?></label>
                             <input class="form-control" type="text" id="txt<?= $campo ?>" name="<?= $campo ?>" maxlength="200" placeholder="Informe a descrição da alternativa" value="<?php echo (isset($dados["questao"]) && $dados["questao"]->getAlternativas() && count($dados["questao"]->getAlternativas()) >= 4 ? $dados["questao"]->getAlternativas()[$i - 1]->getDescricaoAlternativa() : ''); ?>">
                         </div>
                         <?php $i++; ?>
@@ -88,19 +89,30 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
 
 
 
-                    <div class="form-group">
+                    <class="form-group">
 
-                        <label>* Selecione a alternativa correta:</label><br>
-                        <input type="radio" name="alternativa_correta" value="0" style="margin-bottom: 20px" <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>>Alternativa 1<br>
-                        <input type="radio" name="alternativa_correta" value="1" style="margin-bottom: 20px" <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(1) ? 'checked' : '') ?>>Alternativa 2<br>
-                        <input type="radio" name="alternativa_correta" value="2" style="margin-bottom: 20px" <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(2) ? 'checked' : '') ?>>Alternativa 3<br>
-                        <input type="radio" name="alternativa_correta" value="3" style="margin-bottom: 20px" <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(3) ? 'checked' : '') ?>>Alternativa 4<br>
-                    </div>
+                        <label class=" nomeantes">* Selecione a alternativa correta:</label><br>
+                    <div> <input type="radio" name="alternativa_correta" value="0"  <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>>
+                    <label  class=" nomeantes" for="dificil">Alternantiva 1</label>
+                </div> 
+                        
+                        <div> <input type="radio" name="alternativa_correta" value="1"  <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>>
+                    <label  class=" nomeantes" for="dificil">Alternantiva 2</label>
+                </div> 
+                      
+                      <div> <input type="radio" name="alternativa_correta" value="2"  <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>>
+                    <label  class=" nomeantes" for="dificil">Alternantiva 3</label>
+                </div> 
+                      
+                <div> <input type="radio" name="alternativa_correta" value="3"  <?php echo (isset($dados["questao"]) && $dados["questao"]->isAlternativaCerta(0) ? 'checked' : '') ?>>
+                    <label  class=" nomeantes" for="dificil">Alternantiva 4</label>
+                </div> 
+                      
 
                     <input type="hidden" id="hddId" name="id" value="<?= $dados['id']; ?>" />
-
-                    <button type="submit" class="btn btn-success">Gravar</button>
-                    <button type="reset" class="btn btn-danger">Limpar</button>
+                         <br>
+                    <button type="submit"  class="gravar">Gravar</button>
+                    <button type="reset" class="limpar">Limpar</button>
                 </form>
             </div>
 

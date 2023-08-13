@@ -71,10 +71,7 @@
                         <input class="form-control" type="number" id="txtQuantTempo" name="quantTempo" placeholder="Informe a quantidade de tempo do quiz" value="<?php echo (isset($dados["quiz"]) ? $dados["quiz"]->getQuantTempo() : ''); ?>" />
                     </div>
 
-                    <a class="btn btn-success btn-block " href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create">
-                        Inserir Questões ao Quiz
-                    </a>
-
+                
 
                     <input type="hidden" id="hddIdQuiz" name="idQuiz" value="<?= $dados['id']; ?>" />
 

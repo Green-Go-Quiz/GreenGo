@@ -38,7 +38,7 @@
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Imagem:<br></span>
-                                <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" alt="" class="imagemQuestao">
+                                 <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px"></p>
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Alternativas:<br></span>
