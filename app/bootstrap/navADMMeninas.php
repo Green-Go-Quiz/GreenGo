@@ -15,11 +15,11 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
                 <div class="navbar-nav">
 
-                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">Projeto</a>
-                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuizController.php?action=list">Quiz</a>
-                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuestaoController.php?action=list">Questão</a>
+                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">PROJETO</a>
+                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuizController.php?action=list">QUIZ</a>
+                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuestaoController.php?action=list">QUESTAO</a>
                 
-                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> Adm </a>
+                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> ADM </a>
                 </div>
             </div>
         </nav>
