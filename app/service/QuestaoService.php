@@ -24,8 +24,8 @@ class QuestaoService
                 array_push($erros, "O campo [Pontuação] é obrigatório.");
             } else {
                 $pontuacao = $questao->getPontuacao();
-                if ($pontuacao < 1 || $pontuacao > 99) {
-                    array_push($erros, "A pontuação deve estar entre 1 e 99.");
+                if ($pontuacao < 1 || $pontuacao > 100) {
+                    array_push($erros, "A pontuação deve estar entre 1 e 100.");
                 }
             }
         $idxQuestao = 1;

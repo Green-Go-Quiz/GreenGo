@@ -63,7 +63,7 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
 
 <head>
 
-<?php include_once("../../bootstrap/header.php");?>
+<?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/cabecalho.css">
 
@@ -71,8 +71,7 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
 <body style="background-color: #ebf0f1;">
 <nav>
 
-<?php include_once("../../bootstrap/navADM.php");?>
-<br>
+<?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
 
 </nav>
     

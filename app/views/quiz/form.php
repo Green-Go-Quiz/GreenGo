@@ -78,8 +78,8 @@
                     <input type="hidden" id="hddIdQuiz" name="idQuiz" value="<?= $dados['id']; ?>" />
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">Gravar</button>
-                        <button type="reset" class="btn btn-danger">Limpar</button>
+                        <button type="submit" class="gravar">Gravar</button>
+                        <button type="reset" class="limpar">Limpar</button>
                     </div>
 
                 </form>

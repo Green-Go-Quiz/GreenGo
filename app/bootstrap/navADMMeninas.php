@@ -1,7 +1,7 @@
 <div class="col-xs-12" id="nav-container">
     <div id="itensmenu">
         <nav class="navbar navbar-expand-lg " id="menu">
-            <a href="<?php echo BASEURL; ?>/views/index.php" class="nav-brand">
+            <a href="<?php echo BASEURL; ?>/views/projetoADM.php" class="nav-brand">
                 <div class="row justify-content-md-left">
                     <div id="imgmenu">
                         <img class="img-responsive" src="../public/logo-green.svg" id="logo">
@@ -15,11 +15,11 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
                 <div class="navbar-nav">
 
-                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">Projeto</a>
-                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuizController.php?action=list">Quiz</a>
-                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuestaoController.php?action=list">Questão</a>
-
-                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> Adm </a>
+                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">PROJETO</a>
+                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuizController.php?action=list">QUIZ</a>
+                    <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuestaoController.php?action=list">QUESTAO</a>
+                
+                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> ADM </a>
                 </div>
             </div>
         </nav>
