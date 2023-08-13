@@ -39,12 +39,8 @@ class QuizQuestaoDAO
         $conn->beginTransaction();
 
         try {
-            // Inserir o quiz na tabela quiz
-            $quizDAO = new QuizDAO();
-            $quizDAO->insert($quiz);
-
             // Obter o ID do quiz inserido
-            $quizId = $conn->lastInsertId();
+            $quizId = $quiz->getIdQuiz();
 
             // Inserir as associações entre o quiz e as questões na tabela quiz_questao
             $this->insertQuizQuestaoAssociations($quizId, $questoes);

@@ -6,18 +6,25 @@ require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
+require_once(__DIR__ . "/../models/QuizModel.php");
+require_once(__DIR__ . "/../models/QuestaoModel.php");
+require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
+
 
 class QuizQuestaoController extends Controller
 {
     private QuizQuestaoDAO $quizQuestaoDao;
     private QuizDAO $quizDao;
     private QuestaoDAO $questaoDao;
+    private QuizQuestao $quizQuestao; // Adicione esta linha
+
 
     public function __construct()
     {
         $this->quizQuestaoDao = new QuizQuestaoDAO();
         $this->quizDao = new QuizDAO();
         $this->questaoDao = new QuestaoDAO();
+        $this->quizQuestao = new QuizQuestao(); // Instancie a classe QuizQuestaoModel
         $this->handleAction();
     }
 
@@ -34,12 +41,15 @@ class QuizQuestaoController extends Controller
         if ($quiz) {
             $dados["quiz"] = $quiz;
             $dados["listaQuestoes"] = $this->questaoDao->list();
+
+            // Crie uma instância de QuizQuestaoModel
+            $quizQuestao = new QuizQuestao();
+
+            $dados["quizQuestao"] = $quizQuestao;
+
             $this->loadView("quizQuestao/form.php", $dados);
         }
-
     }
-
-    
 
     private function findQuizById()
     {
@@ -52,28 +62,19 @@ class QuizQuestaoController extends Controller
         return $quiz;
     }
 
-
-    public function save()
+    public function add()
     {
         $idQuizQuestao = isset($_POST['id']) ? $_POST['id'] : 0;
         $idQuiz = isset($_POST['quiz_id']) ? $_POST['quiz_id'] : 0;
         $questoes = isset($_POST['questoes']) ? $_POST['questoes'] : array(); // Get an array of selected questões IDs
 
-        // Validation of the data
-        // Implement the validation of the IDs of Quiz and Questão, check if they exist in the database.
+        // Fetch the Quiz object
+        $quiz = $this->quizDao->findById($idQuiz);
 
-        // Create a new QuizQuestao instance
-        $quizQuestao = new QuizQuestao();
-        $quizQuestao->setIdQuizQuestao($idQuizQuestao);
-
-        // Assuming you have Quiz and Questao classes with their respective methods for fetching from the database,
-        // you can fetch the Quiz and Questao objects using their IDs.
-        $quiz = Quiz::getById($idQuiz);
-
-        // You can fetch the selected questões here based on their IDs using your DAO.
+        // Fetch the selected questões here based on their IDs using your DAO.
         $selectedQuestoes = array();
         foreach ($questoes as $questaoId) {
-            $questao = Questao::getById($questaoId);
+            $questao = $this->questaoDao->findById($questaoId);
             if ($questao) {
                 $selectedQuestoes[] = $questao;
             }
@@ -83,19 +84,25 @@ class QuizQuestaoController extends Controller
             // Handle the case where Quiz or Questoes with given IDs are not found in the database.
             $erros = ["Quiz ou Questões não encontradas no banco de dados."];
         } else {
-            $quizQuestao->setQuiz($quiz);
-            // Set the array of selected Questoes
-            $quizQuestao->setQuestao($selectedQuestoes);
-
             try {
                 if ($idQuizQuestao == 0) { // Inserting
-                    $this->quizQuestaoDao->insertQuizWithQuestoes($quizQuestao, $selectedQuestoes);
+                    $this->quizQuestaoDao->insertQuizWithQuestoes($quiz, $selectedQuestoes); // Fix here
                 } else { // Updating
-                    $this->quizQuestaoDao->updateQuizWithQuestoes($quizQuestao, $selectedQuestoes);
+                    $quizQuestao = $this->quizQuestaoDao->findById($idQuizQuestao);
+                    if ($quizQuestao) {
+                        $quizQuestao->setQuiz($quiz);
+                        $quizQuestao->setQuestao($selectedQuestoes);
+
+                        $this->quizQuestaoDao->updateQuizWithQuestoes($quiz, $selectedQuestoes);
+                    } else {
+                        // Handle the case where QuizQuestao with given ID is not found in the database.
+                        $erros = ["Associação Quiz-Questão não encontrada no banco de dados."];
+                    }
                 }
 
                 // Send success message
                 $msg = "Associação Quiz-Questão salva com sucesso.";
+                $dados["quiz"] = $quiz; // Adicione esta linha
                 $this->list("", $msg);
                 exit;
             } catch (PDOException $e) {
@@ -107,8 +114,9 @@ class QuizQuestaoController extends Controller
         $dados["id"] = $idQuizQuestao;
         $dados["quiz_id"] = $idQuiz;
         $dados["questao_id"] = $questoes;
+        $dados["quiz"] = $quiz; // Add this line to provide the $quiz object to the view
         $msgsErro = implode("<br>", $erros);
-        $this->loadView("quiz_questao/formQuizQuestao.php", $dados, $msgsErro);
+        $this->loadView("quizQuestao/form.php", $dados, $msgsErro);
     }
 }
 

@@ -1,20 +1,20 @@
-<?php
-#Nome do arquivo: quiz/form.php
-#Objetivo: interface para cadastro/alteração de quizzes
-include_once("../bootstrap/header.php");
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
+
+
     <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/listQuiz.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/cabecalho.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/index.css">
+
+
 </head>
 
+
 <body>
-    <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
 
     <h3 class="text-center">
         <?php if ($dados['id'] == 0) echo "Inserir";

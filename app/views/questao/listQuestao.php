@@ -3,35 +3,51 @@
 
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/listQuestao.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/list.css">
 </head>
 
 <body>
     <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
 
-    <h3 class="title-margin">Lista de Questões</h3>
+    <h1 class="tituloPagina text-center">Lista de Questões</h1>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-3 d-flex align-items-stretch">
                 <div class="card mb-4 shadow-sm w-100">
                     <div class="card-body">
-                        <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
-                            Inserir Nova Questão
+                        <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center botaoEspecifico" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
+                            <span class="nomeBotaoEspecifico">Inserir Nova Questão</span>
                         </a>
                     </div>
                 </div>
             </div>
 
             <?php foreach ($dados['lista'] as $questao) : ?>
-                <div class="col-md-3">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $questao->getDescricaoQ(); ?></h5>
-                            <p><span class="labelQuestao">Grau de Dificuldade:</span> <?= $questao->getGrauDificuldadeTexto(); ?></p>
-                            <p><span class="labelQuestao">Pontuação:</span> <?= $questao->getPontuacao(); ?></p>
-                            <p><span class="labelQuestao">Imagem:<br></span> <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem();?>" alt="" width="100px"></p>
-                            <p><span class="labelQuestao">Alternativas:<br></span> <?= $questao->getAlternativasTexto(); ?></p>
-                            <p><span class="labelQuestao">Alternativa Correta:<br></span> <?= $questao->getAlternativaCertaTexto(); ?></p>
+                <div class="col-md-3 ">
+                    <div class="card mb-4 shadow-sm cardInserido">
+                        <div class="card-body ">
+                            <h5 class="card-title nomeCard"><?= $questao->getDescricaoQ(); ?></h5>
+                            <p>
+                                <span class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
+                                <span class="dadoAtributo"><?= $questao->getGrauDificuldadeTexto(); ?></span>
+                            </p>
+                            <p>
+                                <span class="nomeAtributo labelQuestao">Pontuação:</span>
+                                <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
+                            </p>
+                            <p>
+                                <span class="nomeAtributo labelQuestao">Imagem:<br></span>
+                                <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" alt="" class="imagemQuestao">
+                            </p>
+                            <p>
+                                <span class="nomeAtributo labelQuestao">Alternativas:<br></span>
+                                <span class="dadoAtributo"><?= $questao->getAlternativasTexto(); ?></span>
+                            </p>
+                            <p>
+                                <span class="nomeAtributo labelQuestao">Alternativa Correta:<br></span>
+                                <span class="dadoAtributo"><?= $questao->getAlternativaCertaTexto(); ?></span>
+                            </p>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -45,6 +61,10 @@
             <?php endforeach; ?>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="js/registro.js"></script>
 </body>
 
 </html>
