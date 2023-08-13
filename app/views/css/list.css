@@ -54,14 +54,13 @@
 
 .dadoAtributo {
   font-weight: 500;
-
   color: var(--verdao);
   font-family: "Poppins-regular";
 }
 
 .nomeBotaoEspecifico {
-  font-weight: 60;
-  font-size: small;
+  font-weight: 900;
+  font-size: 40px;
   color: var(--verdao);
   font-family: "Poppins";
 }
@@ -90,6 +89,12 @@
   transition: background-color 0.8s ease, transform 0.8s ease;
   border: 6px dotted var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
+  white-space: normal; /* Permite que o texto quebre em várias linhas */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .botaoEspecifico:hover {
