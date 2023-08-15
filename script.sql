@@ -7,10 +7,10 @@
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+/*SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
+*/
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `greengo`
 --
+
+-- --------------------------------------------------------
+--
+-- Estrutura da tabela `usuario`
+--
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `nomeUsuario` varchar(100) DEFAULT NULL,
+  `genero` varchar(20) NOT NULL,
+  `escolaridade` varchar(20) NOT NULL,
+  `loginUsuario` varchar(30) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `senha` varchar(100) DEFAULT NULL,
+  `tipoUsuario` tinyint(1) NOT NULL /*1=NORMAL, 2=ADM, 3=PROFESSOR*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idUsuario`);
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
+('Gabriel', 'Masculino', 'Ensino Superior', 'mandelas', 'gabriel.mandellicardoso@gmail.com', '12345678', 1),
+('gabriel', 'Masculino', 'Ensino Médio', 'gabriel', 'gabriel.mandellicardoso@gmail.com', 'eu12345678', 1);
+
+INSERT INTO `usuario` ( `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
+('Juliana', 'Feminino', 'Ensino Superior', 'juuj', 'juujsantana@gmail.com', '12345678', 2);
+
 
 -- --------------------------------------------------------
 
@@ -35,6 +74,17 @@ CREATE TABLE `equipe` (
   `icone` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Índices para tabela `equipe`
+--
+ALTER TABLE `equipe`
+  ADD PRIMARY KEY (`idEquipe`);
+
+--
+-- AUTO_INCREMENT de tabela `equipe`
+--
+ALTER TABLE `equipe`
+  MODIFY `idEquipe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;  
 --
 -- Extraindo dados da tabela `equipe`
 --
@@ -54,8 +104,16 @@ INSERT INTO `equipe` (`idEquipe`, `nomeEquipe`, `codEntrada`, `cor`, `icone`) VA
 CREATE TABLE `equipe_usuario` (
   `idEquipeUsuario` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idEquipe` int(11) NOT NULL
+  `idEquipe` int(11) NOT NULL,
+  PRIMARY KEY (idEquipeUsuario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Limitadores para a tabela `equipe_usuario`
+--
+ALTER TABLE `equipe_usuario`
+  ADD CONSTRAINT `fk_equipe_usuario` FOREIGN KEY (`idEquipe`) REFERENCES `equipe` (`idEquipe`),
+  ADD CONSTRAINT `fk_usuario_equipe` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 -- --------------------------------------------------------
 
@@ -78,14 +136,63 @@ CREATE TABLE `especie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Índices para tabela `especie`
+--
+ALTER TABLE `especie`
+  ADD PRIMARY KEY (`idEspecie`);
+
+--
+-- AUTO_INCREMENT de tabela `especie`
+--
+ALTER TABLE `especie`
+  MODIFY `idEspecie` int(11) NOT NULL AUTO_INCREMENT;  
+
+--
 -- Extraindo dados da tabela `especie`
 --
 
-INSERT INTO `especie` (`idEspecie`, `nomePop`, `nomeCie`, `descricao`, `imagemEspecie`, `frutifera`, `comestivel`, `raridade`, `medicinal`, `toxidade`, `exotica`) VALUES
-(18, 'Cactus', 'Cactus cientifucsio', '<p>Cactus é mto foda tem espinho</p>', '../../public/especies/73052c0da5a25dae226e7271b5b1c3c5.jpg', 1, 1, 0, 0, 0, 0),
-(19, 'Caladium', 'Caladium cientificus', '<p>verdi e rosa</p>', '../../public/especies/aa60c077117e999ed73341dec33d65ee.jpg', 0, 0, 0, 0, 0, 1),
-(20, 'Suculenta', 'Muito suculenta', '<p>da vontade de comer só pelo nome</p>', '../../public/especies/0b4b84181c96962a563210e11b41a9d9.jpg', 0, 1, 0, 1, 0, 0),
-(21, 'Vitoria Regia', 'Vitoria Regia', '<p>Onde os sapos ficam</p>', '../../public/especies/d9954a1e1c365a086ecbb3ca34e72c41.jpg', 0, 0, 0, 0, 0, 1);
+INSERT INTO `especie` (`nomePop`, `nomeCie`, `descricao`, `imagemEspecie`, `frutifera`, `comestivel`, `raridade`, `medicinal`, `toxidade`, `exotica`) VALUES
+('Cactus', 'Cactus cientifucsio', '<p>Cactus é mto foda tem espinho</p>', '../../public/especies/73052c0da5a25dae226e7271b5b1c3c5.jpg', 1, 1, 0, 0, 0, 0),
+('Caladium', 'Caladium cientificus', '<p>verdi e rosa</p>', '../../public/especies/aa60c077117e999ed73341dec33d65ee.jpg', 0, 0, 0, 0, 0, 1),
+('Suculenta', 'Muito suculenta', '<p>da vontade de comer só pelo nome</p>', '../../public/especies/0b4b84181c96962a563210e11b41a9d9.jpg', 0, 1, 0, 1, 0, 0),
+('Vitoria Regia', 'Vitoria Regia', '<p>Onde os sapos ficam</p>', '../../public/especies/d9954a1e1c365a086ecbb3ca34e72c41.jpg', 0, 0, 0, 0, 0, 1);
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `zona`
+--
+
+CREATE TABLE `zona` (
+  `idZona` int(11) NOT NULL,
+  `nomeZona` varchar(60) NOT NULL,
+  `qntPlantas` int(11) DEFAULT NULL,
+  `pontoZona` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tabela `zona`
+--
+ALTER TABLE `zona`
+  ADD PRIMARY KEY (`idZona`);
+
+--
+-- AUTO_INCREMENT de tabela `zona`
+--
+ALTER TABLE `zona`
+  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Extraindo dados da tabela `zona`
+--
+
+INSERT INTO `zona` (`nomeZona`, `qntPlantas`, `pontoZona`) VALUES
+('Zona Deserto', NULL, NULL),
+('Zona Franca', NULL, NULL),
+('Zona Teste', NULL, NULL);
+
 
 -- --------------------------------------------------------
 
@@ -107,93 +214,6 @@ CREATE TABLE `planta` (
   `historia` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `planta`
---
-
-INSERT INTO `planta` (`idPlanta`, `idZona`, `idEspecie`, `codNumerico`, `imagemPlanta`, `pontuacaoPlanta`, `codQR`, `nomeSocial`, `historia`) VALUES
-(67, 16, 18, 1000, '../../public/plantas/524f302af15ee8555116eb4e487e611b.jpg', 10, '../../public/qrcode/qrcode_1000.png', 'Ana Terra', '<p>Ana Terra História</p>'),
-(68, 16, 18, 1001, '../../public/plantas/2dd08102476f925c50224eb0f867b4d0.jpg', 10, '../../public/qrcode/qrcode_1001.png', 'Teste', '<p>teste</p>'),
-(69, 16, 18, 30, '../../public/plantas/ea814b9af8efe2f61671059aa10f8130.jpg', 30, '../../public/qrcode/qrcode_30.png', 'Teste 31 05', '<p>AAA</p>');
-
--- --------------------------------------------------------
---
--- Estrutura da tabela `usuario`
---
-
-CREATE TABLE `usuario` (
-  `idUsuario` int(11) NOT NULL,
-  `nomeUsuario` varchar(100) DEFAULT NULL,
-  `genero` varchar(20) NOT NULL,
-  `escolaridade` varchar(20) NOT NULL,
-  `loginUsuario` varchar(30) NOT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `senha` varchar(100) DEFAULT NULL,
-  `tipoUsuario` tinyint(1) NOT NULL --1=NORMAL, 2=ADM, 3=PROFESSOR
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`idUsuario`, `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
-(19, 'Gabriel', 'Masculino', 'Ensino Superior', 'mandelas', 'gabriel.mandellicardoso@gmail.com', '12345678', 1),
-(20, 'gabriel', 'Masculino', 'Ensino Médio', 'gabriel', 'gabriel.mandellicardoso@gmail.com', 'eu12345678', 1);
-
-INSERT INTO `usuario` ( `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
-('Juliana', 'Feminino', 'Ensino Superior', 'juuj', 'juujsantana@gmail.com', '12345678', 2);
-
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `zona`
---
-
-CREATE TABLE `zona` (
-  `idZona` int(11) NOT NULL,
-  `nomeZona` varchar(60) NOT NULL,
-  `qntPlantas` int(11) DEFAULT NULL,
-  `pontoZona` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `zona`
---
-
-INSERT INTO `zona` (`idZona`, `nomeZona`, `qntPlantas`, `pontoZona`) VALUES
-(16, 'Zona Deserto', NULL, NULL),
-(19, 'Zona Franca', NULL, NULL),
-(21, 'Zona Teste', NULL, NULL),
-(26, 'aaa', NULL, NULL),
-(29, 'aa', NULL, NULL),
-(30, 'aaa', NULL, NULL),
-(31, 'aaaa', NULL, NULL),
-(32, 'aa', NULL, NULL);
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `equipe`
---
-ALTER TABLE `equipe`
-  ADD PRIMARY KEY (`idEquipe`);
-
---
--- Índices para tabela `equipe_usuario`
---
-ALTER TABLE `equipe_usuario`
-  ADD KEY `fk_usuario_equipe` (`idUsuario`),
-  ADD KEY `fk_equipe_usuario` (`idEquipe`);
-
---
--- Índices para tabela `especie`
---
-ALTER TABLE `especie`
-  ADD PRIMARY KEY (`idEspecie`);
-
 -- Índices para tabela `planta`
 --
 ALTER TABLE `planta`
@@ -202,60 +222,20 @@ ALTER TABLE `planta`
   ADD KEY `fkEspecie` (`idEspecie`);
 
 --
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`idUsuario`);
-
---
--- Índices para tabela `zona`
---
-ALTER TABLE `zona`
-  ADD PRIMARY KEY (`idZona`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `equipe`
---
-ALTER TABLE `equipe`
-  MODIFY `idEquipe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `especie`
---
-ALTER TABLE `especie`
-  MODIFY `idEspecie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
 -- AUTO_INCREMENT de tabela `planta`
 --
 ALTER TABLE `planta`
-  MODIFY `idPlanta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `idPlanta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de tabela `zona`
---
-ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- Restrições para despejos de tabelas
+-- Extraindo dados da tabela `planta`
 --
 
---
--- Limitadores para a tabela `equipe_usuario`
---
-ALTER TABLE `equipe_usuario`
-  ADD CONSTRAINT `fk_equipe_usuario` FOREIGN KEY (`idEquipe`) REFERENCES `equipe` (`idEquipe`),
-  ADD CONSTRAINT `fk_usuario_equipe` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+INSERT INTO `planta` (`idZona`, `idEspecie`, `codNumerico`, `imagemPlanta`, `pontuacaoPlanta`, `codQR`, `nomeSocial`, `historia`) VALUES
+(1, 1, 1000, '../../public/plantas/524f302af15ee8555116eb4e487e611b.jpg', 10, '../../public/qrcode/qrcode_1000.png', 'Ana Terra', '<p>Ana Terra História</p>'),
+(1, 1, 1001, '../../public/plantas/2dd08102476f925c50224eb0f867b4d0.jpg', 10, '../../public/qrcode/qrcode_1001.png', 'Teste', '<p>teste</p>'),
+(1, 1, 30, '../../public/plantas/ea814b9af8efe2f61671059aa10f8130.jpg', 30, '../../public/qrcode/qrcode_30.png', 'Teste 31 05', '<p>AAA</p>');
+
 
 --
 -- Limitadores para a tabela `planta`
@@ -263,8 +243,6 @@ ALTER TABLE `equipe_usuario`
 ALTER TABLE `planta`
   ADD CONSTRAINT `fkEspecie` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE,
   ADD CONSTRAINT `fkZona` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`) ON DELETE CASCADE;
-
---
 
 
 
