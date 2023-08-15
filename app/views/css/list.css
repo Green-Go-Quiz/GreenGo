@@ -54,14 +54,13 @@
 
 .dadoAtributo {
   font-weight: 500;
-
   color: var(--verdao);
   font-family: "Poppins-regular";
 }
 
 .nomeBotaoEspecifico {
-  font-weight: 60;
-  font-size: small;
+  font-weight: 900;
+  font-size: 35px;
   color: var(--verdao);
   font-family: "Poppins";
 }
@@ -90,11 +89,59 @@
   transition: background-color 0.8s ease, transform 0.8s ease;
   border: 6px dotted var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
+  white-space: normal; /* Permite que o texto quebre em várias linhas */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .botaoEspecifico:hover {
   background-color: rgba(154, 207, 183, 0.7);
   border: 6px dotted var(--verdao);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoAlterar {
+  background-color: var(--cinzinha);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoAlterar:hover {
+  background-color: #9fb2b4;
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoExcluir {
+  background-color: #f0d8d8;
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoExcluir:hover {
+  background-color: var(--rosinha);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoQuestoes {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoQuestoes:hover {
+  background-color: var(--principal);
   /* Ou qualquer outra cor mais escura que você desejar */
   transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
 }

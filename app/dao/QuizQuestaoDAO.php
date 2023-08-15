@@ -7,7 +7,7 @@ include_once(__DIR__ . "/../models/QuizQuestaoModel.php");
 
 class QuizQuestaoDAO
 {
-    private function insertQuizQuestaoAssociations(int $quizId, array $questoes)
+    public function insertQuizQuestaoAssociations(int $quizId, array $questoes)
     {
         $conn = Connection::getConn();
 
@@ -39,8 +39,12 @@ class QuizQuestaoDAO
         $conn->beginTransaction();
 
         try {
+            // Inserir o quiz na tabela quiz
+            $quizDAO = new QuizDAO();
+            $quizDAO->insert($quiz);
+
             // Obter o ID do quiz inserido
-            $quizId = $quiz->getIdQuiz();
+            $quizId = $conn->lastInsertId();
 
             // Inserir as associações entre o quiz e as questões na tabela quiz_questao
             $this->insertQuizQuestaoAssociations($quizId, $questoes);

@@ -38,7 +38,8 @@
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Imagem:<br></span>
-                                 <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px"></p>
+                                <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px">
+                            </p>
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Alternativas:<br></span>
@@ -51,8 +52,8 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-primary">Alterar</a>
-                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
                                 </div>
                             </div>
                         </div>
