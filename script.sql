@@ -364,3 +364,5 @@ CREATE TABLE IF NOT EXISTS `quiz_questoes` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+ALTER TABLE quiz_questoes ADD CONSTRAINT uk_quiz_questao UNIQUE(idQuiz, idQuestao);
+

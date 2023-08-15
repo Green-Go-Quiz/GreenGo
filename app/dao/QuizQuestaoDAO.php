@@ -4,22 +4,57 @@
 
 include_once(__DIR__ . "/../connection/Connection.php");
 include_once(__DIR__ . "/../models/QuizQuestaoModel.php");
+include_once(__DIR__ . "/../models/QuestaoModel.php");
 
 class QuizQuestaoDAO
 {
-    public function insertQuizQuestaoAssociations(int $quizId, array $questoes)
+
+    // Método para converter um registro da base de dados em um objeto QuizQuestao
+    private function mapQuizQuestao(array $row)
+    {
+        $quizQuestao = new QuizQuestao();
+        $quizQuestao->setIdQuizQuestao($row['idQuizQuestoes']);
+        $quizQuestao->setIdQuiz($row['idQuiz']);
+        $quizQuestao->setIdQuestao($row['idQuestao']);
+        // Definir outras propriedades de QuizQuestao, se houver
+
+        $questao = new Questao();
+        $questao->setIdQuestao($row['idQuiz']);
+
+        $quizQuestao->setQuestao($questao);
+
+        return $quizQuestao;
+    }
+
+    public function listByQuiz(int $idQuiz)
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO quiz_questao (idQuiz, idQuestao) VALUES (:idQuiz, :idQuestao)";
+        $sql = "SELECT qq.*, q.descricaoQ, q.grauDificuldade, q.pontuacao, q.imagem" .
+            " FROM quiz_questoes qq" .
+            " JOIN questao q ON (q.idQuestao = qq.idQuestao)"  .
+            " WHERE qq.idQuiz = :idQuiz";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":idQuiz", $idQuiz);
+        $stm->execute();
+
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->mapQuizQuestoes($result);
+    }
+
+    public function insertQuizQuestao(int $idQuiz, int $idQuestao)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "INSERT INTO quiz_questoes (idQuiz, idQuestao) VALUES (:idQuiz, :idQuestao)";
 
         $stm = $conn->prepare($sql);
 
-        foreach ($questoes as $questao) {
-            $stm->bindValue(":idQuiz", $quizId);
-            $stm->bindValue(":idQuestao", $questao->getIdQuestao());
-            $stm->execute();
-        }
+        $stm->bindValue(":idQuiz", $idQuiz);
+        $stm->bindValue(":idQuestao", $idQuestao);
+        $stm->execute();
     }
 
     private function deleteQuizQuestaoAssociations(int $quizId)
@@ -93,19 +128,7 @@ class QuizQuestaoDAO
         }
     }
 
-    public function list()
-    {
-        $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM quiz_questao";
-
-        $stm = $conn->prepare($sql);
-        $stm->execute();
-
-        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return $this->mapQuizQuestoes($result);
-    }
 
     public function findById(int $id)
     {
@@ -126,17 +149,7 @@ class QuizQuestaoDAO
         return $this->mapQuizQuestao($result);
     }
 
-    // Método para converter um registro da base de dados em um objeto QuizQuestao
-    private function mapQuizQuestao(array $row)
-    {
-        $quizQuestao = new QuizQuestao();
-        $quizQuestao->setIdQuizQuestao($row['idQuizQuestao']);
-        $quizQuestao->setIdQuiz($row['idQuiz']);
-        $quizQuestao->setIdQuestao($row['idQuestao']);
-        // Definir outras propriedades de QuizQuestao, se houver
 
-        return $quizQuestao;
-    }
 
     private function mapQuizQuestoes($result)
     {
