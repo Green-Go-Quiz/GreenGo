@@ -115,7 +115,7 @@
                                         }
                                         ?>
                                     </td>
-                                    <td></td>
+                                    <td><a href='QuizQuestaoController.php?action=delete&idQuestao=<?= $questao->getIdQuestao(); ?>&idQuiz=<?= $dados['quiz'] ? $dados['quiz']->getIdQuiz() : '0'; ?>' class="btn btn-danger">Deletar</a> </td>
                                 </tr>
                         <?php
                             }

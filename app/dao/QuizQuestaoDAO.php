@@ -20,6 +20,12 @@ class QuizQuestaoDAO
 
         $questao = new Questao();
         $questao->setIdQuestao($row['idQuiz']);
+        $questao->setDescricaoQ($row['descricaoQ']);
+        $questao->setGrauDificuldade($row['grauDificuldade']);
+        $questao->setPontuacao($row['pontuacao']);
+        $questao->setImagem($row['imagem']);
+
+
 
         $quizQuestao->setQuestao($questao);
 
@@ -37,6 +43,8 @@ class QuizQuestaoDAO
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":idQuiz", $idQuiz);
+
+
         $stm->execute();
 
         $result = $stm->fetchAll(PDO::FETCH_ASSOC);

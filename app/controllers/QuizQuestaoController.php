@@ -28,6 +28,14 @@ class QuizQuestaoController extends Controller
         $this->handleAction();
     }
 
+    protected function list(string $msgErro = "", string $msgSucesso = "")
+    {
+        $quizQuestoes = $this->quizQuestaoDao->listByQuiz($this->quizQuestao->getIdQuiz());
+        $dados["lista"] = $quizQuestoes;
+
+        $this->loadView("quizQuestao/form.php", $dados, $msgErro, $msgSucesso);
+    }
+
     /*
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
@@ -101,6 +109,18 @@ class QuizQuestaoController extends Controller
             $msgSucesso = 'Questão adicionada ao Quiz com sucesso.';
 
         $this->loadView("quizQuestao/form.php", $dados, $msgsErro, $msgSucesso);
+    }
+
+    public function delete()
+    {
+        $quizQuestao = $this->findQuizById();
+
+        if ($quizQuestao) {
+            $this->quizQuestaoDao->deleteById($quizQuestao->getIdQuizQuestao());
+            $this->list("", "Questão excluída com sucesso do quiz!");
+        } else {
+            $this->list("", "Questão não encontrada no quiz!");
+        }
     }
 }
 
