@@ -21,12 +21,10 @@ class QuizService
 
         if ($quiz->getComTempo() && !$quiz->getQuantTempo())
             array_push($erros, "O campo [Quantidade de Tempo] é obrigatório quando [Com Tempo] é selecionado.");
-            else {
-                $tempo = $quiz->getQuantTempo();
-                if ($tempo < 1 || $tempo > 100) {
-                    array_push($erros, "A o tempo deve estar entre 1 e 100.");
-                }
-            }
+
+        else if ($quiz->getComTempo() and ($quiz->getQuantTempo() < 1 ||  $quiz->getQuantTempo() > 100))
+            array_push($erros, "O campo [Quantidade de Tempo] deve estar entre 1 e 100.");
+
         return $erros;
     }
 
