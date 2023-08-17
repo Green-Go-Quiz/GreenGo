@@ -96,7 +96,10 @@ class QuizQuestaoController extends Controller
         }
 
         //TODO Validar se a questao já existe no quiz
-
+        $quizQuestao = $this->quizQuestaoDao->findByIdQuizQuestao($idQuiz, $idQuestao);
+        if ($quizQuestao) {
+            array_push($erros, "A questão já existe neste quiz.");
+        }
         if (!$erros) {
 
             try {

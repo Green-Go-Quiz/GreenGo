@@ -133,6 +133,22 @@ class QuizQuestaoDAO
     }
 
 
+    public function findByIdQuizQuestao(int $idQuiz, int $idQuestao)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM quiz_questoes WHERE idQuiz = :idQuiz AND idQuestao = :idQuestao";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":idQuiz", $idQuiz);
+        $stm->bindValue(":idQuestao", $idQuestao);
+        $stm->execute();
+
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $result ? $this->mapQuizQuestao($result) : null;
+    }
+
 
     private function mapQuizQuestoes($result)
     {
