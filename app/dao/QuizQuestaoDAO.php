@@ -18,16 +18,17 @@ class QuizQuestaoDAO
         $quizQuestao->setIdQuestao($row['idQuestao']);
         // Definir outras propriedades de QuizQuestao, se houver
 
-        $questao = new Questao();
-        $questao->setIdQuestao($row['idQuiz']);
-        $questao->setDescricaoQ($row['descricaoQ']);
-        $questao->setGrauDificuldade($row['grauDificuldade']);
-        $questao->setPontuacao($row['pontuacao']);
-        $questao->setImagem($row['imagem']);
+        if (isset($row['descricaoQ'])) {
+            $questao = new Questao();
+            $questao->setIdQuestao($row['idQuiz']);
+            $questao->setDescricaoQ($row['descricaoQ']);
+            $questao->setGrauDificuldade($row['grauDificuldade']);
+            $questao->setPontuacao($row['pontuacao']);
+            $questao->setImagem($row['imagem']);
 
+            $quizQuestao->setQuestao($questao);
+        }
 
-
-        $quizQuestao->setQuestao($questao);
 
         return $quizQuestao;
     }
@@ -65,7 +66,7 @@ class QuizQuestaoDAO
         $stm->execute();
     }
 
-    private function deleteQuizQuestaoAssociations(int $quizId)
+    /*private function deleteQuizQuestaoAssociations(int $idQuiz)
     {
         $conn = Connection::getConn();
 
@@ -74,9 +75,9 @@ class QuizQuestaoDAO
         $stm = $conn->prepare($sql);
         $stm->bindValue(":idQuiz", $quizId);
         $stm->execute();
-    }
+    }*/
 
-    public function insertQuizWithQuestoes(Quiz $quiz, array $questoes)
+    /*public function insertQuizWithQuestoes(Quiz $quiz, array $questoes)
     {
         $conn = Connection::getConn();
         $conn->beginTransaction();
@@ -97,43 +98,17 @@ class QuizQuestaoDAO
             $conn->rollback();
             throw $e;
         }
-    }
+    }*/
 
 
     public function deleteById(int $id)
     {
         $conn = Connection::getConn();
 
-        $sql = "DELETE FROM quiz_questao WHERE idQuiz = ?";
+        $sql = "DELETE FROM quiz_questoes WHERE idQuizQuestoes = ?";
 
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
-    }
-
-    public function updateQuizWithQuestoes(Quiz $quiz, array $questoes)
-    {
-        $conn = Connection::getConn();
-        $conn->beginTransaction();
-
-        try {
-            // Atualizar o quiz na tabela quiz
-            $quizDAO = new QuizDAO();
-            $quizDAO->update($quiz);
-
-            // Obter o ID do quiz
-            $quizId = $quiz->getIdQuiz();
-
-            // Excluir as associações antigas do quiz com as questões na tabela quiz_questao
-            $this->deleteQuizQuestaoAssociations($quizId);
-
-            // Inserir as novas associações entre o quiz e as questões na tabela quiz_questao
-            $this->insertQuizQuestaoAssociations($quizId, $questoes);
-
-            $conn->commit();
-        } catch (PDOException $e) {
-            $conn->rollback();
-            throw $e;
-        }
     }
 
 
@@ -142,7 +117,7 @@ class QuizQuestaoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM quiz_questao WHERE idQuizQuestao = :id";
+        $sql = "SELECT * FROM quiz_questoes WHERE idQuizQuestoes = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":id", $id);

@@ -60,7 +60,7 @@ class QuizController extends Controller
         }
     }
 
- 
+
 
     public function save()
     {
@@ -80,7 +80,7 @@ class QuizController extends Controller
         $quiz->setQuantTempo($quantTempo);
         $quiz->setIdZona($idZona);
 
-        
+
 
         // Valida os dados
         $erros = $this->quizService->validarQuiz($quiz);
@@ -124,6 +124,7 @@ class QuizController extends Controller
             $this->list("Quiz não encontrado!");
         }
     }
+
     private function findQuizById()
     {
         $id = 0;

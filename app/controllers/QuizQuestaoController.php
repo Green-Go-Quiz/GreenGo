@@ -63,9 +63,19 @@ class QuizQuestaoController extends Controller
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
         }
-
         $quiz = $this->quizDao->findById($id);
         return $quiz;
+    }
+
+    private function findQuizQuestoesById()
+    {
+        $id = 0;
+        if (isset($_GET['idQuizQuestao'])) {
+            $id = $_GET['idQuizQuestao'];
+        }
+        $quizQuestao = $this->quizQuestaoDao->findById($id);
+
+        return $quizQuestao;
     }
 
     public function add()
@@ -113,14 +123,22 @@ class QuizQuestaoController extends Controller
 
     public function delete()
     {
-        $quizQuestao = $this->findQuizById();
+        $this->quizQuestao = $this->findQuizQuestoesById();
+        $msg = "";
 
-        if ($quizQuestao) {
-            $this->quizQuestaoDao->deleteById($quizQuestao->getIdQuizQuestao());
-            $this->list("", "Questão excluída com sucesso do quiz!");
-        } else {
-            $this->list("", "Questão não encontrada no quiz!");
+
+        if (!$msg) {
+
+            try {
+                $this->quizQuestaoDao->deleteById($this->quizQuestao->getIdQuizQuestao());
+            } catch (PDOException $e) {
+                //print_r($e);
+                $msg = ["Erro ao salvar a associação Quiz-Questão na base de dados." . $e->getMessage()];
+            }
         }
+
+        //$this->list("", $msg);
+        header('location: QuizQuestaoController.php?action=create&id=' .  $this->quizQuestao->getIdQuiz());
     }
 }
 
