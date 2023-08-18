@@ -26,17 +26,17 @@ class QuestaoEspecieDAO
         return $questaoEspecie;
     }
 
-    public function listByEspecie(int $idEspecie)
+    public function listByQuestao(int $idQuestao)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT e.*" .
+        $sql = "SELECT qe.*".
             " FROM questao_especie qe" .
             " JOIN especie e ON (e.idEspecie = qe.idEspecie)"  .
-            " WHERE qe.idEspecie = :idEspecie";
+            " WHERE qe.idQuestao = :idQuestao";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue(":idEspecie", $idEspecie);
+        $stm->bindValue(":idQuestao", $idQuestao);
 
         $stm->execute();
 

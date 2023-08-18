@@ -11,7 +11,7 @@
 
     <div class="container">
         <h1 id="quest" class=" text-center tituloPagina">
-               Especies das Questões </h1>
+            Especies das Questões </h1>
 
         <div class="row" style="margin-top: 30px;">
             <div class="col-md-6 d-flex align-items-stretch">
@@ -47,30 +47,24 @@
 
         <div class="row" style="margin-top: 40px;">
             <h3 id="quest" class=" text-left tituloPagina">
-                Questões disponíveis para o quiz "<span><?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></span>"</h3>
+                Espécies disponíveis para a questao "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
 
             <div class="col-md-12 d-flex align-items-stretch">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <td>Descrição</td>
-                            <td>Grau</td>
-                            <td>Pontuação</td>
-                            <td>Imagem</td>
-                            <td></td>
+                            <td>Nome Popular</td>
+                            <td>Nome Cientifico</td>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($dados['listaQuestoes'] as $questao) : ?>
+                        <?php foreach ($dados['listaEspecie'] as $especie) : ?>
                             <tr>
-                                <td><?= $questao->getDescricaoQ(); ?></td>
-                                <td><?= $questao->getGrauDificuldadeTexto(); ?></td>
-                                <td><?= $questao->getPontuacao(); ?></td>
-                                <td><?php
-                                    if ($questao->getImagem())
-                                        echo '<img src="' . BASEURL_ARQUIVOS . '/' . $questao->getImagem() . '" width="100px" />';
-                                    ?></td>
-                                <td><a href='QuizQuestaoController.php?action=add&idQuestao=<?= $questao->getIdQuestao(); ?>&idQuiz=<?= $dados['quiz'] ? $dados['quiz']->getIdQuiz() : '0'; ?>' class="btn btn-success">Adicionar</a> </td>
+                                <td><?= $especie->getNomePopular(); ?></td>
+                                <td><?= $especie->getNomeCientifico(); ?></td>
+
+                                <td><a href='QuestaoespecieController.php?action=add&idEspecie=<?= $especie->getIdEspecie(); ?>&idQuestao=<?= $dados['questao'] ? $dados['questao']->getIdQuestao() : '0'; ?>' class="btn btn-success">Adicionar</a> </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -81,47 +75,36 @@
         <div class="row" style="margin-top: 40px;">
 
             <h3 id="quest" class=" text-left tituloPagina">
-                Questões adicionadas ao quiz "<span><?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></span>"</h3>
+             Espécies adicionadas a questão "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
 
             <div class="col-md-12 d-flex align-items-stretch">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <td>Descrição</td>
-                            <td>Grau</td>
-                            <td>Pontuação</td>
-                            <td>Imagem</td>
-                            <td></td>
+                            <td>Nome Popular</td>
+                            <td>Nome Cientifico</td>
+                          
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $quizQuestaoQuestoes = $dados['listaQuestoesQuiz'];
-                        if ($quizQuestaoQuestoes) {
-                            foreach ($quizQuestaoQuestoes as $quizQuestao) {
-                                $questao = $quizQuestao->getQuestao();
-                        ?>
-                                <tr>
-                                    <td><?= $questao->getDescricaoQ() ?></td>
-                                    <td><?= $questao->getGrauDificuldadeTexto() ?></td>
-                                    <td><?= $questao->getPontuacao() ?></td>
-                                    <td>
-                                        <?php
-                                        $questaoImagem = $questao->getImagem();
-                                        if ($questaoImagem) {
-                                            echo '<img src="' . BASEURL_ARQUIVOS . '/' . $questaoImagem . '" width="100px" />';
-                                        } else {
-                                            echo "Nenhuma imagem disponível";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td><a href='QuizQuestaoController.php?action=delete&idQuizQuestao=<?= $quizQuestao->getIdQuizQuestao(); ?>' class="btn btn-danger" onclick="return confirm('Confirma a exclusão?');">Deletar</a> </td>
-
-                                </tr>
-                        <?php
+                        $questaoEspecieEspecies = $dados['listaQuestoesEspecie'];
+                        if ($questaoEspecieEspecies) {
+                            foreach ($questaoEspecieEspecies as $questaoEspecie) {
+                                $especie = $questaoEspecie->getEspecie();
+                             ?>
+                         
+                                        <td><?= $especie->getNomePopular(); ?></td>
+                                         <td><?= $especie->getNomeCientifico(); ?></td>
+                                               <td>
+                <a href='QuestaoespecieController.php?action=delete&idQuestaoEspecie=<?= $especie->getIdEspecie(); ?>&idQuestao=<?= $dados['questao'] ? $dados['questao']->getIdQuestao() : '0'; ?>' class="btn btn-success">Deletar</a>
+            </td>
+                      </tr>
+                      <?php
                             }
                         }
                         ?>
+
                     </tbody>
                 </table>
             </div>

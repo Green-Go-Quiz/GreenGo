@@ -30,8 +30,8 @@ class QuestaoEspecieController extends Controller
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        $especies = $this->questaoEspecieDao->listByEspecie($this->questaoEspecie->getIdEspecie());
-        $dados["lista"] = $especies;
+        $questaoEspecies = $this->questaoEspecieDao->listByQuestao($this->questaoEspecie->getIdQuestao());
+        $dados["lista"] = $questaoEspecies;
 
         $this->loadView("questaoEspecie/form.php", $dados, $msgErro, $msgSucesso);
     }
@@ -41,8 +41,8 @@ class QuestaoEspecieController extends Controller
         $questao = $this->findQuestaoById();
         if ($questao) {
             $dados["questao"] = $questao;
-            $dados["listaQuestoes"] = $this->questaoDao->list();
-            //$dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
+            $dados["listaEspecie"] = $this->especieDao->list();
+            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
 
             $this->loadView("questaoEspecie/form.php", $dados);
         }
@@ -78,19 +78,19 @@ class QuestaoEspecieController extends Controller
 
         $erros = array();
 
-        $especie = $this->especieDao->findById($idEspecie);
-        if (!$especie) {
-            array_push($erros, "Espécie não encontrada no banco de dados.");
-        }
-
         $questao = $this->questaoDao->findById($idQuestao);
         if (!$questao) {
             array_push($erros, "Questão não encontrada no banco de dados.");
         }
 
+        $especie = $this->especieDao->findById($idEspecie);
+        if (!$especie) {
+            array_push($erros, "Espécie não encontrada no banco de dados.");
+        }
+
         $questaoEspecie = $this->questaoEspecieDao->findByIdEspecieQuestao($idEspecie, $idQuestao);
         if ($questaoEspecie) {
-            array_push($erros, "A questão já existe nesta espécie.");
+            array_push($erros, "A espécie já existe nesta questão.");
         }
 
         if (!$erros) {
@@ -101,16 +101,16 @@ class QuestaoEspecieController extends Controller
             }
         }
 
-        $especie = $this->especieDao->findById($idEspecie);
-        $dados["especie"] = $especie;
+        $questao = $this->questaoDao->findById($idQuestao);
+        $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
-        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
+        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
 
         $msgSucesso = "";
         if (!$msgsErro) {
-            $msgSucesso = 'Questão adicionada à espécie com sucesso.';
+            $msgSucesso = 'Espécie adicionada à questão com sucesso.';
         }
 
         $this->loadView("questaoEspecie/form.php", $dados, $msgsErro, $msgSucesso);
@@ -129,7 +129,7 @@ class QuestaoEspecieController extends Controller
             }
         }
 
-        header('location: QuestaoEspecieController.php?action=create&id=' . $this->questaoEspecie->getIdEspecie());
+        header('location: QuestaoEspecieController.php?action=create&id=' . $this->questaoEspecie->getIdQuestao());
     }
 }
 
