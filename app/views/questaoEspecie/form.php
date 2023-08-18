@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;'>Alternativa correta: </span>
-                <span><?= $dados['questao'] ? $dados['questao']->getalternaticaCorreta() : '---';; ?></span>
+                <span><?= $dados['questao'] ? $dados['questao']->getAlternativaCertaTexto() : '---';; ?></span>
             </div>
         </div>
 

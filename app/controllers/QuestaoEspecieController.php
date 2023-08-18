@@ -4,10 +4,12 @@ require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoEspecieDAO.php");
 require_once(__DIR__ . "/../dao/EspecieDAO.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
+require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 require_once(__DIR__ . "/../models/QuestaoEspecieModel.php");
 require_once(__DIR__ . "/../models/EspecieModel.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
+
 
 class QuestaoEspecieController extends Controller
 {
@@ -15,13 +17,14 @@ class QuestaoEspecieController extends Controller
     private EspecieDAO $especieDao;
     private QuestaoDAO $questaoDao;
     private QuestaoEspecie $questaoEspecie; // Adicione esta linha
-
+    private AlternativaDAO $alternativaDao;
     public function __construct()
     {
         $this->questaoEspecieDao = new QuestaoEspecieDAO();
         $this->especieDao = new EspecieDAO();
         $this->questaoDao = new QuestaoDAO();
         $this->questaoEspecie = new QuestaoEspecie(); // Instancie a classe QuestaoEspecieModel
+        $this->alternativaDao = new AlternativaDAO();
         $this->handleAction();
     }
 
@@ -35,24 +38,26 @@ class QuestaoEspecieController extends Controller
 
     protected function create()
     {
-        $especie = $this->findEspecieById();
-        if ($especie) {
-            $dados["especie"] = $especie;
+        $questao = $this->findQuestaoById();
+        if ($questao) {
+            $dados["questao"] = $questao;
             $dados["listaQuestoes"] = $this->questaoDao->list();
-            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
+            //$dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
 
             $this->loadView("questaoEspecie/form.php", $dados);
         }
     }
 
-    private function findEspecieById()
+    private function findQuestaoById()
     {
         $id = 0;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
         }
-        $especie = $this->especieDao->findById($id);
-        return $especie;
+        $questao = $this->questaoDao->findById($id);
+        if($questao)
+            $questao->setAlternativas($this->alternativaDao->findAllByQuestao($id));
+        return $questao;
     }
 
     private function findQuestaoEspecieById()
