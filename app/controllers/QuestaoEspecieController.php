@@ -38,7 +38,7 @@ class QuestaoEspecieController extends Controller
         $especie = $this->findEspecieById();
         if ($especie) {
             $dados["especie"] = $especie;
-            $dados["listaQuestoes"] = $this->questaoDao->list();
+            $dados["listaEspecie"] = $this->especieDao->list();
             $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
 
             $this->loadView("questaoEspecie/form.php", $dados);
