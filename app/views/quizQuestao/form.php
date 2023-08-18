@@ -42,42 +42,6 @@
                 <span><?= $dados['quiz'] ? $dados['quiz']->getMaximoPergunta() : '---';; ?></span>
             </div>
         </div>
-
-        <!-- ... (código anterior do formulário) ... -->
-
-        <div class="row" style="margin-top: 40px;">
-            <h3 id="quest" class=" text-left tituloPagina">
-                Questões disponíveis para o quiz "<span><?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></span>"</h3>
-
-            <div class="col-md-12 d-flex align-items-stretch">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>Descrição</td>
-                            <td>Grau</td>
-                            <td>Pontuação</td>
-                            <td>Imagem</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($dados['listaQuestoes'] as $questao) : ?>
-                            <tr>
-                                <td><?= $questao->getDescricaoQ(); ?></td>
-                                <td><?= $questao->getGrauDificuldadeTexto(); ?></td>
-                                <td><?= $questao->getPontuacao(); ?></td>
-                                <td><?php
-                                    if ($questao->getImagem())
-                                        echo '<img src="' . BASEURL_ARQUIVOS . '/' . $questao->getImagem() . '" width="100px" />';
-                                    ?></td>
-                                <td><a href='QuizQuestaoController.php?action=add&idQuestao=<?= $questao->getIdQuestao(); ?>&idQuiz=<?= $dados['quiz'] ? $dados['quiz']->getIdQuiz() : '0'; ?>' class="btn btn-success">Adicionar</a> </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
         <div class="row" style="margin-top: 40px;">
 
             <h3 id="quest" class=" text-left tituloPagina">
@@ -122,6 +86,41 @@
                             }
                         }
                         ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ... (código anterior do formulário) ... -->
+
+        <div class="row" style="margin-top: 40px;">
+            <h3 id="quest" class=" text-left tituloPagina">
+                Questões disponíveis para o quiz "<span><?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></span>"</h3>
+
+            <div class="col-md-12 d-flex align-items-stretch">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Descrição</td>
+                            <td>Grau</td>
+                            <td>Pontuação</td>
+                            <td>Imagem</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($dados['listaQuestoes'] as $questao) : ?>
+                            <tr>
+                                <td><?= $questao->getDescricaoQ(); ?></td>
+                                <td><?= $questao->getGrauDificuldadeTexto(); ?></td>
+                                <td><?= $questao->getPontuacao(); ?></td>
+                                <td><?php
+                                    if ($questao->getImagem())
+                                        echo '<img src="' . BASEURL_ARQUIVOS . '/' . $questao->getImagem() . '" width="100px" />';
+                                    ?></td>
+                                <td><a href='QuizQuestaoController.php?action=add&idQuestao=<?= $questao->getIdQuestao(); ?>&idQuiz=<?= $dados['quiz'] ? $dados['quiz']->getIdQuiz() : '0'; ?>' class="btn btn-success">Adicionar</a> </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
