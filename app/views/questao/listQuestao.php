@@ -54,13 +54,15 @@
                                 <div class="btn-group">
                                     <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
                                     <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
         </div>
+    <?php endforeach; ?>
+    </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
