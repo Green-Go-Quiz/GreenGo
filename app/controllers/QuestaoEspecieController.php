@@ -4,10 +4,12 @@ require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuestaoEspecieDAO.php");
 require_once(__DIR__ . "/../dao/EspecieDAO.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
+require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 require_once(__DIR__ . "/../models/QuestaoEspecieModel.php");
 require_once(__DIR__ . "/../models/EspecieModel.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
+
 
 class QuestaoEspecieController extends Controller
 {
@@ -15,20 +17,21 @@ class QuestaoEspecieController extends Controller
     private EspecieDAO $especieDao;
     private QuestaoDAO $questaoDao;
     private QuestaoEspecie $questaoEspecie; // Adicione esta linha
-
+    private AlternativaDAO $alternativaDao;
     public function __construct()
     {
         $this->questaoEspecieDao = new QuestaoEspecieDAO();
         $this->especieDao = new EspecieDAO();
         $this->questaoDao = new QuestaoDAO();
         $this->questaoEspecie = new QuestaoEspecie(); // Instancie a classe QuestaoEspecieModel
+        $this->alternativaDao = new AlternativaDAO();
         $this->handleAction();
     }
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        $especies = $this->questaoEspecieDao->listByEspecie($this->questaoEspecie->getIdEspecie());
-        $dados["lista"] = $especies;
+        $questaoEspecies = $this->questaoEspecieDao->listByQuestao($this->questaoEspecie->getIdQuestao());
+        $dados["lista"] = $questaoEspecies;
 
         $this->loadView("questaoEspecie/form.php", $dados, $msgErro, $msgSucesso);
     }
@@ -40,19 +43,26 @@ class QuestaoEspecieController extends Controller
             $dados["especie"] = $especie;
             $dados["listaEspecie"] = $this->especieDao->list();
             $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
+        $questao = $this->findQuestaoById();
+        if ($questao) {
+            $dados["questao"] = $questao;
+            $dados["listaEspecie"] = $this->especieDao->list();
+            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
 
             $this->loadView("questaoEspecie/form.php", $dados);
         }
     }
 
-    private function findEspecieById()
+    private function findQuestaoById()
     {
         $id = 0;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
         }
-        $especie = $this->especieDao->findById($id);
-        return $especie;
+        $questao = $this->questaoDao->findById($id);
+        if ($questao)
+            $questao->setAlternativas($this->alternativaDao->findAllByQuestao($id));
+        return $questao;
     }
 
     private function findQuestaoEspecieById()
@@ -73,6 +83,11 @@ class QuestaoEspecieController extends Controller
 
         $erros = array();
 
+        $questao = $this->questaoDao->findById($idQuestao);
+        if (!$questao) {
+            array_push($erros, "Questão não encontrada no banco de dados.");
+        }
+
         $especie = $this->especieDao->findById($idEspecie);
         if (!$especie) {
             array_push($erros, "Espécie não encontrada no banco de dados.");
@@ -85,7 +100,7 @@ class QuestaoEspecieController extends Controller
 
         $questaoEspecie = $this->questaoEspecieDao->findByIdEspecieQuestao($idEspecie, $idQuestao);
         if ($questaoEspecie) {
-            array_push($erros, "A questão já existe nesta espécie.");
+            array_push($erros, "A espécie já existe nesta questão.");
         }
 
         if (!$erros) {
@@ -96,16 +111,16 @@ class QuestaoEspecieController extends Controller
             }
         }
 
-        $especie = $this->especieDao->findById($idEspecie);
-        $dados["especie"] = $especie;
+        $questao = $this->questaoDao->findById($idQuestao);
+        $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
-        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
+        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
 
         $msgSucesso = "";
         if (!$msgsErro) {
-            $msgSucesso = 'Questão adicionada à espécie com sucesso.';
+            $msgSucesso = 'Espécie adicionada à questão com sucesso.';
         }
 
         $this->loadView("questaoEspecie/form.php", $dados, $msgsErro, $msgSucesso);
@@ -124,7 +139,7 @@ class QuestaoEspecieController extends Controller
             }
         }
 
-        header('location: QuestaoEspecieController.php?action=create&id=' . $this->questaoEspecie->getIdEspecie());
+        header('location: QuestaoEspecieController.php?action=create&id=' . $this->questaoEspecie->getIdQuestao());
     }
 }
 

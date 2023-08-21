@@ -66,41 +66,6 @@ class QuizQuestaoDAO
         $stm->execute();
     }
 
-    /*private function deleteQuizQuestaoAssociations(int $idQuiz)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "DELETE FROM quiz_questao WHERE idQuiz = :idQuiz";
-
-        $stm = $conn->prepare($sql);
-        $stm->bindValue(":idQuiz", $quizId);
-        $stm->execute();
-    }*/
-
-    /*public function insertQuizWithQuestoes(Quiz $quiz, array $questoes)
-    {
-        $conn = Connection::getConn();
-        $conn->beginTransaction();
-
-        try {
-            // Inserir o quiz na tabela quiz
-            $quizDAO = new QuizDAO();
-            $quizDAO->insert($quiz);
-
-            // Obter o ID do quiz inserido
-            $quizId = $conn->lastInsertId();
-
-            // Inserir as associações entre o quiz e as questões na tabela quiz_questao
-            $this->insertQuizQuestaoAssociations($quizId, $questoes);
-
-            $conn->commit();
-        } catch (PDOException $e) {
-            $conn->rollback();
-            throw $e;
-        }
-    }*/
-
-
     public function deleteById(int $id)
     {
         $conn = Connection::getConn();
