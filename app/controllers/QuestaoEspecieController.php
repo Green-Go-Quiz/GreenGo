@@ -38,16 +38,11 @@ class QuestaoEspecieController extends Controller
 
     protected function create()
     {
-        $especie = $this->findEspecieById();
-        if ($especie) {
-            $dados["especie"] = $especie;
-            $dados["listaEspecie"] = $this->especieDao->list();
-            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByEspecie($especie->getIdEspecie());
         $questao = $this->findQuestaoById();
         if ($questao) {
             $dados["questao"] = $questao;
             $dados["listaEspecie"] = $this->especieDao->list();
-            $dados["listaEspecies"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
+            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
 
             $this->loadView("questaoEspecie/form.php", $dados);
         }
@@ -83,11 +78,6 @@ class QuestaoEspecieController extends Controller
 
         $erros = array();
 
-        $questao = $this->questaoDao->findById($idQuestao);
-        if (!$questao) {
-            array_push($erros, "Questão não encontrada no banco de dados.");
-        }
-
         $especie = $this->especieDao->findById($idEspecie);
         if (!$especie) {
             array_push($erros, "Espécie não encontrada no banco de dados.");
@@ -98,9 +88,14 @@ class QuestaoEspecieController extends Controller
             array_push($erros, "Questão não encontrada no banco de dados.");
         }
 
+        $especie = $this->especieDao->findById($idEspecie);
+        if (!$especie) {
+            array_push($erros, "Espécie não encontrada no banco de dados.");
+        }
+
         $questaoEspecie = $this->questaoEspecieDao->findByIdEspecieQuestao($idEspecie, $idQuestao);
         if ($questaoEspecie) {
-            array_push($erros, "A espécie já existe nesta questão.");
+            array_push($erros, "A questão já existe nesta espécie.");
         }
 
         if (!$erros) {
@@ -111,10 +106,13 @@ class QuestaoEspecieController extends Controller
             }
         }
 
+
         $questao = $this->questaoDao->findById($idQuestao);
         $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
-        $dados["listaEspecies"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
+        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
+
+
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
 
