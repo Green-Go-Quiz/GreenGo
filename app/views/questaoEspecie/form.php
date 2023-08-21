@@ -88,7 +88,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $questaoEspecieEspecies = $dados['listaQuestoesEspecie'];
+                        $questaoEspecieEspecies = $dados['listaEspecies'];
                         if ($questaoEspecieEspecies) {
                             foreach ($questaoEspecieEspecies as $questaoEspecie) {
                                 $especie = $questaoEspecie->getEspecie();

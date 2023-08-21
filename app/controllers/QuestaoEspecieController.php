@@ -47,7 +47,7 @@ class QuestaoEspecieController extends Controller
         if ($questao) {
             $dados["questao"] = $questao;
             $dados["listaEspecie"] = $this->especieDao->list();
-            $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
+            $dados["listaEspecies"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
 
             $this->loadView("questaoEspecie/form.php", $dados);
         }
@@ -114,7 +114,7 @@ class QuestaoEspecieController extends Controller
         $questao = $this->questaoDao->findById($idQuestao);
         $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
-        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
+        $dados["listaEspecies"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
 
