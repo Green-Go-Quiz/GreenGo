@@ -95,7 +95,7 @@ class QuestaoEspecieController extends Controller
 
         $questaoEspecie = $this->questaoEspecieDao->findByIdEspecieQuestao($idEspecie, $idQuestao);
         if ($questaoEspecie) {
-            array_push($erros, "A questão já existe nesta espécie.");
+            array_push($erros, "A espécie já existe nesta questão.");
         }
 
         if (!$erros) {
@@ -110,7 +110,7 @@ class QuestaoEspecieController extends Controller
         $questao = $this->questaoDao->findById($idQuestao);
         $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
-        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($especie->getIdEspecie());
+        $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
 
 
 

@@ -72,10 +72,13 @@
             </div>
         </div>
 
+
+        <!-- ADICIONADASSSSSS--!-->
+
         <div class="row" style="margin-top: 40px;">
 
             <h3 id="quest" class=" text-left tituloPagina">
-             Espécies adicionadas a questão "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
+                Espécies adicionadas à questão "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
 
             <div class="col-md-12 d-flex align-items-stretch">
                 <table class="table table-striped">
@@ -83,38 +86,32 @@
                         <tr>
                             <td>Nome Popular</td>
                             <td>Nome Cientifico</td>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $questaoEspecieEspecies = $dados['listaEspecies'];
+                        $questaoEspecieEspecies = $dados['listaQuestoesEspecie'];
                         if ($questaoEspecieEspecies) {
                             foreach ($questaoEspecieEspecies as $questaoEspecie) {
                                 $especie = $questaoEspecie->getEspecie();
-                             ?>
-                         
-                                        <td><?= $especie->getNomePopular(); ?></td>
-                                         <td><?= $especie->getNomeCientifico(); ?></td>
-                                               <td>
-                <a href='QuestaoespecieController.php?action=delete&idQuestaoEspecie=<?= $especie->getIdEspecie(); ?>&idQuestao=<?= $dados['questao'] ? $dados['questao']->getIdQuestao() : '0'; ?>' class="btn btn-success">Deletar</a>
-            </td>
-                      </tr>
-                      <?php
+                        ?>
+                                <tr>
+                                    <td><?= $especie->getNomePopular() ?></td>
+                                    <td><?= $especie->getNomeCientifico() ?></td>
+                                    <td><a href='QuestaoEspecieController.php?action=delete&idQuestaoEspecie=<?= $questaoEspecie->getIdQuestaoEspecie(); ?>' class="btn btn-danger" onclick="return confirm('Confirma a exclusão?');">Deletar</a></td>
+                                </tr>
+                        <?php
                             }
                         }
                         ?>
+
 
                     </tbody>
                 </table>
             </div>
         </div>
-
-
     </div>
-
-    <!-- ... (restante do código do formulário) ... -->
-
     </div>
 </body>
 
