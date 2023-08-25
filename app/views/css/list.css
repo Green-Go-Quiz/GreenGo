@@ -105,25 +105,31 @@
 }
 
 .botaoAlterar {
+  left: 10%;
   background-color: var(--cinzinha);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
   font-family: "Poppins-semibold";
   border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+ 
 }
 
 .botaoAlterar:hover {
+  
   background-color: #9fb2b4;
   /* Ou qualquer outra cor mais escura que você desejar */
   transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+
 }
 
 .botaoExcluir {
+  left: 10%;
   background-color: #f0d8d8;
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
   font-family: "Poppins-semibold";
   border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+ 
 }
 
 .botaoExcluir:hover {
@@ -133,6 +139,7 @@
 }
 
 .botaoQuestoes {
+  left: 10%;
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
@@ -147,6 +154,7 @@
 }
 
 .botaoEspecies {
+  left: 10%;
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */

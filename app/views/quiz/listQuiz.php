@@ -53,17 +53,21 @@
                                 </p>
                             <?php endif; ?>
 
-                            <div class="d-flex justify-content-between align-items-center">
+                            
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
                                     <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
                                 </div>
                             </div>
-                        </div>
                     </div>
+                    
                 </div>
+                
             <?php endforeach; ?>
+            
         </div>
     </div>
 
