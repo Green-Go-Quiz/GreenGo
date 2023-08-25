@@ -54,7 +54,7 @@
                         <tr class="atributoTabelaAdicionada">
                             <td>Nome Popular</td>
                             <td>Nome Cientifico</td>
-
+                              <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,7 +90,8 @@
                         <tr class="atributoTabelaDisponivel">
                             <td>Nome Popular</td>
                             <td>Nome Cientifico</td>
-
+                             <td></td>
+                            
                         </tr>
                     </thead>
                     <tbody>

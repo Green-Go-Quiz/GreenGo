@@ -107,7 +107,9 @@ class QuestaoEspecieController extends Controller
         }
 
 
-        $questao = $this->questaoDao->findById($idQuestao);
+        //$questao = $this->questaoDao->findById($idQuestao);
+        if ($questao)
+            $questao->setAlternativas($this->alternativaDao->findAllByQuestao($questao->getIdQuestao()));
         $dados["questao"] = $questao;
         $dados["listaEspecie"] = $this->especieDao->list();
         $dados["listaQuestoesEspecie"] = $this->questaoEspecieDao->listByQuestao($questao->getIdQuestao());
