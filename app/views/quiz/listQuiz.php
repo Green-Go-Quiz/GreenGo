@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 d-flex align-items-stretch">
+            <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                 <div class="card mb-4 shadow-sm w-100 min-vh-25">
                     <div class="card-body">
                         <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center botaoEspecifico " href="<?= BASEURL ?>/controllers/QuizController.php?action=create">
@@ -26,7 +26,7 @@
             </div>
 
             <?php foreach ($dados['lista'] as $quiz) : ?>
-                <div class="col-md-3 d-flex align-items-stretch">
+                <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                     <div class="card mb-4 shadow-sm w-100 min-vh-25 cardInserido">
                         <div class="card-body">
                             <h3 class="card-title nomeCard"><?= $quiz->getNomeQuiz(); ?></h3>
@@ -55,7 +55,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
                                     <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
                                     <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
                                 </div>

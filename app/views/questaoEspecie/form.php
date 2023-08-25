@@ -3,7 +3,7 @@
 
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/list.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/form.css">
 </head>
 
 <body>
@@ -11,12 +11,12 @@
 
     <div class="container">
         <h1 id="quest" class=" text-center tituloPagina">
-            Especies das Questões </h1>
+            Espécies da Questão </h1>
 
         <div class="row" style="margin-top: 30px;">
             <div class="col-md-6 d-flex align-items-stretch">
                 <h4 id="quest" class=" text-left tituloPagina">
-                    Questão selecionado:</h4>
+                    Questão selecionada:</h4>
             </div>
 
             <div class="col-md-6 d-flex align-items-stretch">
@@ -26,54 +26,22 @@
 
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
-                <span style='font-weight: bold; margin-right: 10px;'>Descrição da questão : </span>
-                <span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>
+                <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Descrição da questão : </span>
+                <span class="dadoAtributo"><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
-                <span style='font-weight: bold; margin-right: 10px;'>Grau de dificuldade: </span>
-                <span><?= $dados['questao'] ? $dados['questao']->getGrauDificuldadeTexto() : '---';; ?></span>
+                <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Grau de dificuldade: </span>
+                <span class="dadoAtributo"><?= $dados['questao'] ? $dados['questao']->getGrauDificuldadeTexto() : '---';; ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
-                <span style='font-weight: bold; margin-right: 10px;'>Alternativa correta: </span>
-                <span><?= $dados['questao'] ? $dados['questao']->getAlternativaCertaTexto() : '---';; ?></span>
+                <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Alternativa correta: </span>
+                <span class="dadoAtributo"><?= $dados['questao'] ? $dados['questao']->getAlternativaCertaTexto() : '---';; ?></span>
             </div>
         </div>
-
-        <!-- ... (código anterior do formulário) ... -->
-
-        <div class="row" style="margin-top: 40px;">
-            <h3 id="quest" class=" text-left tituloPagina">
-                Espécies disponíveis para a questao "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
-
-            <div class="col-md-12 d-flex align-items-stretch">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>Nome Popular</td>
-                            <td>Nome Cientifico</td>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($dados['listaEspecie'] as $especie) : ?>
-                            <tr>
-                                <td><?= $especie->getNomePopular(); ?></td>
-                                <td><?= $especie->getNomeCientifico(); ?></td>
-
-                                <td><a href='QuestaoespecieController.php?action=add&idEspecie=<?= $especie->getIdEspecie(); ?>&idQuestao=<?= $dados['questao'] ? $dados['questao']->getIdQuestao() : '0'; ?>' class="btn btn-success">Adicionar</a> </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-        <!-- ADICIONADASSSSSS--!-->
 
         <div class="row" style="margin-top: 40px;">
 
@@ -83,7 +51,7 @@
             <div class="col-md-12 d-flex align-items-stretch">
                 <table class="table table-striped">
                     <thead>
-                        <tr>
+                        <tr class="atributoTabelaAdicionada">
                             <td>Nome Popular</td>
                             <td>Nome Cientifico</td>
 
@@ -96,10 +64,10 @@
                             foreach ($questaoEspecieEspecies as $questaoEspecie) {
                                 $especie = $questaoEspecie->getEspecie();
                         ?>
-                                <tr>
+                                <tr class="dadoTabelaAdicionada">
                                     <td><?= $especie->getNomePopular() ?></td>
                                     <td><?= $especie->getNomeCientifico() ?></td>
-                                    <td><a href='QuestaoEspecieController.php?action=delete&idQuestaoEspecie=<?= $questaoEspecie->getIdQuestaoEspecie(); ?>' class="btn btn-danger" onclick="return confirm('Confirma a exclusão?');">Deletar</a></td>
+                                    <td><a href='QuestaoEspecieController.php?action=delete&idQuestaoEspecie=<?= $questaoEspecie->getIdQuestaoEspecie(); ?>' class="btn btn-danger botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Deletar</a></td>
                                 </tr>
                         <?php
                             }
@@ -111,6 +79,38 @@
                 </table>
             </div>
         </div>
+
+        <div class="row" style="margin-top: 40px;">
+            <h3 id="quest" class=" text-left tituloPagina">
+                Espécies disponíveis para a questão "<span><?= $dados['questao'] ? $dados['questao']->getDescricaoQ() : '---'; ?></span>"</h3>
+
+            <div class="col-md-12 d-flex align-items-stretch">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr class="atributoTabelaDisponivel">
+                            <td>Nome Popular</td>
+                            <td>Nome Cientifico</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($dados['listaEspecie'] as $especie) : ?>
+                            <tr class="dadoTabelaDisponivel">
+                                <td><?= $especie->getNomePopular(); ?></td>
+                                <td><?= $especie->getNomeCientifico(); ?></td>
+
+                                <td><a href='QuestaoespecieController.php?action=add&idEspecie=<?= $especie->getIdEspecie(); ?>&idQuestao=<?= $dados['questao'] ? $dados['questao']->getIdQuestao() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- ADICIONADASSSSSS--!-->
+
+
     </div>
     </div>
 </body>

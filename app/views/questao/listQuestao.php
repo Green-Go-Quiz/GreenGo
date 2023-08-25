@@ -13,7 +13,7 @@
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 d-flex align-items-stretch">
+            <div class="col-md-5 d-flex align-items-stretch">
                 <div class="card mb-4 shadow-sm w-100">
                     <div class="card-body">
                         <a class="btn btn-success btn-block h-100 d-flex justify-content-center align-items-center botaoEspecifico" href="<?= BASEURL ?>/controllers/QuestaoController.php?action=create">
@@ -24,7 +24,7 @@
             </div>
 
             <?php foreach ($dados['lista'] as $questao) : ?>
-                <div class="col-md-3 ">
+                <div class="col-md-5">
                     <div class="card mb-4 shadow-sm cardInserido">
                         <div class="card-body ">
                             <h5 class="card-title nomeCard"><?= $questao->getDescricaoQ(); ?></h5>

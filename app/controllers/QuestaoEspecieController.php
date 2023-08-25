@@ -16,7 +16,7 @@ class QuestaoEspecieController extends Controller
     private QuestaoEspecieDAO $questaoEspecieDao;
     private EspecieDAO $especieDao;
     private QuestaoDAO $questaoDao;
-    private QuestaoEspecie $questaoEspecie; // Adicione esta linha
+    private QuestaoEspecie $questaoEspecie;
     private AlternativaDAO $alternativaDao;
     public function __construct()
     {

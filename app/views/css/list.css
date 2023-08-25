@@ -146,6 +146,20 @@
   transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
 }
 
+.botaoEspecies {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoEspecies:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
 body {
   background-color: var(--branco);
 }

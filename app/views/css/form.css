@@ -49,6 +49,45 @@
   font-family: "Poppins-semibold";
 }
 
+.dadoAtributo {
+  font-weight: 500;
+  color: var(--verdao);
+  font-family: "Poppins-medium";
+}
+
+.atributoTabelaDisponivel {
+  background-color: var(--verdinho); /* Definir a cor de fundo como rosinha */
+  border-radius: 7px; /* Adicionar bordas arredondadas */
+  color: var(--cinza);
+  font-family: "Poppins-semibold";
+}
+
+.dadoTabelaDisponivel {
+  /* Definir a cor de fundo como rosinha */
+  border-radius: 7px; /* Adicionar bordas arredondadas */
+  color: var(--cinza);
+  font-family: "Poppins-medium";
+}
+
+.atributoTabelaAdicionada {
+  background-color: var(
+    --rosinhasinha
+  ); /* Definir a cor de fundo como rosinha */
+  border-radius: 7px; /* Adicionar bordas arredondadas */
+  color: var(--cinza);
+  font-family: "Poppins-semibold";
+}
+
+.dadoTabelaAdicionada {
+  /* Definir a cor de fundo como rosinha */
+  border-radius: 7px; /* Adicionar bordas arredondadas */
+  color: var(--cinza);
+  font-family: "Poppins-medium";
+}
+.table-bordered {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
 /* Estilizar os campos de entrada */
 .form-control {
   border-radius: 10px; /* Adicionar bordas arredondadas */
@@ -126,4 +165,22 @@
 
 .asterisco {
   color: var(--vermelho);
+}
+
+.botaoExcluir {
+  background-color: #f0d8d8;
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoExcluir:hover {
+  background-color: var(--rosinha);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+body {
+  background-color: var(--branco);
 }

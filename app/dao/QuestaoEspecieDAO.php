@@ -30,7 +30,7 @@ class QuestaoEspecieDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT qe.*".
+        $sql = "SELECT qe.*" .
             " FROM questao_especie qe" .
             " JOIN especie e ON (e.idEspecie = qe.idEspecie)"  .
             " WHERE qe.idQuestao = :idQuestao";
