@@ -36,6 +36,7 @@ CREATE TABLE `usuario` (
   `tipoUsuario` tinyint(1) NOT NULL /*1=NORMAL, 2=ADM, 3=PROFESSOR*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
 --
 -- Índices para tabela `usuario`
 --
@@ -47,6 +48,11 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 
 --
 -- Extraindo dados da tabela `usuario`
@@ -73,6 +79,8 @@ CREATE TABLE `equipe` (
   `cor` varchar(50) NOT NULL,
   `icone` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 --
 -- Índices para tabela `equipe`
@@ -322,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `questao_especie` (
   CONSTRAINT `fk_idQuestao`
     FOREIGN KEY (`idQuestao`)
     REFERENCES `questao` (`idQuestao`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -365,4 +373,183 @@ CREATE TABLE IF NOT EXISTS `quiz_questoes` (
 ENGINE = InnoDB;
 
 ALTER TABLE quiz_questoes ADD CONSTRAINT uk_quiz_questao UNIQUE(idQuiz, idQuestao);
+
+--
+-- Estrutura para tabela `equipe`
+--
+
+CREATE TABLE IF NOT EXISTS `equipe` (
+  `idEquipe` int(11) NOT NULL,
+  `nomeEquipe` varchar(100) NOT NULL,
+  `cor` varchar(50) NOT NULL,
+  `icone` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Fazendo dump de dados para tabela `equipe`
+--
+
+INSERT INTO `equipe` (`idEquipe`, `nomeEquipe`, `cor`, `icone`) VALUES
+(9, 'Cacto', '#51a97b', '../../public/icon/cacto_icon.png'),
+(10, 'Florzinha', '#ee6d87', '../../public/icon/flor_icon.png'),
+(11, 'Árvore', '#000000', '../../public/icon/arvore_icon.png'),
+(12, 'Planta no Vaso', '#38998d', '../../public/icon/samambaia_icon.png');
+
+--
+-- Índices de tabela `equipe`
+--
+ALTER TABLE `equipe`
+  ADD PRIMARY KEY (`idEquipe`);
+
+--
+-- AUTO_INCREMENT de tabela `equipe`
+--
+ALTER TABLE `equipe`
+  MODIFY `idEquipe` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+
+--
+-- Estrutura para tabela `equipe_usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `equipe_usuario` (
+  `idEquipeUsuario` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idEquipe` int(11) NOT NULL,
+  `pontuacaoUsuario` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices de tabela `equipe_usuario`
+--
+ALTER TABLE `equipe_usuario`
+  ADD KEY `fk_usuario_equipe` (`idUsuario`), ADD KEY `fk_equipe_usuario` (`idEquipe`);
+
+-- Restrições para tabelas `equipe_usuario`
+--
+ALTER TABLE `equipe_usuario`
+ADD CONSTRAINT `fk_equipe_usuario` FOREIGN KEY (`idEquipe`) REFERENCES `equipe` (`idEquipe`),
+ADD CONSTRAINT `fk_usuario_equipe` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+
+--
+-- Estrutura para tabela `partida`
+--
+
+CREATE TABLE IF NOT EXISTS `partida` (
+  `idPartida` int(11) NOT NULL,
+  `dataInicio` datetime DEFAULT NULL,
+  `dataFim` datetime DEFAULT NULL,
+  `limiteJogadores` int(11) NOT NULL,
+  `tempoPartida` int(11) NOT NULL,
+  `nomePartida` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `senhaPartida` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `statusPartida` tinyint(4) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Fazendo dump de dados para tabela `partida`
+--
+
+INSERT INTO `partida` (`idPartida`, `dataInicio`, `dataFim`, `limiteJogadores`, `tempoPartida`, `nomePartida`, `senhaPartida`, `statusPartida`) VALUES
+(31, NULL, NULL, 20, 20, 'Partida', '123', 1),
+(32, NULL, '2023-08-28 20:24:08', 20, 20, 'Partida', '123', 1),
+(33, NULL, NULL, 22, 12, 'Partida', '123', 1);
+
+--
+-- Índices de tabela `partida`
+--
+ALTER TABLE `partida`
+  ADD PRIMARY KEY (`idPartida`);
+
+ALTER TABLE `partida`
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+--
+
+--
+-- Estrutura para tabela `partida_equipe`
+--
+
+CREATE TABLE IF NOT EXISTS `partida_equipe` (
+  `idPartidaEquipe` int(11) NOT NULL,
+  `idEquipe` int(11) NOT NULL,
+  `idPartida` int(11) NOT NULL,
+  `pontuacaoEquipe` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Fazendo dump de dados para tabela `partida_equipe`
+--
+
+INSERT INTO `partida_equipe` (`idPartidaEquipe`, `idEquipe`, `idPartida`, `pontuacaoEquipe`) VALUES
+(24, 11, 31, NULL),
+(25, 9, 31, NULL),
+(26, 11, 32, NULL),
+(27, 10, 32, NULL),
+(28, 10, 33, NULL);
+
+--
+-- Índices de tabela `partida_equipe`
+--
+ALTER TABLE `partida_equipe`
+  ADD PRIMARY KEY (`idPartidaEquipe`), ADD KEY `fk_equipe_partida` (`idEquipe`), ADD KEY `fk_partida_equipe` (`idPartida`);
+
+-- AUTO_INCREMENT de tabela `partida_equipe`
+--
+ALTER TABLE `partida_equipe`
+  MODIFY `idPartidaEquipe` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+
+  --
+-- Restrições para tabelas `partida_equipe`
+--
+ALTER TABLE `partida_equipe`
+ADD CONSTRAINT `fk_equipe_partida` FOREIGN KEY (`idEquipe`) REFERENCES `equipe` (`idEquipe`),
+ADD CONSTRAINT `fk_partida_equipe` FOREIGN KEY (`idPartida`) REFERENCES `partida` (`idPartida`);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `partida_zona`
+--
+
+CREATE TABLE IF NOT EXISTS `partida_zona` (
+  `idPartidaZona` int(11) NOT NULL,
+  `idPartida` int(11) NOT NULL,
+  `idZona` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Fazendo dump de dados para tabela `partida_zona`
+--
+
+INSERT INTO `partida_zona` (`idPartidaZona`, `idPartida`, `idZona`) VALUES
+(23, 31, 35),
+(24, 31, 34),
+(25, 32, 34),
+(26, 32, 36),
+(27, 33, 35);
+
+--
+-- Índices de tabela `partida_zona`
+--
+ALTER TABLE `partida_zona`
+  ADD PRIMARY KEY (`idPartidaZona`), ADD KEY `fk_zona_partida` (`idZona`), ADD KEY `fk_partida_zona` (`idPartida`);
+
+--
+-- AUTO_INCREMENT de tabela `partida_zona`
+--
+ALTER TABLE `partida_zona`
+  MODIFY `idPartidaZona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+
+--
+-- Restrições para tabelas `partida_zona`
+--
+ALTER TABLE `partida_zona`
+ADD CONSTRAINT `fk_partida_zona` FOREIGN KEY (`idPartida`) REFERENCES `partida` (`idPartida`),
+ADD CONSTRAINT `fk_zona_partida` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
+
+
+
+
+
+
+
 
