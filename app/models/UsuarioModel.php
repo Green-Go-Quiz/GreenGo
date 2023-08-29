@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
-    class Usuario {
+class Usuario
+{
 
         private $idUsuario;
         private $nomeUsuario;
@@ -11,12 +12,12 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
         private $senha;
         private $genero;
         private $escolaridade;
-        private $tipoUsuario;
+        private $tipoUsuario; //1-Jogador, 2-Adm, 3-Professor
 
 
         /**
          * Get the value of nomeUsuario
-         */ 
+         */
         public function getNomeUsuario()
         {
                 return $this->nomeUsuario;
@@ -26,7 +27,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of nomeUsuario
          *
          * @return  self
-         */ 
+         */
         public function setNomeUsuario($nomeUsuario)
         {
                 $this->nomeUsuario = $nomeUsuario;
@@ -36,7 +37,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of email
-         */ 
+         */
         public function getEmail()
         {
                 return $this->email;
@@ -46,7 +47,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of email
          *
          * @return  self
-         */ 
+         */
         public function setEmail($email)
         {
                 $this->email = $email;
@@ -56,7 +57,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of senha
-         */ 
+         */
         public function getSenha()
         {
                 return $this->senha;
@@ -66,7 +67,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of senha
          *
          * @return  self
-         */ 
+         */
         public function setSenha($senha)
         {
                 $this->senha = $senha;
@@ -76,7 +77,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of genero
-         */ 
+         */
         public function getGenero()
         {
                 return $this->genero;
@@ -86,7 +87,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of genero
          *
          * @return  self
-         */ 
+         */
         public function setGenero($genero)
         {
                 $this->genero = $genero;
@@ -96,7 +97,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of escolaridade
-         */ 
+         */
         public function getEscolaridade()
         {
                 return $this->escolaridade;
@@ -106,7 +107,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of escolaridade
          *
          * @return  self
-         */ 
+         */
         public function setEscolaridade($escolaridade)
         {
                 $this->escolaridade = $escolaridade;
@@ -116,7 +117,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of tipoUsuario
-         */ 
+         */
         public function getTipoUsuario()
         {
                 return $this->tipoUsuario;
@@ -126,7 +127,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of tipoUsuario
          *
          * @return  self
-         */ 
+         */
         public function setTipoUsuario($tipoUsuario)
         {
                 $this->tipoUsuario = $tipoUsuario;
@@ -134,27 +135,30 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
                 return $this;
         }
 
-        public function getPapeisAsArray() {
-                if($this->papeis) 
-                    return explode(UsuarioPapel::$SEPARADOR, $this->papeis);
-                
-                return array();    
-            }
-        
-            public function setPapeisAsArray($array) {
-                if($array)
-                    $this->papeis = implode(UsuarioPapel::$SEPARADOR, $array);
+        public function getPapeisAsArray()
+        {
+                if ($this->papeis)
+                        return explode(UsuarioPapel::$SEPARADOR, $this->papeis);
+
+                return array();
+        }
+
+        public function setPapeisAsArray($array)
+        {
+                if ($array)
+                        $this->papeis = implode(UsuarioPapel::$SEPARADOR, $array);
                 else
-                    $this->papeis = NULL;
-            }
-        
-            public function getPapeisStr() {
+                        $this->papeis = NULL;
+        }
+
+        public function getPapeisStr()
+        {
                 return str_replace(UsuarioPapel::$SEPARADOR, ", ", $this->papeis);
-            }
+        }
 
         /**
          * Get the value of idUsuario
-         */ 
+         */
         public function getIdUsuario()
         {
                 return $this->idUsuario;
@@ -164,7 +168,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of idUsuario
          *
          * @return  self
-         */ 
+         */
         public function setIdUsuario($idUsuario)
         {
                 $this->idUsuario = $idUsuario;
@@ -174,7 +178,7 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
 
         /**
          * Get the value of login
-         */ 
+         */
         public function getLogin()
         {
                 return $this->login;
@@ -184,11 +188,11 @@ require_once(__DIR__ . "/enum/UsuarioPapel.php");
          * Set the value of login
          *
          * @return  self
-         */ 
+         */
         public function setLogin($login)
         {
                 $this->login = $login;
 
                 return $this;
         }
-       } 
+}

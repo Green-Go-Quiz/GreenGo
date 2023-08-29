@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<?php 
+<?php
 
-session_start();
+/*session_start();
 
 if(isset($_SESSION['adm'])){
     $nomeADM = $_SESSION['adm'];
@@ -13,14 +13,15 @@ else if(isset($_SESSION['normal'])){
 else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
     header("Location: users/login.php");
     exit;
-}
+}*/
 ?>
+
 <head>
-    <?php include_once("../bootstrap/header.php");?>
+    <?php include_once("../bootstrap/header.php"); ?>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cabecalho.css">
 
-</head> 
+</head>
 
 <?php require_once(__DIR__ . "/../bootstrap/navADMMeninas.php"); ?>
 
@@ -33,7 +34,7 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
                         <h1><br><br>Aprenda <br> com trilhas <br> ecológicas! </h1>
                         <div class="row">
                             <div class="col">
-                               
+
                                 <!--SÓ HÁ UM MODO DE JOGO POR HORA
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -46,13 +47,12 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
                                     </div>
                                 </div>
                                 -->
-                                
+
                             </div>
                         </div>
                     </div>
                     <div class="img-responsive">
-                        <a href="..\controllers\EspecieControllerADM.php?action=EspeciesMapa"><img src="../public/mapa 1.svg" class="img-fluid" alt="logo-index"
-                                id="mapa-da-home"></a>
+                        <a href="..\controllers\EspecieControllerADM.php?action=EspeciesMapa"><img src="../public/mapa 1.svg" class="img-fluid" alt="logo-index" id="mapa-da-home"></a>
                     </div>
                 </div>
             </div>
@@ -84,6 +84,7 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
     <br><br><br>
 </body>
 <div class="container-fluid" id="rodape">
-            
-            </div>
+
+</div>
+
 </html>

@@ -58,13 +58,20 @@ ALTER TABLE `usuario`
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
+/*INSERT INTO `usuario` (`nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
 ('Gabriel', 'Masculino', 'Ensino Superior', 'mandelas', 'gabriel.mandellicardoso@gmail.com', '12345678', 1),
 ('gabriel', 'Masculino', 'Ensino Médio', 'gabriel', 'gabriel.mandellicardoso@gmail.com', 'eu12345678', 1);
 
 INSERT INTO `usuario` ( `nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
 ('Juliana', 'Feminino', 'Ensino Superior', 'juuj', 'juujsantana@gmail.com', '12345678', 2);
+*/
 
+INSERT INTO `usuario` (`nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, `email`, `senha`, `tipoUsuario`) VALUES
+('Professor', 'Masculino', 'Ensino Superior', 'professor', 'professor@gmail.com', '$2y$10$HG1poKhwizbPOSOxWSfCj.3d8OQOqIwKv96NR3zVPI5ECNkpUk2gG', 3),
+('Adm', 'Masculino', 'Ensino Superior', 'adm', 'adm@gmail.com', '$2y$10$HG1poKhwizbPOSOxWSfCj.3d8OQOqIwKv96NR3zVPI5ECNkpUk2gG', 2),
+('Jogador', 'Masculino', 'Ensino Médio', 'jogador', 'jogador@gmail.com', '$2y$10$HG1poKhwizbPOSOxWSfCj.3d8OQOqIwKv96NR3zVPI5ECNkpUk2gG', 1);
+
+--- a senha pra entra é 123
 
 -- --------------------------------------------------------
 

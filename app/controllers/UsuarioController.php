@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../service/UsuarioService.php");
 require_once(__DIR__ . "/../models/UsuarioModel");
 require_once(__DIR__ . "/../models/enum/UsuarioPapel.php");
 
-class UsuarioController extends Controller
+/*class UsuarioController extends Controller
 {
 
     private UsuarioDAO $usuarioDao;
@@ -139,3 +139,6 @@ class UsuarioController extends Controller
 
 #Criar objeto da classe
 $usuCont = new UsuarioController();
+
+
+*/
