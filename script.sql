@@ -554,9 +554,25 @@ ADD CONSTRAINT `fk_partida_zona` FOREIGN KEY (`idPartida`) REFERENCES `partida` 
 ADD CONSTRAINT `fk_zona_partida` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
 
 
+-- -----------------------------------------------------
+-- Table `greengo`.`partida_quiz`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `partida_quiz` (
+  `idPartidaQuiz` INT NOT NULL AUTO_INCREMENT,
+  `idPartida` INT NOT NULL,
+  `idQuiz` INT NOT NULL,
+  PRIMARY KEY (`idPartidaQuiz`),
+  CONSTRAINT `fk_partida_has_quiz_partida1`
+    FOREIGN KEY (`idPartida`)
+    REFERENCES `partida` (`idPartida`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_partida_has_quiz_quiz1`
+    FOREIGN KEY (`idQuiz`)
+    REFERENCES `quiz` (`idQuiz`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-
-
-
-
+ALTER TABLE partida_quiz ADD CONSTRAINT uk_partida_quiz UNIQUE(idPartida, idQuiz);
 
