@@ -49,7 +49,7 @@ class QuestaoController extends Controller
         $dados["id"] = 0;
 
         $dados['alternativas'] = $this->camposAlternativas;
-        
+
         $this->loadView("questao/form.php", $dados);
     }
 
@@ -66,7 +66,7 @@ class QuestaoController extends Controller
             // Carregar as alternativas
             $dados["questao"] = $questao;
             $dados['alternativas'] = $this->camposAlternativas;
-            
+
             $this->loadView("questao/form.php", $dados);
         } else {
             $this->list("Questão não encontrada.");
@@ -95,20 +95,20 @@ class QuestaoController extends Controller
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
         $questao->setImagem("greengo\app\arquivos.jpg");
-   
+
 
         $alternativas = $this->alternativaDao->findAllByQuestao($dados["id"]);
         foreach ($textoAlternativa as $idx => $texto) {
             $alt = null;
-            if($idx < count($alternativas))
+            if ($idx < count($alternativas))
                 $alt = $alternativas[$idx];
             else
                 $alt = new Alternativa();
-            
+
             $alt->setDescricaoAlternativa($texto);
             $alt->setAlternativaCerta(0);
-            
-            if(! $alt->getIdAlternativa())
+
+            if (!$alt->getIdAlternativa())
                 array_push($alternativas, $alt);
 
             // Captura o índice da alternativa correta do campo "alternativa_correta" enviado pelo formulário
@@ -125,7 +125,7 @@ class QuestaoController extends Controller
         $erros = $this->questaoService->validarQuestao($questao, $imagem, $alternativas);
 
         if (empty($erros)) {
-            if($imagem['size'] > 0) {
+            if ($imagem['size'] > 0) {
                 $arquivoNome = explode('.', $imagem['name']);
                 $arquivoExtensao = $arquivoNome[1];
 
@@ -160,7 +160,7 @@ class QuestaoController extends Controller
                 // Enviar mensagem de sucesso
                 $msg = "Questão salva com sucesso.";
                 $this->list("", $msg);
-                
+
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar a questão na base de dados." . $e];
@@ -181,11 +181,11 @@ class QuestaoController extends Controller
         //   var_dump($_GET['id']);
         $questao = $this->findQuestaoById();
         if ($questao) {
-            
+
             $this->questaoDao->deleteImage($questao->getImagem());
 
             $this->questaoDao->deleteById($questao->getIdQuestao());
-           
+
             $this->list("", "Questão excluída com sucesso!");
         } else {
             $this->list("Questão não encontrada!");

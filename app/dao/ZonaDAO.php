@@ -9,6 +9,10 @@ class ZonaDAO
     private const SQL_ZONA = "SELECT z.*, s.nomeZona AS nomeZona FROM zona z" .
         " JOIN zona s ON s.idZona= z.idZona";
 
+    private const SQL_ZONA_PARTIDA = "SELECT z.*" .
+        " FROM partida_zona pz" .
+        " JOIN zona z ON pz.idZona = z.idZona";
+
     private function mapZonas($resultSql)
     {
         $zonas = array();
@@ -72,6 +76,24 @@ class ZonaDAO
             " encontrado para o ID " . $idZona);
     }
 
+    public function listByPartida($idPartida)
+    {
+        $conn = Connection::getConn();
+
+        $sql = ZonaDAO::SQL_ZONA_PARTIDA .
+            " WHERE pz.idPartida = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idPartida]);
+        $result = $stmt->fetchAll();
+
+
+
+        //Criar o objeto Partida
+        $zonas = $this->mapZonas($result);
+
+        return $zonas;
+    }
 
     public function save(Zona $zona)
     {

@@ -39,7 +39,7 @@ class PlantaDAO {
 }
 
     public function list() {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = PlantaDAO::SQL_PLANTA . 
                 " ORDER BY p.nomeSocial";
@@ -52,7 +52,7 @@ class PlantaDAO {
 
 
     public function findById($idPlanta) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = PlantaDAO::SQL_PLANTA . 
                 " WHERE p.idPlanta = ?";
@@ -74,7 +74,7 @@ class PlantaDAO {
     }
 
     public function findByCod($CodNumerico) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = PlantaDAO::SQL_PLANTA . 
                 " WHERE p.codNumerico = ?";
@@ -97,7 +97,7 @@ class PlantaDAO {
 
 
     public function save(Planta $planta) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
 
         $sql = "INSERT INTO planta (nomeSocial, codQR, codNumerico, pontuacaoPlanta, historia, imagemPlanta, idZona, idEspecie)".
         " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -107,7 +107,7 @@ class PlantaDAO {
     }
 
     public function update(Planta $planta) {
-        $conn = conectar_db();
+        $conn = Connection::getConn();
     
         $sql = "UPDATE planta SET nomeSocial = ?, codQR = ?, codNumerico = ?, pontuacaoPlanta = ?, historia = ?, imagemPlanta = ?, idZona = ?, idEspecie = ? WHERE idPlanta = ?";
         $stmt = $conn->prepare($sql);
@@ -117,7 +117,7 @@ class PlantaDAO {
 
     
     public function delete(Planta $planta) {
-    $conn = conectar_db();
+        $conn = Connection::getConn();
     
 
     $sql = "DELETE FROM planta WHERE idPlanta = ?";
@@ -134,5 +134,3 @@ class PlantaDAO {
 }
     
 }
-
-?>

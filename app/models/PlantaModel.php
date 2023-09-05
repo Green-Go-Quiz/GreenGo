@@ -1,6 +1,7 @@
 <?php
 
-Class Planta {
+class Planta
+{
 
     private $IdPlanta;
     private $NomeSocial;
@@ -11,14 +12,16 @@ Class Planta {
     private $ImagemPlanta;
     private $zona;
     private $PlantaHistoria;
+    private $Usuario;
 
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->ImagemPlanta;
     }
     /**
      * Get the value of IdPlanta
-     */ 
+     */
     public function getIdPlanta()
     {
         return $this->IdPlanta;
@@ -28,7 +31,7 @@ Class Planta {
      * Set the value of IdPlanta
      *
      * @return  self
-     */ 
+     */
     public function setIdPlanta($IdPlanta)
     {
         $this->IdPlanta = $IdPlanta;
@@ -38,7 +41,7 @@ Class Planta {
 
     /**
      * Get the value of NomeSocial
-     */ 
+     */
     public function getNomeSocial()
     {
         return $this->NomeSocial;
@@ -48,7 +51,7 @@ Class Planta {
      * Set the value of NomeSocial
      *
      * @return  self
-     */ 
+     */
     public function setNomeSocial($NomeSocial)
     {
         $this->NomeSocial = $NomeSocial;
@@ -58,7 +61,7 @@ Class Planta {
 
     /**
      * Get the value of CodNumerico
-     */ 
+     */
     public function getCodNumerico()
     {
         return $this->CodNumerico;
@@ -68,7 +71,7 @@ Class Planta {
      * Set the value of CodNumerico
      *
      * @return  self
-     */ 
+     */
     public function setCodNumerico($CodNumerico)
     {
         $this->CodNumerico = $CodNumerico;
@@ -78,7 +81,7 @@ Class Planta {
 
     /**
      * Get the value of Especie
-     */ 
+     */
     public function getEspecie()
     {
         return $this->Especie;
@@ -88,7 +91,7 @@ Class Planta {
      * Set the value of Especie
      *
      * @return  self
-     */ 
+     */
     public function setEspecie($Especie)
     {
         $this->Especie = $Especie;
@@ -98,7 +101,7 @@ Class Planta {
 
     /**
      * Get the value of zona
-     */ 
+     */
     public function getZona()
     {
         return $this->zona;
@@ -108,7 +111,7 @@ Class Planta {
      * Set the value of zona
      *
      * @return  self
-     */ 
+     */
     public function setZona($zona)
     {
         $this->zona = $zona;
@@ -118,7 +121,7 @@ Class Planta {
 
     /**
      * Get the value of PlantaHistoria
-     */ 
+     */
     public function getPlantaHistoria()
     {
         return $this->PlantaHistoria;
@@ -128,7 +131,7 @@ Class Planta {
      * Set the value of PlantaHistoria
      *
      * @return  self
-     */ 
+     */
     public function setPlantaHistoria($PlantaHistoria)
     {
         $this->PlantaHistoria = $PlantaHistoria;
@@ -138,7 +141,7 @@ Class Planta {
 
     /**
      * Get the value of Pontos
-     */ 
+     */
     public function getPontos()
     {
         return $this->Pontos;
@@ -148,7 +151,7 @@ Class Planta {
      * Set the value of Pontos
      *
      * @return  self
-     */ 
+     */
     public function setPontos($Pontos)
     {
         $this->Pontos = $Pontos;
@@ -158,7 +161,7 @@ Class Planta {
 
     /**
      * Get the value of ImagemPlanta
-     */ 
+     */
     public function getImagemPlanta()
     {
         return $this->ImagemPlanta;
@@ -168,7 +171,7 @@ Class Planta {
      * Set the value of ImagemPlanta
      *
      * @return  self
-     */ 
+     */
     public function setImagemPlanta($ImagemPlanta)
     {
         $this->ImagemPlanta = $ImagemPlanta;
@@ -178,7 +181,7 @@ Class Planta {
 
     /**
      * Get the value of QrCode
-     */ 
+     */
     public function getQrCode()
     {
         return $this->QrCode;
@@ -188,10 +191,30 @@ Class Planta {
      * Set the value of QrCode
      *
      * @return  self
-     */ 
+     */
     public function setQrCode($QrCode)
     {
         $this->QrCode = $QrCode;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Usuario
+     */
+    public function getUsuario()
+    {
+        return $this->Usuario;
+    }
+
+    /**
+     * Set the value of Usuario
+     *
+     * @return  self
+     */
+    public function setUsuario($Usuario)
+    {
+        $this->Usuario = $Usuario;
 
         return $this;
     }

@@ -16,6 +16,7 @@
                 <div class="navbar-nav">
 
                     <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">Projeto</a>
+                    <a class="nav-item nav-link" id="projeto-menu" href="../controllers/PartidaController.php?action=list">Partida</a>
                     <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuizController.php?action=list">Quiz</a>
                     <a class="nav-item nav-link" id="mapa-menu" href="../controllers/QuestaoController.php?action=list">Questão</a>
 
