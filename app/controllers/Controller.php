@@ -38,7 +38,6 @@ class Controller
     {
 
         //Verificar os dados que estão sendo recebidos na função
-        //print_r($dados);
         //exit;
 
         $caminho = __DIR__ . "/../views/" . $path;

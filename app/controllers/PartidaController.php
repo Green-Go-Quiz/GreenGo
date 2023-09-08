@@ -35,10 +35,10 @@ class PartidaController extends Controller
         $partidas = $this->partidaDAO->list();
 
         //TODO adicionar zonas às partidas
-        /*foreach ($partidas as $partida) {
-            $listaAlt = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
-            $questao->setAlternativas($listaAlt);
-        }*/
+        foreach ($partidas as $partida) {
+            $listaZona = $this->zonaDAO->listByPartida($partida->getIdPartida());
+            $partida->setZonas($listaZona);
+        }
 
         $dados["lista"] = $partidas;
 
@@ -48,7 +48,6 @@ class PartidaController extends Controller
 
     public function buscarPorId($idPartida)
     {
-        print_r("oiii");
 
         $partida = $this->partidaDAO->findById($idPartida);
         if ($partida) {

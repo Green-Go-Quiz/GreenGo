@@ -123,4 +123,20 @@ class ZonaDAO
         $stmt = $conn->prepare($sql);
         $stmt->execute([$zona->getIdZona()]);
     }
+
+    // Método para buscar todos os CamposAlternativa no banco de dados
+    /*public function findAllByPartida($idPartida)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM partida_zona WHERE idPartida = :idPartida ORDER BY idZona";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("idPartida", $idPartida);
+        $stm->execute();
+
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->mapZonas($result);
+    }*/
 }

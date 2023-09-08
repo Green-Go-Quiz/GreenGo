@@ -45,7 +45,7 @@ class QuizDAO
             " - Erro: mais de um quiz encontrado.");
     }
 
-  
+
 
     public function insert(Quiz $quiz)
     {
@@ -61,9 +61,25 @@ class QuizDAO
         $stm->bindValue(":quantTempo", $quiz->getQuantTempo());
         $stm->bindValue(":idZona", $quiz->getIdZona());
         $stm->execute();
-
-      
     }
+    public function zonaComumComPartida($partidaId)
+    {
+        $conn = Connection::getConn();
+        $sql = QuizDAO::SQL_QUIZ . "; " . // Adicione um ponto e vírgula aqui
+            "SELECT DISTINCT q.*
+            FROM quiz q
+            INNER JOIN partida_quiz pq ON q.idQuiz = pq.idQuiz
+            INNER JOIN partida_zona pz ON pz.idZona = q.idZona
+            WHERE pz.idPartida = :partidaId;";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([':partidaId' => $partidaId]);
+        $result = $stm->fetchAll();
+
+        return $result;
+    }
+
+
 
 
     public function findAll()
@@ -166,4 +182,3 @@ class QuizDAO
         $stm->execute();
     }
 }
-

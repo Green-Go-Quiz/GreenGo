@@ -36,7 +36,6 @@ class PartidaDAO
     }
     private function mapPartidas($resultSql)
     {
-        print_r("oiii");
 
         $partidas = array();
         foreach ($resultSql as $reg) :
@@ -72,7 +71,6 @@ class PartidaDAO
     public function findById($idPartida)
     {
         $conn = Connection::getConn();
-        print_r("oiii");
 
         $sql = PartidaDAO::SQL_PARTIDA .
             " WHERE p.idPartida = ?";

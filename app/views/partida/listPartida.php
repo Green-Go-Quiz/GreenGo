@@ -20,7 +20,10 @@
                             <h5 class="card-title nomeCard"><?= $partida->getNomePartida(); ?></h5>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Zona:</span>
-                                <span class="dadoAtributo"><?= $partida->getZonas(); ?></span>
+                                <?php foreach ($partida->getZonas() as $zona) : ?>
+                                    <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
+                                <?php endforeach; ?>
+
                             </p>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">

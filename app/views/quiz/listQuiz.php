@@ -48,26 +48,26 @@
                             </p>
                             <?php if ($quiz->getComTempo() == 1) : ?>
                                 <p>
-                                    <span class="nomeAtributo">Tempo em minutos:</span>
-                                    <span class="dadoAtributo"><?= $quiz->getQuantTempo(); ?></span>
+                                    <span class="nomeAtributo">Tempo:</span>
+                                    <span class="dadoAtributo"><?= $quiz->getQuantTempo() . " min"; ?></span>
                                 </p>
                             <?php endif; ?>
 
-                            
+
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
-                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
-                                    <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
-                                </div>
+                            <div class="btn-group">
+                                <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
+                                <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                                <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
                             </div>
+                        </div>
                     </div>
-                    
+
                 </div>
-                
+
             <?php endforeach; ?>
-            
+
         </div>
     </div>
 

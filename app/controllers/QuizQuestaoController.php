@@ -50,8 +50,11 @@ class QuizQuestaoController extends Controller
         $quiz = $this->findQuizById();
         if ($quiz) {
             $dados["quiz"] = $quiz;
+
             $dados["listaQuestoes"] = $this->questaoDao->list();
+
             $dados["listaQuestoesQuiz"] = $this->quizQuestaoDao->listByQuiz($quiz->getIdQuiz());
+
 
             $this->loadView("quizQuestao/form.php", $dados);
         }

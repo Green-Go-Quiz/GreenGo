@@ -21,7 +21,6 @@ class PartidaQuizController extends Controller
 
     public function __construct()
     {
-        print_r("oiii");
 
         $this->partidaQuizDao = new PartidaQuizDAO();
         $this->quizDao = new QuizDAO();
@@ -34,7 +33,6 @@ class PartidaQuizController extends Controller
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        print_r("HELPPPPPPP");
         $partidaQuizzes = $this->partidaQuizDao->listByPartida($this->partidaQuiz->getIdPartida());
         $dados["lista"] = $partidaQuizzes;
 
@@ -46,14 +44,14 @@ class PartidaQuizController extends Controller
     protected function create()
     {
         $partida = $this->findPartidaById();
-        print_r("HELPPPPPPP");
 
         if ($partida) {
             $dados["partida"] = $partida;
-            print_r($dados);
 
-            $dados["listaQuizzes"] = $this->quizDao->list();
-            $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdQuiz());
+            $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
+
+
+            $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
 
             $this->loadView("partidaQuiz/form.php", $dados);
         }
@@ -65,8 +63,8 @@ class PartidaQuizController extends Controller
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
         }
-        $quiz = $this->quizDao->findById($id);
-        return $quiz;
+        $partida = $this->partidaDao->findById($id);
+        return $partida;
     }
 
     private function findPartidaQuizzesById()
@@ -106,17 +104,17 @@ class PartidaQuizController extends Controller
             try {
                 $this->partidaQuizDao->insertPartidaQuiz($idPartida, $idQuiz);
             } catch (PDOException $e) {
-                //print_r($e);
                 $erros = ["Erro ao salvar a associação Partida-Quiz na base de dados." . $e->getMessage()];
             }
         }
 
         $partida = $this->partidaDao->findById($idPartida);
         $dados["partida"] = $partida;
-        $dados["listaQuizzes"] = $this->quizDao->list();
-        $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($quiz->getIdPartida());
+        $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($idPartida);
+        $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
+        print_r('oie');
 
         $msgSucesso = "";
         if (!$msgsErro)
@@ -136,7 +134,6 @@ class PartidaQuizController extends Controller
             try {
                 $this->partidaQuizDao->deleteById($this->partidaQuiz->getIdPartidaQuiz());
             } catch (PDOException $e) {
-                //print_r($e);
                 $msg = ["Erro ao salvar a associação Partida-Quiz na base de dados." . $e->getMessage()];
             }
         }

@@ -112,6 +112,19 @@ class Partida
         return $this->Zonas;
     }
 
+    public function getZonasTexto()
+    {
+        $str = "";
+        if ($this->Zonas !== null) {
+            foreach ($this->Zonas as $zona) {
+                $str .= $zona->getNomeZona() . "\n";
+            }
+        }
+
+        $str = trim($str);
+        return str_replace("\n", "<br>", $str);
+    }
+
     /**
      * Set the value of Zonas
      *

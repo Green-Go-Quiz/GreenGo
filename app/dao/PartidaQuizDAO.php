@@ -12,8 +12,6 @@ class PartidaQuizDAO
     // Método para converter um registro da base de dados em um objeto PartidaQuiz
     private function mapPartidaQuiz(array $row)
     {
-        print_r("HELPPPPS");
-
         $partidaQuiz = new PartidaQuiz();
         $partidaQuiz->setIdPartidaQuiz($row['idPartidaQuiz']);
         $partidaQuiz->setIdPartida($row['idPartida']);
@@ -39,15 +37,15 @@ class PartidaQuizDAO
     public function listByPartida(int $idPartida)
     {
         $conn = Connection::getConn();
-        print_r("HELPPPPS");
-        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.tempoPartida, q.quantTempo" .
+
+        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo" .
             " FROM partida_quiz pq" .
-            " JOIN questao q ON (q.idQuiz = qq.idQuiz)" .
+            " JOIN quiz q ON (q.idQuiz = pq.idQuiz)" .
             " WHERE pq.idPartida = :idPartida";
+
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":idPartida", $idPartida);
-
         $stm->execute();
 
         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -82,7 +80,6 @@ class PartidaQuizDAO
     public function findById(int $id)
     {
         $conn = Connection::getConn();
-        print_r("HELPPPPS");
 
         $sql = "SELECT * FROM partida_quiz WHERE idPartidaQuiz = :id";
 

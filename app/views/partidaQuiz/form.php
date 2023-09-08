@@ -27,31 +27,36 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Nome da Partida: </span>
-                <span class="dadoAtributo"><?= $dados['partida'] ? $dados['partida']->getNomePartida() : '---'; ?></span>
+                <span class="dadoAtributo"><?= isset($dados['partida']) ? $dados['partida']->getNomePartida() : '---'; ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Zona: </span>
-                <span class="dadoAtributo"><?= $dados['partida'] ? $dados['partida']->getZona() : '---';; ?></span>
+                <?php if ($dados['partida'] instanceof Partida) : ?>
+                    <?php foreach ($dados['partida']->getZonas() as $zona) : ?>
+                        <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Limite de Jogadores: </span>
-                <span class="dadoAtributo"><?= $dados['partida'] ? $dados['partida']->getLimiteJogadores() : '---';; ?></span>
+                <span class="dadoAtributo"><?= isset($dados['partida']) ? $dados['partida']->getLimiteJogadores() : '---';; ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Tempo da Partida: </span>
-                <span class="dadoAtributo"><?= $dados['partida'] ? $dados['partida']->getTempoPartida() : '---';; ?></span>
+                <span class="dadoAtributo"><?= isset($dados['partida']) ? $dados['partida']->getTempoPartida() : '---';; ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Senha da Partida: </span>
-                <span class="dadoAtributo"><?= $dados['partida'] ? $dados['partida']->getSenha() : '---';; ?></span>
+                <span class="dadoAtributo"><?= isset($dados['partida']) ? $dados['partida']->getSenha() : '---';; ?></span>
             </div>
         </div>
 
@@ -59,16 +64,17 @@
         <div class="row" style="margin-top: 40px;">
 
             <h4 id="quest" class=" text-left tituloPagina">
-                Quizzes adicionados à Partida "<span><?= $dados['partida'] ? $dados['partida']->getNomePartida() : '---'; ?></span>"</h4>
+                Quizzes adicionados à Partida "<span><?= isset($dados['partida']) ? $dados['partida']->getNomePartida() : '---'; ?></span>"</h4>
 
             <div class="col-md-12 d-flex align-items-stretch">
-                <table class="rounded table  table-striped ">
+                <table class="table table-striped">
                     <thead>
                         <tr class="atributoTabelaAdicionada">
                             <td>Nome do Quiz</td>
                             <td>Máximo de Questões Adicionadas</td>
                             <td>Com limite de Tempo</td>
                             <td>Quantidade de Tempo</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,13 +82,23 @@
                         $partidaQuizQuizzes = $dados['listaPartidasQuiz'];
                         if ($partidaQuizQuizzes) {
                             foreach ($partidaQuizQuizzes as $partidaQuiz) {
-                                $quiz = $partidaQuiz->getQuestao();
+                                $quiz = $partidaQuiz->getQuiz();
                         ?>
                                 <tr class="dadoTabelaAdicionada">
                                     <td><?= $quiz->getNomeQuiz() ?></td>
                                     <td><?= $quiz->getMaximoPergunta() ?></td>
-                                    <td><?= $quiz->getComTempo() ?></td>
+                                    <td>
+                                        <?php
+                                        $comTempo = $quiz->getComTempo();
+                                        if ($comTempo == 0) {
+                                            echo "Não";
+                                        } else {
+                                            echo "Sim";
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?= $quiz->getQuantTempo() ?></td>
+
                                     <td><a href='PartidaQuizController.php?action=delete&idPartidaQuiz=<?= $partidaQuiz->getIdPartidaQuiz(); ?>' class="btn btn-danger botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a> </td>
                                 </tr>
                         <?php
@@ -94,11 +110,10 @@
             </div>
         </div>
 
-        <!-- ... (código anterior do formulário) ... -->
 
         <div class="row" style="margin-top: 40px;">
             <h4 id="quest" class=" text-left tituloPagina">
-                Quizzes disponíveis para a partida "<span><?= $dados['partida'] ? $dados['partida']->getNomePartida() : '---'; ?></span>"</h4>
+                Quizzes disponíveis para à partida "<span><?= $dados['partida'] ? $dados['partida']->getNomePartida() : '---'; ?></span>"</h4>
 
             <div class="col-md-12 d-flex align-items-stretch">
                 <table class="table table-striped">
@@ -108,6 +123,8 @@
                             <td>Máximo de Questões Adicionadas</td>
                             <td>Com limite de Tempo</td>
                             <td>Quantidade de Tempo</td>
+                            <td></td>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -115,9 +132,26 @@
                             <tr class="dadoTabelaDisponivel">
                                 <td><?= $quiz->getNomeQuiz() ?></td>
                                 <td><?= $quiz->getMaximoPergunta() ?></td>
-                                <td><?= $quiz->getComTempo() ?></td>
-                                <td><?= $quiz->getQuantTempo() ?></td>
-
+                                <td>
+                                    <?php
+                                    $comTempo = $quiz->getComTempo();
+                                    if ($comTempo == 0) {
+                                        echo "Não";
+                                    } else {
+                                        echo "Sim";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $quantTempo = $quiz->getQuantTempo();
+                                    if ($quantTempo == 0) {
+                                        echo "-----";
+                                    } else {
+                                        echo $quantTempo . " min";
+                                    }
+                                    ?>
+                                </td>
                                 <td><a href='PartidaQuizController.php?action=add&idQuiz=<?= $quiz->getIdQuiz(); ?>&idPartida=<?= $dados['partida'] ? $dados['partida']->getIdPartida() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
                             </tr>
                         <?php endforeach; ?>
