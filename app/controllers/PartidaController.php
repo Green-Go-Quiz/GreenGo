@@ -26,7 +26,6 @@ class PartidaController extends Controller
 
     public function listar()
     {
-        echo 'oiii';
         return $this->partidaDAO->list();
     }
 
@@ -71,7 +70,6 @@ class PartidaController extends Controller
 
         $idUsuario = $_SESSION["ID"];
         $inEquipe = $this->partidaDAO->usuarioInEquipe($idUsuario);
-        var_dump($inEquipe);
 
         if ($inEquipe) {
             $error = "Você já pertence a uma equipe!";

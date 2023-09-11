@@ -125,12 +125,10 @@ class QuestaoDAO
         $stm->execute();
     }
 
-
-    
     public function deleteImage(string $img_del)
     {
 
-        $path =__DIR__ . "/../../arquivos/$img_del";
+        $path = __DIR__ . "/../../arquivos/$img_del";
 
         if (file_exists($path)) {
             unlink($path);
@@ -179,4 +177,3 @@ class QuestaoDAO
         $stm->execute();
     }
 }
-

@@ -5,9 +5,13 @@
 include_once(__DIR__ . "/../connection/Connection.php");
 include_once(__DIR__ . "/../models/PartidaQuizModel.php");
 include_once(__DIR__ . "/../models/QuizModel.php");
+include_once(__DIR__ . "/../models/ZonaModel.php");
+
+
 
 class PartidaQuizDAO
 {
+    const SQL_QUIZ = "SELECT q.*, z.nomeZona FROM quiz q JOIN zona z ON (q.idZona = z.idZona)";
 
     // Método para converter um registro da base de dados em um objeto PartidaQuiz
     private function mapPartidaQuiz(array $row)
@@ -26,10 +30,11 @@ class PartidaQuizDAO
             $quiz->setMaximoPergunta($row['maximoPergunta']);
             $quiz->setComTempo($row['comTempo']);
             $quiz->setQuantTempo($row['quantTempo']);
+            $quiz->setZona($row['idZona']);
+
 
             $partidaQuiz->setQuiz($quiz);
         }
-
 
         return $partidaQuiz;
     }
@@ -38,7 +43,7 @@ class PartidaQuizDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo" .
+        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo, q.idZona" .
             " FROM partida_quiz pq" .
             " JOIN quiz q ON (q.idQuiz = pq.idQuiz)" .
             " WHERE pq.idPartida = :idPartida";

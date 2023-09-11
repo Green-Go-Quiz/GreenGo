@@ -62,6 +62,7 @@ class QuizDAO
         $stm->bindValue(":idZona", $quiz->getIdZona());
         $stm->execute();
     }
+
     public function zonaComumComPartida($partidaId)
     {
         $conn = Connection::getConn();

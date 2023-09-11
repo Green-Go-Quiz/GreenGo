@@ -5,6 +5,7 @@ require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/PartidaQuizDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
+require_once(__DIR__ . "/../dao/ZonaDAO.php");
 require_once(__DIR__ . "/../dao/PartidaDAO.php");
 require_once(__DIR__ . "/../models/PartidaQuizModel.php");
 require_once(__DIR__ . "/../models/QuizModel.php");
@@ -16,6 +17,8 @@ class PartidaQuizController extends Controller
     private PartidaQuizDAO $partidaQuizDao;
     private PartidaDAO $partidaDao;
     private QuizDAO $quizDao;
+    private ZonaDAO $zonaDao;
+
     private PartidaQuiz $partidaQuiz; // Adicione esta linha
 
 
@@ -26,7 +29,6 @@ class PartidaQuizController extends Controller
         $this->quizDao = new QuizDAO();
         $this->partidaDao = new PartidaDAO();
         $this->partidaQuiz = new PartidaQuiz();
-        print_r($this->partidaDao);
 
         $this->handleAction();
     }
@@ -47,11 +49,13 @@ class PartidaQuizController extends Controller
 
         if ($partida) {
             $dados["partida"] = $partida;
-
+            //$zona = $this->findZonaById();
+            //$dados["zona"] = $zona;
+            //$dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
             $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
 
-
             $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
+
 
             $this->loadView("partidaQuiz/form.php", $dados);
         }
@@ -65,6 +69,16 @@ class PartidaQuizController extends Controller
         }
         $partida = $this->partidaDao->findById($id);
         return $partida;
+    }
+
+    private function findZonaById()
+    {
+        $id = 0;
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+        $zona = $this->zonaDao->findById($id);
+        return $zona;
     }
 
     private function findPartidaQuizzesById()
@@ -99,6 +113,12 @@ class PartidaQuizController extends Controller
         if ($partidaQuiz) {
             array_push($erros, "O quiz já existe nesta partida.");
         }
+
+        // Verificação do tempo
+        if ($partida && $quiz && $quiz->getQuantTempo() > $partida->getTempoPartida()) {
+            array_push($erros, "O tempo do quiz não pode ser maior do que o tempo da partida.");
+        }
+
         if (!$erros) {
 
             try {
@@ -110,11 +130,13 @@ class PartidaQuizController extends Controller
 
         $partida = $this->partidaDao->findById($idPartida);
         $dados["partida"] = $partida;
-        $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($idPartida);
+
+        //$dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($idPartida);
+        $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
+
         $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
-        print_r('oie');
 
         $msgSucesso = "";
         if (!$msgsErro)
@@ -122,6 +144,8 @@ class PartidaQuizController extends Controller
 
         $this->loadView("partidaQuiz/form.php", $dados, $msgsErro, $msgSucesso);
     }
+
+
 
     public function delete()
     {

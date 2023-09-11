@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
                 <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Zona: </span>
-                <?php if ($dados['partida'] instanceof Partida) : ?>
+                <?php if ($dados['partida'] instanceof Partida && $dados['partida']->getZonas()) : ?>
                     <?php foreach ($dados['partida']->getZonas() as $zona) : ?>
                         <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
                     <?php endforeach; ?>
@@ -71,6 +71,7 @@
                     <thead>
                         <tr class="atributoTabelaAdicionada">
                             <td>Nome do Quiz</td>
+                            <td>Zona</td>
                             <td>Máximo de Questões Adicionadas</td>
                             <td>Com limite de Tempo</td>
                             <td>Quantidade de Tempo</td>
@@ -80,12 +81,16 @@
                     <tbody>
                         <?php
                         $partidaQuizQuizzes = $dados['listaPartidasQuiz'];
+
                         if ($partidaQuizQuizzes) {
                             foreach ($partidaQuizQuizzes as $partidaQuiz) {
+
                                 $quiz = $partidaQuiz->getQuiz();
                         ?>
                                 <tr class="dadoTabelaAdicionada">
+
                                     <td><?= $quiz->getNomeQuiz() ?></td>
+                                    <td><?= $quiz->getZona() ?></td>
                                     <td><?= $quiz->getMaximoPergunta() ?></td>
                                     <td>
                                         <?php
@@ -120,6 +125,7 @@
                     <thead>
                         <tr class="atributoTabelaDisponivel">
                             <td>Nome do Quiz</td>
+                            <td>Zona</td>
                             <td>Máximo de Questões Adicionadas</td>
                             <td>Com limite de Tempo</td>
                             <td>Quantidade de Tempo</td>
@@ -130,11 +136,12 @@
                     <tbody>
                         <?php foreach ($dados['listaQuizzes'] as $quiz) : ?>
                             <tr class="dadoTabelaDisponivel">
-                                <td><?= $quiz->getNomeQuiz() ?></td>
-                                <td><?= $quiz->getMaximoPergunta() ?></td>
+                                <td><?= $quiz['nomeQuiz'] ?></td>
+                                <td><?= $quiz['nomeZona'] ?></td>
+                                <td><?= $quiz['maximoPergunta'] ?></td>
                                 <td>
                                     <?php
-                                    $comTempo = $quiz->getComTempo();
+                                    $comTempo = $quiz['comTempo'];
                                     if ($comTempo == 0) {
                                         echo "Não";
                                     } else {
@@ -144,7 +151,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $quantTempo = $quiz->getQuantTempo();
+                                    $quantTempo = $quiz['quantTempo'];
                                     if ($quantTempo == 0) {
                                         echo "-----";
                                     } else {
@@ -152,9 +159,10 @@
                                     }
                                     ?>
                                 </td>
-                                <td><a href='PartidaQuizController.php?action=add&idQuiz=<?= $quiz->getIdQuiz(); ?>&idPartida=<?= $dados['partida'] ? $dados['partida']->getIdPartida() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
+                                <td><a href='PartidaQuizController.php?action=add&idQuiz=<?= $quiz['idQuiz']; ?>&idPartida=<?= $dados['partida'] ? $dados['partida']->getIdPartida() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
                             </tr>
                         <?php endforeach; ?>
+
                     </tbody>
                 </table>
             </div>

@@ -18,7 +18,6 @@ class PartidaDAO
 
     private function mapZonas($resultSql)
     {
-        print_r("oiii");
 
         $zonas = array();
         foreach ($resultSql as $reg) :
@@ -128,7 +127,6 @@ class PartidaDAO
     public function saveUsuarioEquipe($idPartidaEquipe, $idUsuario)
     {
 
-        var_dump($idPartidaEquipe);
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO partida_usuario (idPartidaEquipe, idUsuario) VALUES (?, ?)";
@@ -244,7 +242,20 @@ class PartidaDAO
         ]);
     }
 
+    public function atualizar(Partida $partida)
+    {
+        $conn = Connection::getConn();
 
+        $sql = "UPDATE partida SET nomePartida = ?, limiteJogadores = ?, senhaPartida = ?, tempoPartida = ? WHERE idPartida = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            $partida->getNomePartida(),
+            $partida->getLimiteJogadores(),
+            $partida->getSenha(),
+            $partida->getTempoPartida(),
+            $partida->getIdPartida()
+        ]);
+    }
     public function delete(Planta $planta)
     {
         $conn = Connection::getConn();
