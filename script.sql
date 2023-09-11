@@ -71,7 +71,7 @@ INSERT INTO `usuario` (`nomeUsuario`, `genero`, `escolaridade`, `loginUsuario`, 
 ('Adm', 'Masculino', 'Ensino Superior', 'adm', 'adm@gmail.com', '$2y$10$HG1poKhwizbPOSOxWSfCj.3d8OQOqIwKv96NR3zVPI5ECNkpUk2gG', 2),
 ('Jogador', 'Masculino', 'Ensino Médio', 'jogador', 'jogador@gmail.com', '$2y$10$HG1poKhwizbPOSOxWSfCj.3d8OQOqIwKv96NR3zVPI5ECNkpUk2gG', 1);
 
---- a senha pra entra é 123
+--- a senha pra entra é 123 ------
 
 -- --------------------------------------------------------
 
