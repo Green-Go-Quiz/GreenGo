@@ -66,12 +66,15 @@ class QuizDAO
     public function zonaComumComPartida($partidaId)
     {
         $conn = Connection::getConn();
-        $sql = QuizDAO::SQL_QUIZ . "; " . // Adicione um ponto e vírgula aqui
+        $sql = QuizDAO::SQL_QUIZ . "; " .
             "SELECT DISTINCT q.*
             FROM quiz q
-            INNER JOIN partida_quiz pq ON q.idQuiz = pq.idQuiz
-            INNER JOIN partida_zona pz ON pz.idZona = q.idZona
-            WHERE pz.idPartida = :partidaId;";
+            WHERE q.idZona IN (
+                SELECT pz.idZona
+                FROM partida_zona pz
+                WHERE pz.idPartida = :partidaId
+            );
+            ";
 
         $stm = $conn->prepare($sql);
         $stm->execute([':partidaId' => $partidaId]);

@@ -1,6 +1,9 @@
 <?php
 # Classe controller para QuizQuestao
-
+session_start();
+if (!isset($_SESSION["tempo"])) {
+    $_SESSION["tempo"] = 0;
+}
 require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/PartidaQuizDAO.php");
@@ -11,9 +14,12 @@ require_once(__DIR__ . "/../models/PartidaQuizModel.php");
 require_once(__DIR__ . "/../models/QuizModel.php");
 require_once(__DIR__ . "/../models/PartidaModel.php");
 
-
 class PartidaQuizController extends Controller
 {
+
+    private $tempoPartida = 0; // Variável para rastrear o tempo restante da partida
+    private $partida;
+
     private PartidaQuizDAO $partidaQuizDao;
     private PartidaDAO $partidaDao;
     private QuizDAO $quizDao;
@@ -29,6 +35,8 @@ class PartidaQuizController extends Controller
         $this->quizDao = new QuizDAO();
         $this->partidaDao = new PartidaDAO();
         $this->partidaQuiz = new PartidaQuiz();
+        $this->partida = new Partida();
+        $this->tempoPartida = $this->partida->getTempoPartida();
 
         $this->handleAction();
     }
@@ -123,12 +131,18 @@ class PartidaQuizController extends Controller
 
             try {
                 $this->partidaQuizDao->insertPartidaQuiz($idPartida, $idQuiz);
+                $tempoQuiz = $quiz->getQuantTempo();
+                $_SESSION["tempo"] += $tempoQuiz;
+                var_dump($_SESSION["tempo"]);
+                $this->subtrairTempoPartida($tempoQuiz);
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar a associação Partida-Quiz na base de dados." . $e->getMessage()];
             }
         }
 
         $partida = $this->partidaDao->findById($idPartida);
+        $dados["tempoPartida"] = $this->tempoPartida;
+
         $dados["partida"] = $partida;
 
         //$dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($idPartida);
@@ -157,13 +171,33 @@ class PartidaQuizController extends Controller
 
             try {
                 $this->partidaQuizDao->deleteById($this->partidaQuiz->getIdPartidaQuiz());
+                // Recupere o tempo do quiz removido e adicione-o de volta ao tempo da partida
+                //$tempoQuiz = $this->partidaQuiz->getQuiz()->getQuantTempo();
+                //$this->adicionarTempoPartida($tempoQuiz);
             } catch (PDOException $e) {
                 $msg = ["Erro ao salvar a associação Partida-Quiz na base de dados." . $e->getMessage()];
             }
         }
+        $dados["tempoPartida"] = $this->tempoPartida;
 
         //$this->list("", $msg);
         header('location: PartidaQuizController.php?action=create&id=' .  $this->partidaQuiz->getIdPartida());
+    }
+
+    private function subtrairTempoPartida($tempoQuiz)
+    {
+        $this->tempoPartida -= $tempoQuiz;
+
+        // Certifique-se de que o tempo restante nunca seja negativo
+        if ($this->tempoPartida < 0) {
+            $this->tempoPartida = 0;
+        }
+    }
+
+    // Método para adicionar o tempo do quiz de volta ao tempo restante da partida
+    private function adicionarTempoPartida($tempoQuiz)
+    {
+        $this->tempoPartida += $tempoQuiz;
     }
 }
 
