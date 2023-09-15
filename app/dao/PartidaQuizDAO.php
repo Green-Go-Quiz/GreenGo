@@ -30,22 +30,64 @@ class PartidaQuizDAO
             $quiz->setMaximoPergunta($row['maximoPergunta']);
             $quiz->setComTempo($row['comTempo']);
             $quiz->setQuantTempo($row['quantTempo']);
-            $quiz->setZona($row['idZona']);
 
+            if (isset($row['nomeZona'])) {
+                $zona = new Zona();
+                $zona->setIdZona($row['idZona']);
+                $zona->setNomeZona($row['nomeZona']);
+
+                $quiz->setZona($zona);
+            }
 
             $partidaQuiz->setQuiz($quiz);
         }
+        if (isset($row['nomePartida'])) {
+            $partida = new Partida();
+            $partida->setIdPartida($row['idPartida']); //não entendi pq tem que passar o id da partida ???
+            $partida->setDataInicio($row['dataInicio']);
+            $partida->setDataFim($row['dataFim']);
+            $partida->setLimiteJogadores($row['limiteJogadores']);
+            $partida->setTempoPartida($row['tempoPartida']);
+            $partida->setNomePartida($row['nomePartida']);
+            $partida->setSenha($row['senhaPartida']);
+            $partida->setStatusPartida($row['statusPartida']);
 
+            if (isset($row['nomeZona'])) {
+                $zonas = array();
+                foreach ($row['nomeZona'] as $nomeZona) {
+                    $zona = new Zona();
+                    $zona->setIdZona($row['idZona']);
+                    $zona->setNomeZona($nomeZona);
+                    $zonas[] = $zona;
+                }
+                $partida->setZonas($zonas);
+            }
+
+            $partidaQuiz->setPartida($partida);
+        }
         return $partidaQuiz;
+    }
+
+    public function list()
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM partida_quiz p ORDER BY p.idPartidaQuiz";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapPartidaQuizzes($result);
     }
 
     public function listByPartida(int $idPartida)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo, q.idZona" .
+        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo, q.idZona, z.nomeZona" .
             " FROM partida_quiz pq" .
             " JOIN quiz q ON (q.idQuiz = pq.idQuiz)" .
+            " JOIN zona z ON (z.idZona = q.idZona)" .
             " WHERE pq.idPartida = :idPartida";
 
 

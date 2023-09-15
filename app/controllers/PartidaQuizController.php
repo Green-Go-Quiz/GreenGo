@@ -34,6 +34,7 @@ class PartidaQuizController extends Controller
         $this->partidaQuizDao = new PartidaQuizDAO();
         $this->quizDao = new QuizDAO();
         $this->partidaDao = new PartidaDAO();
+        $this->zonaDao = new ZonaDAO();
         $this->partidaQuiz = new PartidaQuiz();
         $this->partida = new Partida();
         $this->tempoPartida = $this->partida->getTempoPartida();
@@ -41,14 +42,24 @@ class PartidaQuizController extends Controller
         $this->handleAction();
     }
 
+
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
-        $partidaQuizzes = $this->partidaQuizDao->listByPartida($this->partidaQuiz->getIdPartida());
+        $partidaQuizzes = $this->partidaQuizDao->list($this->partidaQuiz->getIdPartida());
         $dados["lista"] = $partidaQuizzes;
 
         $this->loadView("partidaQuiz/form.php", $dados, $msgErro, $msgSucesso);
     }
 
+    protected function listar(string $msgErro = "", string $msgSucesso = "")
+    {
+        $partidaQuizzes = $this->partidaQuizDao->list();
+        $dados["listaPartidasQuiz"] = $partidaQuizzes;
+
+
+
+        $this->loadView("partidaQuiz/listJOG.php", $dados, $msgErro, $msgSucesso);
+    }
 
 
     protected function create()
@@ -56,6 +67,9 @@ class PartidaQuizController extends Controller
         $partida = $this->findPartidaById();
 
         if ($partida) {
+            $listaZona = $this->zonaDao->listByPartida($partida->getIdPartida());
+            $partida->setZonas($listaZona);
+
             $dados["partida"] = $partida;
             //$zona = $this->findZonaById();
             //$dados["zona"] = $zona;
@@ -111,6 +125,8 @@ class PartidaQuizController extends Controller
         if (!$partida) {
             array_push($erros, "Partida não encontrada no banco de dados.");
         }
+        $listaZona = $this->zonaDao->listByPartida($partida->getIdPartida());
+        $partida->setZonas($listaZona);
 
         $quiz = $this->quizDao->findById($idQuiz);
         if (!$quiz) {
@@ -140,7 +156,7 @@ class PartidaQuizController extends Controller
             }
         }
 
-        $partida = $this->partidaDao->findById($idPartida);
+        //$partida = $this->partidaDao->findById($idPartida);
         $dados["tempoPartida"] = $this->tempoPartida;
 
         $dados["partida"] = $partida;

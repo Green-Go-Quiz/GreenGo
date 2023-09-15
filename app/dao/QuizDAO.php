@@ -66,25 +66,20 @@ class QuizDAO
     public function zonaComumComPartida($partidaId)
     {
         $conn = Connection::getConn();
-        $sql = QuizDAO::SQL_QUIZ . "; " .
-            "SELECT DISTINCT q.*
-            FROM quiz q
-            WHERE q.idZona IN (
+        $sql = QuizDAO::SQL_QUIZ .
+            ' WHERE q.idZona IN (
                 SELECT pz.idZona
                 FROM partida_zona pz
                 WHERE pz.idPartida = :partidaId
-            );
-            ";
+            )';
 
         $stm = $conn->prepare($sql);
         $stm->execute([':partidaId' => $partidaId]);
         $result = $stm->fetchAll();
 
-        return $result;
+        //return $result;
+        return $this->mapQuizzes($result);
     }
-
-
-
 
     public function findAll()
     {

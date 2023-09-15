@@ -32,11 +32,9 @@
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-stretch">
-                <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Zona: </span>
+                <span style='font-weight: bold; margin-right: 10px;' class="nomeAtributo">Zonas: </span>
                 <?php if ($dados['partida'] instanceof Partida && $dados['partida']->getZonas()) : ?>
-                    <?php foreach ($dados['partida']->getZonas() as $zona) : ?>
-                        <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
-                    <?php endforeach; ?>
+                    <span class="dadoAtributo"><?= $dados['partida']->getZonasTexto(); ?></span>
                 <?php endif; ?>
 
             </div>
@@ -136,30 +134,21 @@
                     <tbody>
                         <?php foreach ($dados['listaQuizzes'] as $quiz) : ?>
                             <tr class="dadoTabelaDisponivel">
-                                <td><?= $quiz['nomeQuiz'] ?></td>
-                                <td><?= $quiz['nomeZona'] ?></td>
-                                <td><?= $quiz['maximoPergunta'] ?></td>
+                                <td><?= $quiz->getNomeQuiz() ?></td>
+                                <td><?= $quiz->getZona()->getNomeZona() ?></td>
+                                <td><?= $quiz->getMaximoPergunta() ?></td>
+                                <td><?= $quiz->getComTempoTexto() ?></td>
                                 <td>
                                     <?php
-                                    $comTempo = $quiz['comTempo'];
-                                    if ($comTempo == 0) {
-                                        echo "Não";
-                                    } else {
-                                        echo "Sim";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    $quantTempo = $quiz['quantTempo'];
-                                    if ($quantTempo == 0) {
+                                    //$quantTempo = $quiz['quantTempo'];
+                                    if (!$quiz->getComTempo()) {
                                         echo "-----";
                                     } else {
-                                        echo $quantTempo . " min";
+                                        echo $quiz->getQuantTempo() . " min";
                                     }
                                     ?>
                                 </td>
-                                <td><a href='PartidaQuizController.php?action=add&idQuiz=<?= $quiz['idQuiz']; ?>&idPartida=<?= $dados['partida'] ? $dados['partida']->getIdPartida() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
+                                <td><a href='PartidaQuizController.php?action=add&idQuiz=<?= $quiz->getIdQuiz(); ?>&idPartida=<?= $dados['partida'] ? $dados['partida']->getIdPartida() : '0'; ?>' class="btn btn-success botaoGravar">Adicionar</a> </td>
                             </tr>
                         <?php endforeach; ?>
 

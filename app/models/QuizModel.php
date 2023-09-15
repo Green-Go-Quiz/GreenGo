@@ -94,6 +94,14 @@ class Quiz
         return $this->comTempo;
     }
 
+    public function getComTempoTexto()
+    {
+        if ($this->comTempo)
+            return 'Sim';
+
+        return 'Não';
+    }
+
     /**
      * Set the value of comTempo
      *
@@ -113,6 +121,8 @@ class Quiz
     {
         return $this->quantTempo;
     }
+
+
 
     /**
      * Set the value of quantTempo
