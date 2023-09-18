@@ -53,14 +53,22 @@ class PartidaQuizController extends Controller
 
     protected function listar(string $msgErro = "", string $msgSucesso = "")
     {
-        $partidaQuizzes = $this->partidaQuizDao->list();
+        $partidaQuizzes = $this->partidaQuizDao->listPartidasQuiz();
+
         $dados["listaPartidasQuiz"] = $partidaQuizzes;
-
-
 
         $this->loadView("partidaQuiz/listJOG.php", $dados, $msgErro, $msgSucesso);
     }
 
+    protected function listarQuiz(string $msgErro = "", string $msgSucesso = "")
+    {
+        $partida = $this->findPartidaById();
+        $quizzes = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
+        $dados["quizzes"] = $quizzes;
+        $dados["partida"] = $partida;
+
+        $this->loadView("partidaQuiz/listQuizJOG.php", $dados, $msgErro, $msgSucesso);
+    }
 
     protected function create()
     {

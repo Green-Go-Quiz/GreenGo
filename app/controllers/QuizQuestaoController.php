@@ -60,6 +60,16 @@ class QuizQuestaoController extends Controller
         }
     }
 
+    protected function listarQuestao(string $msgErro = "", string $msgSucesso = "")
+    {
+        $quiz = $this->findQuizById();
+        $questoes = $this->quizQuestaoDao->listByQuiz($quiz->getIdQuiz());
+        $dados["questoes"] = $questoes;
+        $dados["quiz"] = $quiz;
+
+        $this->loadView("partidaQuiz/partidaJOG.php", $dados, $msgErro, $msgSucesso);
+    }
+
     private function findQuizById()
     {
         $id = 0;
@@ -67,6 +77,7 @@ class QuizQuestaoController extends Controller
             $id = $_GET['id'];
         }
         $quiz = $this->quizDao->findById($id);
+
         return $quiz;
     }
 

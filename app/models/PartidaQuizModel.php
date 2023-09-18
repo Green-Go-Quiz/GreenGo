@@ -59,6 +59,8 @@ class PartidaQuiz
         return $this;
     }
 
+
+
     /**
      * Get the value of partida
      */

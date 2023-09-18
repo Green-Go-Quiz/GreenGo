@@ -20,7 +20,7 @@ class QuizQuestaoDAO
 
         if (isset($row['descricaoQ'])) {
             $questao = new Questao();
-            $questao->setIdQuestao($row['idQuiz']);
+            $questao->setIdQuestao($row['idQuestao']);
             $questao->setDescricaoQ($row['descricaoQ']);
             $questao->setGrauDificuldade($row['grauDificuldade']);
             $questao->setPontuacao($row['pontuacao']);
@@ -28,7 +28,6 @@ class QuizQuestaoDAO
 
             $quizQuestao->setQuestao($questao);
         }
-
 
         return $quizQuestao;
     }
@@ -52,6 +51,8 @@ class QuizQuestaoDAO
 
         return $this->mapQuizQuestoes($result);
     }
+
+
 
     public function insertQuizQuestao(int $idQuiz, int $idQuestao)
     {
@@ -124,5 +125,67 @@ class QuizQuestaoDAO
         }
 
         return $quizQuestoes;
+    }
+
+    private function mapQuestoesDoQuiz($result)
+    {
+        $questoes = array();
+        foreach ($result as $row) {
+            $currentQuestao = new Questao();
+            $currentQuestao->setIdQuestao($row['idQuestao']);
+            $currentQuestao->setDescricaoQ($row['descricaoQ']);
+            $currentQuestao->setGrauDificuldade($row['grauDificuldade']);
+            $currentQuestao->setPontuacao($row['pontuacao']);
+            $currentQuestao->setImagem($row['imagem']);
+        }
+
+        return $questoes;
+    }
+
+    public function getProximaQuestao(int $idQuiz, int $idQuestaoAtual)
+    {
+        $conn = Connection::getConn();
+
+        // Primeiro, você precisa determinar qual é a próxima pergunta com base no ID atual
+        $sql = "SELECT qq.idQuestao" .
+            " FROM quiz_questoes qq" .
+            " WHERE qq.idQuiz = :idQuiz" .
+            " AND qq.idQuestao > :idQuestaoAtual" . // A próxima pergunta tem um ID maior
+            " ORDER BY qq.idQuestao ASC" . // Certifique-se de ordenar para obter a próxima pergunta
+            " LIMIT 1"; // Obtenha apenas a próxima pergunta
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":idQuiz", $idQuiz);
+        $stm->bindValue(":idQuestaoAtual", $idQuestaoAtual);
+        $stm->execute();
+
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            // Agora você tem o ID da próxima pergunta
+            $idProximaQuestao = $result['idQuestao'];
+
+            // Você também deve buscar os detalhes da próxima pergunta com base no ID
+            $proximaQuestao = $this->questaoDao->findById($idProximaQuestao);
+
+            // Certifique-se de obter as opções de resposta da próxima pergunta aqui
+            $opcoesResposta = $this->obterOpcoesResposta($idProximaQuestao);
+
+            $proximaQuestao->opcoesResposta = $opcoesResposta;
+
+            return $proximaQuestao;
+        } else {
+            // Se não houver próxima pergunta, retorne null ou outra indicação adequada
+            return null;
+        }
+    }
+
+    // Implemente a lógica para obter as opções de resposta da próxima pergunta
+    private function obterOpcoesResposta(int $idQuestao)
+    {
+        $conn = Connection::getConn();
+
+        // Implemente a consulta para buscar as opções de resposta com base no ID da pergunta
+        // e retorne um array com as opções de resposta
     }
 }

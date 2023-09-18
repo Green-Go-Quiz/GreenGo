@@ -17,9 +17,7 @@
             $partidaQuizQuizzes = $dados['listaPartidasQuiz'];
             if ($partidaQuizQuizzes) {
                 foreach ($partidaQuizQuizzes as $partidaQuiz) {
-
-                    $partida = $partidaQuiz->getPartida()->getNomePartida();
-                    print_r($partida);
+                    $partida = $partidaQuiz->getPartida();
 
             ?>
 
@@ -31,13 +29,14 @@
                                     <span class="nomeAtributo labelQuestao">Zona:</span>
                                     <?php foreach ($partida->getZonas() as $zona) : ?>
                                         <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
+                                        <br>
                                     <?php endforeach; ?>
 
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="<?= BASEURL ?>/controllers/PartidaQuizController.php?action=create&id=<?= $partidaQuiz->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
+                                    <a href="<?= BASEURL ?>/controllers/PartidaQuizController.php?action=listarQuiz&id=<?= $partidaQuiz->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
                                 </div>
                             </div>
                         </div>
