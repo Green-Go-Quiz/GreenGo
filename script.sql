@@ -576,3 +576,231 @@ ENGINE = InnoDB;
 
 ALTER TABLE partida_quiz ADD CONSTRAINT uk_partida_quiz UNIQUE(idPartida, idQuiz);
 
+-- -----------------------------------------------------
+-- POPULARIZANDO O BANCO
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Questões e alternativas
+-- -----------------------------------------------------
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(100, 'Qual é a função das raízes das plantas?', 'facil', 5, NULL),
+(200, 'Onde ocorre a fotossíntese nas plantas?', 'facil', 5, NULL),
+(300, 'Qual é o nome da estrutura das plantas responsável pela absorção de água e nutrientes do solo?', 'facil', 5, NULL),
+(400, 'O que é a clorofila?', 'facil', 5, NULL);
+
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Absorver luz solar', 0, 100,
+('Produzir flores', 0, 100),
+('Armazenar água', 0, 100),
+('Absorver água e nutrientes do solo', 1, 100);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Nas folhas', 1, 200),
+('Nas raízes', 0, 200),
+('No caule', 0, 200),
+('Nos frutos', 0, 200);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Folha', 0, 300),
+('Raiz', 1, 300),
+('Caule', 0, 300),
+('Flor', 0, 300);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Um tipo de fungo', 0, 400),
+('Um pigmento verde presente nas plantas', 1, 400),
+('Uma parte das raízes das plantas', 0, 400),
+('Um tipo de inseto', 0, 400);
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(500, 'O que é a polinização cruzada nas plantas?', 'medio', 10, NULL),
+(600, 'Quais são os principais tipos de tecidos em uma planta?', 'medio', 10, NULL),
+(700, 'O que são plantas carnívoras e como elas obtêm nutrientes?', 'medio', 10, 'imagem_c6ad72da-c271-deee-d1fd-6951b23cde6b.jpg'),
+(800, 'Explique o ciclo de vida de uma planta com flores.', 'medio', 10, NULL);
+
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('A polinização de uma planta por outra da mesma espécie', 0, 500),
+('A polinização de uma planta por outra de espécies diferentes', 1, 500),
+('A polinização de uma planta por vento', 0, 500),
+('A polinização de uma planta por insetos', 0, 500);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Tecido epitelial e tecido conjuntivo', 0, 600),
+('Tecido vascular e tecido muscular', 0, 600),
+('Tecido meristemático e tecido permanente', 1, 600),
+('Tecido ósseo e tecido nervoso', 0, 600);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Plantas que se alimentam de outras plantas', 1, 700),
+('Plantas que não realizam fotossíntese', 0, 700),
+('Plantas que vivem em desertos', 0, 700),
+('Plantas que não têm raízes', 0, 700);
+
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('As plantas com flores não têm um ciclo de vida definido', 0, 800),
+('O ciclo de vida de uma planta com flores inclui apenas as fases de semente e adulta', 0, 800),
+('O ciclo de vida de uma planta com flores inclui as fases de semente, germinação, crescimento vegetativo, floração, polinização, frutificação e dispersão de sementes', 1, 800),
+('O ciclo de vida de uma planta com flores consiste em apenas três fases: germinação, crescimento e reprodução', 0, 800);
+
+
+
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(9, 'O que são gimnospermas?', 'medio', 10, 'imagem_413e1619-b48d-a2e9-5922-bd0a40ed4c37.jpg'),
+(10, 'Cite duas características distintivas das gimnospermas.', 'medio', 10, NULL),
+(11, 'Quais são os grupos principais de gimnospermas?', 'dificil', 15, 'imagem_053ce7a0-ac51-f489-0904-6f8de61d5603.jpg'),
+(12, 'Explique como as gimnospermas se reproduzem.', 'dificil', 15, 'imagem_5f4139d9-28e3-e96a-4b1d-7b24e6145b13.jpg');
+
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('São plantas com flores que produzem sementes dentro de frutos', 0, 9),
+('São plantas que produzem sementes nuas, ou seja, sem frutos', 1, 9),
+('São plantas que não produzem sementes', 0, 9),
+('São plantas aquáticas', 0, 9);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Produzem sementes nuas e não têm flores verdadeiras', 1, 10),
+('Têm flores verdadeiras e produzem sementes dentro de frutos', 0, 10),
+('São plantas aquáticas', 0, 10),
+('São plantas que não produzem sementes', 0, 10);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Coníferas, cicadáceas, gnetófitas e ginkgófitas', 1, 11),
+('Rosa, margarida, girassol e lírio', 0, 11),
+('Orquídeas, samambaias, musgos e hepáticas', 0, 11),
+('Bananeira, abacateiro, pereira e maçãzeira', 0, 11);
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('As gimnospermas se reproduzem por meio de sementes que são produzidas em estruturas chamadas cones, onde ocorre a fertilização das sementes.', 1, 12),
+('Elas se reproduzem assexuadamente por meio de rizomas subterrâneos.', 0, 12),
+('As gimnospermas não se reproduzem por sementes, mas sim por esporos.', 0, 12),
+('Elas se reproduzem apenas por brotamento de raízes.', 0, 12);
+
+
+
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(13, 'Qual é o nome científico da margarida?', 'facil', 5, 'imagem_d599a5ed-e2bc-15ed-0a9d-f8ec4a3a3e67.jpg');
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Bellis perennis', 1, 13),
+('Rosa chinensis', 0, 13),
+('Helianthus annuus', 0, 13),
+('Ficus benjamina', 0, 13);
+
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(14, 'Qual é o nome científico da pitangueira?', 'facil', 5, 'imagem_519dd1fb-50d9-6ef1-5583-37e53113a3a9.jpg');
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Eugenia uniflora', 1, 14),
+('Citrus sinensis', 0, 14),
+('Morus alba', 0, 14),
+('Solanum lycopersicum', 0, 14);
+
+
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(15, 'Qual é o nome científico do girassol?', 'facil', 5, 'imagem_67c43e3b-be9f-f543-fe88-1d62ef4c6222.JPG');
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Helianthus annuus', 1, 15),
+('Rosa chinensis', 0, 15),
+('Bellis perennis', 0, 15),
+('Ficus benjamina', 0, 15);
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(16, 'Qual é a característica principal das samambaias em relação à reprodução?', 'medio', 10, 'imagem_7d1fd34e-959f-0d32-9730-0ac93b47c629.jpg');
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Reproduzem-se por meio de sementes', 0, 16),
+('Reproduzem-se por meio de esporos', 1, 16),
+('Reproduzem-se por meio de bulbos', 0, 16),
+('Reproduzem-se assexuadamente por brotos', 0, 16);
+
+INSERT INTO `questao` (`idQuestao`, `descricaoQ`, `grauDificuldade`, `pontuacao`, `imagem`) VALUES
+(17, 'O que caracteriza as suculentas em termos de armazenamento de água?', 'medio', 10, 'imagem_340e01f3-0384-69ff-599e-9982a7df1d27.jpg');
+
+INSERT INTO `alternativa` (`descricaoAlternativa`, `alternativaCerta`, `idQuestao`) VALUES
+('Elas não armazenam água', 0, 17),
+('Elas armazenam água em suas raízes', 0, 17),
+('Elas armazenam água em suas folhas, caules ou raízes', 1, 17),
+('Elas armazenam água em suas flores', 0, 17);
+
+
+
+INSERT INTO `zona` (`idZona`, `nomeZona`, `qntPlantas`, `pontoZona`) VALUES
+(16, 'Zona Deserto', NULL, NULL),
+(19, 'Zona dos Ecossistemas Aquáticos', NULL, NULL),
+(21, 'Zona do Vale Encantado', NULL, NULL),
+(26, 'Zona da Aventura', NULL, NULL),
+(29, 'Zona Árida', NULL, NULL),
+(30, 'Zona do Pantanal Mágico', NULL, NULL),
+(31, 'Zona das Maravilhas Microscópicas', NULL, NULL),
+(32, 'Zona das Florestas Tropicais', NULL, NULL),
+(33, 'Zona Desafiadora', NULL, NULL),
+(34, 'Theophrastus', NULL, NULL),
+(35, 'Zona Eugen Warming', NULL, NULL),
+(36, 'Zona Botânica', NULL, NULL),
+(37, 'Zona Amaro Macedo', NULL, NULL);
+
+
+INSERT INTO `quiz` (`idQuiz`, `maximoPergunta`, `nomeQuiz`, `comTempo`, `quantTempo`, `idZona`) VALUES
+(4, 20, 'Expedição ao Coração do Deserto', 0, 15, 16),
+(11, 50, 'Zona 1', 0, 33, 26),
+(12, 10, 'Selva', 1, 30, 35),
+(14, 20, 'Estudo de Briófitas', 0, 0, 34),
+(15, 20, 'Campo Florido', 1, 30, 26),
+(16, 20, 'Expedição', 1, 45, 29),
+(17, 10, 'Quiz Botânico: Desafio das Flores', 1, 15, 16),
+(18, 8, 'Mistérios do Reino Vegetal', 1, 12, 19),
+(19, 12, 'Explorando o Mundo das Plantas', 1, 18, 21),
+(20, 9, 'Aventura na Zona da Botânica', 1, 14, 26),
+(21, 11, 'Conhecimentos em Botânica', 1, 16, 29),
+(22, 10, 'Maravilhas da Flora', 0, 0, 30),
+(23, 10, 'Microcosmo Botânico', 1, 13, 31),
+(24, 10, 'Selva das Plantas Tropicais', 1, 17, 32),
+(25, 10, 'Desafio Botânico', 1, 19, 33),
+(26, 8, 'Theophrastus Botanical Quiz', 1, 12, 34),
+(27, 9, 'Eugen Warming: Botany Adventure', 1, 14, 35),
+(28, 10, 'Quiz Botânico: Teste seu Conhecimento', 1, 18, 36),
+(29, 7, 'Amaro Macedo: Conheça as Plantas', 1, 11, 37);
+
+
+INSERT INTO `partida` (`idPartida`, `dataInicio`, `dataFim`, `limiteJogadores`, `tempoPartida`, `nomePartida`, `senhaPartida`, `statusPartida`) VALUES
+(1, '2023-09-03 21:36:37', NULL, 20, 20, 'Minha Partida', '123456', 1),
+(2, '2023-09-03 21:38:17', NULL, 15, 38, 'Gimnospermas', 'abcdef', 1),
+(31, NULL, NULL, 20, 20, 'Partida', '123', 1),
+(32, NULL, '2023-08-28 20:24:08', 20, 20, 'Estudo sobre Plantas', '123', 1),
+(33, NULL, NULL, 22, 12, 'Cachorro', '123', 1),
+(34, '2023-09-03 21:35:04', NULL, 20, 20, 'Minha Partida', '123456', 1),
+(35, NULL, NULL, 18, 15, 'Desafio das Plantas', '456', 1),
+(36, NULL, '2023-08-30 14:30:00', 20, 18, 'Jardim Botânico', '789', 1),
+(37, NULL, NULL, 16, 14, 'Segredos da Flora', '321', 1),
+(38, NULL, NULL, 20, 20, 'Botânica em Foco', '654', 1),
+(39, NULL, NULL, 20, 20, 'Desafio Botânico', '123', 1),
+(40, NULL, '2023-08-28 20:24:08', 20, 20, 'Mistérios da Flora', '123', 1),
+(41, NULL, NULL, 22, 12, 'Aventura Botânica', '123', 1);
+
+
+INSERT INTO `partida_zona` (`idPartida`, `idZona`) VALUES
+(1, 16),
+(2, 19),
+(31, 21),
+(32, 26),
+(33, 29),
+(34, 30),
+(35, 31),
+(36, 32),
+(37, 33),
+(38, 34),
+(39, 35),
+(40, 36),
+(41, 37);
+
+
