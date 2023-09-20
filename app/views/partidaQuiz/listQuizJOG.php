@@ -52,7 +52,7 @@
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
+                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,6 +62,9 @@
                 }
             }
             ?>
+        </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
         </div>
     </div>
 

@@ -12,6 +12,7 @@
     <h1 class="tituloPagina text-center">Partidas</h1>
     <br>
     <div class="container">
+
         <div class="row">
             <?php
             $partidaQuizQuizzes = $dados['listaPartidasQuiz'];
@@ -45,6 +46,9 @@
                 }
             }
             ?>
+        </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
         </div>
     </div>
 

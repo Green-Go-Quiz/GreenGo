@@ -69,6 +69,9 @@
             <?php endforeach; ?>
 
         </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        </div>
     </div>
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

@@ -84,7 +84,7 @@ class PartidaQuizController extends Controller
             //$dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
             $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
 
-            $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
+            $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartidas($partida->getIdPartida());
 
 
             $this->loadView("partidaQuiz/form.php", $dados);
@@ -172,7 +172,7 @@ class PartidaQuizController extends Controller
         //$dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($idPartida);
         $dados["listaQuizzes"] = $this->quizDao->zonaComumComPartida($partida->getIdPartida());
 
-        $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
+        $dados["listaPartidasQuiz"] = $this->partidaQuizDao->listByPartidas($partida->getIdPartida());
 
         $msgsErro = $erros ? implode("<br>", $erros) : "";
 

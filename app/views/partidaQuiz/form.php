@@ -156,7 +156,11 @@
                 </table>
             </div>
         </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        </div>
     </div>
+
     </div>
 </body>
 

@@ -120,6 +120,26 @@ class PartidaQuizDAO
         return $this->mapQuizzesDaPartida($result);
     }
 
+    public function listByPartidas(int $idPartida)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT pq.*, q.maximoPergunta, q.nomeQuiz, q.comTempo, q.quantTempo, q.idZona, z.nomeZona" .
+            " FROM partida_quiz pq" .
+            " JOIN quiz q ON (q.idQuiz = pq.idQuiz)" .
+            " JOIN zona z ON (z.idZona = q.idZona)" .
+            " WHERE pq.idPartida = :idPartida";
+
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":idPartida", $idPartida);
+        $stm->execute();
+
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->mapPartidasQuizzes($result);
+    }
+
     public function insertPartidaQuiz(int $idPartida, int $idQuiz)
     {
         $conn = Connection::getConn();
@@ -181,16 +201,16 @@ class PartidaQuizDAO
 
 
 
-    // private function mapPartidaQuizzes($result)
-    // {
-    //     $partidaQuizzes = array();
-    //     foreach ($result as $row) {
-    //         $partidaQuiz = $this->mapPartidaQuiz($row);
-    //         array_push($partidaQuizzes, $partidaQuiz);
-    //     }
+    private function mapPartidasQuizzes($result)
+    {
+        $partidaQuizzes = array();
+        foreach ($result as $row) {
+            $partidaQuiz = $this->mapPartidaQuiz($row);
+            array_push($partidaQuizzes, $partidaQuiz);
+        }
 
-    //     return $partidaQuizzes;
-    // }
+        return $partidaQuizzes;
+    }
 
     private function mapPartidaQuizzes($result)
     {

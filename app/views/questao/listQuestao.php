@@ -50,18 +50,21 @@
                                 <span class="dadoAtributo"><?= $questao->getAlternativaCertaTexto(); ?></span>
                             </p>
 
-                            
+
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
-                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
-                                    <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
-                                </div>
+                            <div class="btn-group">
+                                <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
+                                <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                                <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
                             </div>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
         </div>
     </div>
     <!--/div-->

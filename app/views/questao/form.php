@@ -123,7 +123,9 @@ require_once(__DIR__ . "/../../bootstrap/header.php");
                 <?php require_once(__DIR__ . "/../../bootstrap/msg.php"); ?>
             </div>
         </div>
-
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        </div>
     </div>
 </body>
 
