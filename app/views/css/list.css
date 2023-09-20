@@ -52,6 +52,13 @@
   font-family: "Poppins";
 }
 
+.teste {
+  font-weight: 500;
+  color:#000000;
+  font-family: "Poppins";
+}
+
+
 .dadoAtributo {
   font-weight: 500;
   color: var(--verdao);
