@@ -1,11 +1,5 @@
-<?php
-
-require_once(__DIR__ . "/../../util/config.php");
-
-?>
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
@@ -13,7 +7,6 @@ require_once(__DIR__ . "/../../util/config.php");
 </head>
 
 <body>
-
     <?php require_once(__DIR__ . "/../../bootstrap/navJOGADOR.php"); ?>
 
     <div class="container mt-4">
@@ -95,5 +88,6 @@ require_once(__DIR__ . "/../../util/config.php");
     <script src="assets/js/grayscale.js"></script>
     <script src="js/quiz.js"></script>
 </body>
+
 
 </html>
