@@ -43,11 +43,11 @@
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Alternativas:<br></span>
-                                <span class="dadoAtributo"><?= $questao->getAlternativasTexto(); ?></span>
+                                <span class="dadoAtributo"><?= $questao->getAlternativasTextoTratada(); ?></span>
                             </p>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Alternativa Correta:<br></span>
-                                <span class="dadoAtributo"><?= $questao->getAlternativaCertaTexto(); ?></span>
+                                <span class="dadoAtributo"><?= $questao->getAlternativaCertaTextoTratada(); ?></span>
                             </p>
 
 

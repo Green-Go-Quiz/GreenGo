@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
 require_once(__DIR__ . "/../dao/QuestaoDAO.php");
 require_once(__DIR__ . "/../dao/AlternativaDAO.php");
+require_once(__DIR__ . "/../dao/RespostaDAO.php");
+require_once(__DIR__ . "/../dao/RespostaUsuarioDAO.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
 require_once(__DIR__ . "/../models/QuizModel.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
@@ -15,20 +17,21 @@ require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
 class JogarController extends Controller
 {
     private QuizQuestaoDAO $quizQuestaoDao;
+    private QuestaoDAO $questaoDao;
     private QuizDAO $quizDao;
     private AlternativaDAO $alternativaDao;
-    //private QuestaoDAO $questaoDao;
-    //private QuizQuestao $quizQuestao; // Adicione esta linha
-
+    private RespostaDAO $respostaDao;
+    private RespostaUsuarioDAO $respostaUsuarioDao;
 
     public function __construct()
     {
         $this->quizQuestaoDao = new QuizQuestaoDAO();
         $this->quizDao = new QuizDAO();
+        $this->questaoDao = new QuestaoDAO();
         $this->alternativaDao = new AlternativaDAO();
+        $this->respostaDao = new RespostaDAO();
+        $this->respostaUsuarioDao = new RespostaUsuarioDAO();
 
-        //$this->questaoDao = new QuestaoDAO();
-        //$this->quizQuestao = new QuizQuestao(); // Instancie a classe QuizQuestaoModel
         $this->handleAction();
     }
 
@@ -47,17 +50,66 @@ class JogarController extends Controller
         $dados["questoes"] = $questoes;
         $dados["quiz"] = $quiz;
 
+
         $this->loadView("partidaQuiz/partidaJOG.php", $dados, $msgErro, $msgSucesso);
     }
 
-    private function save()
+    protected function save()
     {
         $quiz = $this->findQuizById();
         $questoes = $this->quizQuestaoDao->listByQuizJOG($quiz->getIdQuiz());
+        //Adicionar as alternativas em cada questão
+        foreach ($questoes as $questao) {
+            $listaAlt = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
+            $questao->setAlternativas($listaAlt);
+        }
+
+
+        //print_r($questoes);
+
+        //Carregar as respostas que vieram da tela
+        $respostas = array();
+        foreach ($questoes as $questao) {
+            //Validar se veio a resposta
+            if (isset($_POST['altQuestao_' . $questao->getIdQuestao()])) {
+                //1- Criar o objeto RespostaUsuario
+                $idAlternativaResposta = $_POST['altQuestao_' . $questao->getIdQuestao()];
+
+                //2- Adicionar o objeto no Array $respostas
+                //array_push($respostas, <objeto>);
+            } else {
+                //Retornar um erro e manter na tela para escolhar as respostas
+            }
+        }
+
+        //Persistir os dados
+        //1- Chamar o respostaUsuarioDAO e passar o array de respostas
+        //1.1 - No DAO, deve-se fazer um INSERT para cada objeto do array
+
+        /*
+        $respostas = $this->respostaDao->list();
+        $repostasUsuario = $this->respostaUsuarioDao->listByResposta($respostas->getIdResposta());
 
         foreach ($questoes as $questao) {
             $idAlternativaResposta = $_POST['altQuestao_' . $questao->getIdQuestao()];
+
+            $respostaUsuario = new RespostaUsuario();
+            $respostaUsuario->setIdUsuario($_SESSION['idUsuario']);
+            $respostaUsuario->setIdQuestao($idQuestao);
+            $respostaUsuario->setIdResposta($idResposta);
+            //questao só existe em resposta
+
+            $questao = $questaoDao->findById($questao->getIdQuestao());
+            if ($respostaSelecionada == $questao->getIdAlternativaCorreta()) {
+                $respostaUsuario->setAcertou(1);
+            } else {
+                $respostaUsuario->setAcertou(0);
+            }
+
+            // criar metodo do respostaUsuario para salvar no dao?
+
         }
+        */
     }
 
     private function findQuizById()

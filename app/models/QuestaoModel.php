@@ -10,7 +10,7 @@ class Questao
     private $grauDificuldade;
     private $pontuacao;
     private $imagem;
-    
+
     private $alternativas; //Campo que armazena um array de objetos Alternativa
 
 
@@ -152,7 +152,7 @@ class Questao
 
         return $this;
     }
-  
+
 
     public function getAlternativaCertaTexto()
     {
@@ -165,14 +165,50 @@ class Questao
         return "Nenhuma alternativa correta definida.";
     }
 
-    public function isAlternativaCerta($idx) {
+    public function isAlternativaCerta($idx)
+    {
         $alternativas = $this->getAlternativas();
-        if(isset($alternativas[$idx]) and $alternativas[$idx]->getAlternativaCerta())
+        if (isset($alternativas[$idx]) and $alternativas[$idx]->getAlternativaCerta())
             return true;
 
         return false;
     }
 
+    public function isAlternativaCertaById($idAlternativa)
+    {
+        $alternativas = $this->getAlternativas();
+        foreach ($alternativas as $alt) {
+            if ($alt->getIdAlternativa() == $idAlternativa)
+                return $alt->getAlternativaCerta();
+        }
 
-   
+        return false;
+    }
+
+    public function getAlternativasTextoTratada()
+    {
+        $textoAlternativas = "";
+        $icone = "﹡";
+
+        foreach ($this->alternativas as $alternativa) {
+            $textoAlternativas .= $icone . $alternativa->getDescricaoAlternativa() . ";<br>";
+        }
+
+        $textoAlternativas = rtrim($textoAlternativas, "; ");
+
+        return $textoAlternativas;
+    }
+
+    public function getAlternativaCertaTextoTratada()
+    {
+        $alternativas = $this->getAlternativas();
+        $icone = "﹡";
+
+        foreach ($alternativas as $alternativa) {
+            if ($alternativa->getAlternativaCerta() == 1) {
+                return $icone . $alternativa->getDescricaoAlternativa();
+            }
+        }
+        return "Nenhuma alternativa correta definida.";
+    }
 }

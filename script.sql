@@ -419,10 +419,11 @@ ALTER TABLE `equipe`
 --
 
 CREATE TABLE IF NOT EXISTS `equipe_usuario` (
-  `idEquipeUsuario` int(11) NOT NULL,
+  `idEquipeUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuario` int(11) NOT NULL,
   `idEquipe` int(11) NOT NULL,
-  `pontuacaoUsuario` int(5) NOT NULL
+  `pontuacaoUsuario` int(5) NOT NULL,
+  CONSTRAINT pk_equipe_usuario PRIMARY KEY (idEquipeUsuario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -575,6 +576,80 @@ CREATE TABLE IF NOT EXISTS `partida_quiz` (
 ENGINE = InnoDB;
 
 ALTER TABLE partida_quiz ADD CONSTRAINT uk_partida_quiz UNIQUE(idPartida, idQuiz);
+
+/*
+-- -----------------------------------------------------
+-- Table `greengo`.`resposta_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `resposta` (
+  `idResposta` INT NOT NULL AUTO_INCREMENT,
+  `idQuestao` INT NOT NULL,
+  `quantidadeAlt` INT NOT NULL,
+  `respostaCerta` TINYINT NOT NULL,
+  `descricaoR` VARCHAR (200) NOT NULL,
+  PRIMARY KEY (`idResposta`),
+  CONSTRAINT `fk_resposta_pergunta1`
+    FOREIGN KEY (`idQuestao`)
+    REFERENCES `questao` (`idQuestao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `greengo`.`resposta_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `resposta_usuario` (
+  `idRespostaUsuario` INT NOT NULL AUTO_INCREMENT,
+  `idResposta` INT NOT NULL,
+  `idUsuario` INT NOT NULL,
+  `acertou` TINYINT NOT NULL,
+  PRIMARY KEY (`idRespostaUsuario`),
+  CONSTRAINT `fk_resposta_has_usuario_resposta1`
+    FOREIGN KEY (`idResposta`)
+    REFERENCES `resposta` (`idResposta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_resposta_has_usuario_resposta`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+ALTER TABLE resposta_usuario ADD CONSTRAINT uk_resposta_usuario UNIQUE(idResposta, idUsuario);
+*/
+-- -----------------------------------------------------
+-- Table `greengo`.`resposta_usuario`
+-- -----------------------------------------------------
+
+
+CREATE TABLE IF NOT EXISTS resposta_usuario (
+  idRespostaUsuario INT NOT NULL AUTO_INCREMENT,
+  idQuestao INT NOT NULL,
+  idAlternativa INT NOT NULL,
+  idEquipeUsuario INT NOT NULL,
+  acertou TINYINT NOT NULL,
+  PRIMARY KEY (idRespostaUsuario),
+  CONSTRAINT fk_resposta_usuario_questao
+    FOREIGN KEY (idQuestao)
+    REFERENCES questao (idQuestao)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_resposta_usuario_alternativa
+    FOREIGN KEY (idAlternativa)
+    REFERENCES alternativa (idAlternativa)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)  
+ENGINE = InnoDB;
+ALTER TABLE resposta_usuario ADD CONSTRAINT uk_resposta_usuario UNIQUE(idQuestao, idEquipeUsuario);
+
+ALTER TABLE resposta_usuario ADD
+  CONSTRAINT fk_resposta_usuario_equipe_usuario
+    FOREIGN KEY (idEquipeUsuario)
+    REFERENCES equipe_usuario (idEquipeUsuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
 
 -- -----------------------------------------------------
 -- POPULARIZANDO O BANCO

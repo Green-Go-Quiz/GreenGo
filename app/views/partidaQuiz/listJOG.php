@@ -28,12 +28,19 @@
                                 <h5 class="card-title nomeCard"><?= $partida->getNomePartida(); ?></h5>
                                 <p>
                                     <span class="nomeAtributo labelQuestao">Zona:</span>
-                                    <?php foreach ($partida->getZonas() as $zona) : ?>
-                                        <span class="dadoAtributo"><?= $zona->getNomeZona(); ?></span>
-                                        <br>
-                                    <?php endforeach; ?>
-
+                                    <?php
+                                    $zonas = $partida->getZonas();
+                                    $numZonas = count($zonas);
+                                    foreach ($zonas as $index => $zona) {
+                                        echo '<span class="dadoAtributo">' . $zona->getNomeZona() . '</span>';
+                                        if ($index < $numZonas - 1) {
+                                            echo ', ';
+                                        }
+                                        echo '<br>';
+                                    }
+                                    ?>
                                 </p>
+
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">

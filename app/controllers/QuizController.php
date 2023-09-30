@@ -135,31 +135,6 @@ class QuizController extends Controller
         $quiz = $this->quizDao->findById($id);
         return $quiz;
     }
-    private function insertQuizQuestaoAssociations(int $quizId, array $questoes)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "INSERT INTO quiz_questao (idQuiz, idQuestao) VALUES (:idQuiz, :idQuestao)";
-
-        $stm = $conn->prepare($sql);
-
-        foreach ($questoes as $questao) {
-            $stm->bindValue(":idQuiz", $quizId);
-            $stm->bindValue(":idQuestao", $questao->getIdQuestao());
-            $stm->execute();
-        }
-    }
-
-    private function deleteQuizQuestaoAssociations(int $quizId)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "DELETE FROM quiz_questao WHERE idQuiz = :idQuiz";
-
-        $stm = $conn->prepare($sql);
-        $stm->bindValue(":idQuiz", $quizId);
-        $stm->execute();
-    }
 }
 
 
