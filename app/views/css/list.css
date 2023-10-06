@@ -146,7 +146,7 @@
 }
 
 .botaoQuestoes {
-  left: 10%;
+
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */

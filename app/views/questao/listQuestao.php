@@ -24,12 +24,12 @@
             </div>
 
             <?php foreach ($dados['lista'] as $questao) : ?>
-                <div class="col-md-3 col-sm-6 mb-4">
+                     <div class="col-md-3 col-sm-6 mb-4">
                         <div class="card cardInserido h-100">
                             <div class="card-body">
                             <h5 class="card-title nomeCard"><?= $questao->getDescricaoQTruncada(); ?></h5>
                             <p>
-                                <p class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
+                                <span class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
                                 <span class="dadoAtributo"><?= $questao->getGrauDificuldadeTexto(); ?></span>
                             </p>
                             <p>
