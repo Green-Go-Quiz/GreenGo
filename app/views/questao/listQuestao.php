@@ -24,40 +24,42 @@
             </div>
 
             <?php foreach ($dados['lista'] as $questao) : ?>
-                <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
-                    <div class="card mb-4 shadow-sm w-100 min-vh-25 cardInserido">
-                        <div class="card-body ">
-                            <h5 class="card-title nomeCard"><?= $questao->getDescricaoQ(); ?></h5>
+                <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="card cardInserido h-100">
+                            <div class="card-body">
+                            <h5 class="card-title nomeCard"><?= $questao->getDescricaoQTruncada(); ?></h5>
                             <p>
-                                <span class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
+                                <p class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
                                 <span class="dadoAtributo"><?= $questao->getGrauDificuldadeTexto(); ?></span>
                             </p>
                             <p>
-                                <span class="nomeAtributo labelQuestao">Pontuação:</span>
-                                <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
+                            <p class="nomeAtributo labelQuestao">Pontuação:</span>
+                            <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
                             </p>
                             <p>
-                                <span class="nomeAtributo labelQuestao">Imagem:<br></span>
+                            <p class="nomeAtributo labelQuestao">Imagem:<br></span>
                                 <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px">
                             </p>
                             </p>
                             <p>
-                                <span class="nomeAtributo labelQuestao">Alternativas:<br></span>
-                                <span class="dadoAtributo"><?= $questao->getAlternativasTextoTratada(); ?></span>
+                            <p class="nomeAtributo labelQuestao">Alternativas:<br></span>
+                            <span class="dadoAtributo"<?= $questao->getAlternativasTextoTratada();?></span>
                             </p>
                             <p>
-                                <span class="nomeAtributo labelQuestao">Alternativa Correta:<br></span>
-                                <span class="dadoAtributo"><?= $questao->getAlternativaCertaTextoTratada(); ?></span>
+                            <p class="nomeAtributo labelQuestao">Alternativa Correta:<br></span>
+                            <span class="dadoAtributo"><?= $questao->getAlternativaCertaTextoTratada(); ?></span>
                             </p>
 
 
                         </div>
+                        <div class="card-footer">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
                                 <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
                                 <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

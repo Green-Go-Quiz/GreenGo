@@ -67,7 +67,7 @@
 
 .nomeBotaoEspecifico {
   font-weight: 900;
-  font-size: 35px;
+  font-size: 25px;
   color: var(--verdao);
   font-family: "Poppins";
 }
@@ -112,7 +112,7 @@
 }
 
 .botaoAlterar {
-  left: 10%;
+  
   background-color: var(--cinzinha);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
@@ -130,7 +130,7 @@
 }
 
 .botaoExcluir {
-  left: 10%;
+
   background-color: #f0d8d8;
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
@@ -161,7 +161,7 @@
 }
 
 .botaoEspecies {
-  left: 10%;
+
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */

@@ -94,7 +94,7 @@ class QuestaoController extends Controller
         $questao->setDescricaoQ($descricao);
         $questao->setGrauDificuldade($grauDificuldade);
         $questao->setPontuacao($pontuacao);
-        $questao->setImagem("greengo\app\arquivos.jpg");
+        $questao->setImagem("logo\icon.jpg");
 
 
         $alternativas = $this->alternativaDao->findAllByQuestao($dados["id"]);
@@ -137,8 +137,10 @@ class QuestaoController extends Controller
                     $questao->setImagem($nomeArquivoSalvar);
                 } else {
                     //Caso não consega salvar, exibe o erro
-                    $erros = ["Erro, o arquivo n&atilde;o pode ser enviado."];
+                    $imagemLogo = 'BASEURL_LOGO_PROJETO'; // Substitua pelo caminho real da imagem de fallback
+                    echo '<p class="nomeAtributo labelQuestao">Imagem:<br><img src="' . $imagemLogo . '" class="imagemQuestao" alt="" width="100px"></p>';
                 }
+            
             }
         }
 

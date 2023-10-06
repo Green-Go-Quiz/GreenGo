@@ -195,7 +195,11 @@ class Questao
         }
 
         $textoAlternativas = rtrim($textoAlternativas, "; ");
-
+        if (strlen($textoAlternativas) > 150) {
+            // Trunca a descrição para 125 caracteres e adiciona três pontos (...).
+            $textoAlternativas = substr($textoAlternativas, 0, 100) . '...';
+        }
+    
         return $textoAlternativas;
     }
 
@@ -208,7 +212,23 @@ class Questao
             if ($alternativa->getAlternativaCerta() == 1) {
                 return $icone . $alternativa->getDescricaoAlternativa();
             }
+            
         }
         return "Nenhuma alternativa correta definida.";
     }
+
+    public function getDescricaoQTruncada()
+{
+    $descricao = $this->descricaoQ;
+
+    // Verifica se a descrição é maior que 125 caracteres
+    if (strlen($descricao) > 50) {
+        // Trunca a descrição para 125 caracteres e adiciona três pontos (...).
+        $descricao = substr($descricao, 0, 50) . '...';
+    }
+
+    return $descricao;
+}
+
+
 }
