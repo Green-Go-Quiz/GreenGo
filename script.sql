@@ -878,4 +878,6 @@ INSERT INTO `partida_zona` (`idPartida`, `idZona`) VALUES
 (40, 36),
 (41, 37);
 
-
+INSERT INTO `equipe_usuario` (`idUsuario`, `idEquipe`, `pontuacaoUsuario`)
+VALUES
+    (33, 1, 0);

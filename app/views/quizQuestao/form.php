@@ -49,7 +49,7 @@
                 Questões adicionadas ao quiz "<span><?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></span>"</h4>
 
             <div class="col-md-12 d-flex align-items-stretch">
-                <table class="rounded table  table-striped ">
+                <table class="rounded table table-striped ">
                     <thead>
                         <tr class="atributoTabelaAdicionada">
                             <td>Descrição</td>

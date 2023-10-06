@@ -4,6 +4,7 @@
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
     <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/quiz.css">
+
 </head>
 
 <body>
@@ -40,23 +41,11 @@
                     $alternativas = $questao->getAlternativas();
                     foreach ($alternativas as $idxAlt => $alternativa) :
                     ?>
-                        <!--
-                        <div class="col-md-6">
-                            <input id="altQuestao_<?= $questao->getIdQuestao() ?>ID" type="radio" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>" />
-                            <label for="altQuestao_<?= $questao->getIdQuestao() ?>ID"> <?= $alternativa->getDescricaoAlternativa(); ?></label>
-
-                            <button type="button" class="btn btn-primary btn-block answerBtn" data-answer="option<?= $idxAlt + 1; ?>">
-                            <?= $alternativa->getDescricaoAlternativa(); ?>
-                            </button>
-                        </div>
-                         -->
-
                         <div class="col-md-6 mt-2">
-                            <div class="btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-primary">
                                     <input type="radio" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>">
-                                    <label for="altQuestao_<?= $questao->getIdQuestao() ?>ID"> <?= $alternativa->getDescricaoAlternativa(); ?></label>
-
+                                    <?= $alternativa->getDescricaoAlternativa(); ?>
                                 </label>
                             </div>
                         </div>
@@ -64,6 +53,7 @@
                     endforeach;
                     ?>
                 </div>
+
 
         <?php
             endforeach;

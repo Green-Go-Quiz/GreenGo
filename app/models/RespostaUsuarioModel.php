@@ -3,90 +3,151 @@
 class RespostaUsuario
 {
     private $idRespostaUsuario;
-    private $idResposta;
-    private $idUsuario;
+    private $idQuestao;
+    private $idAlternativa;
+    private $idEquipeUsuario;
     private $acertou;
 
-    private $resposta;
-    private $usuario;
+    private $questao;
+    private $equipeUsuario;
 
+
+    /**
+     * Get the value of idRespostaUsuario
+     */
     public function getIdRespostaUsuario()
     {
         return $this->idRespostaUsuario;
     }
 
-    public function getIdResposta()
-    {
-        return $this->idResposta;
-    }
-
-    public function getIdUsuario()
-    {
-        return $this->idUsuario;
-    }
-
-    public function getAcertou()
-    {
-        return $this->acertou;
-    }
-
-    // Métodos Setters
-    public function setIdRespostaUsuario($idRespostaUsuario)
-    {
-        $this->idRespostaUsuario = $idRespostaUsuario;
-    }
-
-    public function setIdResposta($idResposta)
-    {
-        $this->idResposta = $idResposta;
-    }
-
-    public function setIdUsuario($idUsuario)
-    {
-        $this->idUsuario = $idUsuario;
-    }
-
-    public function setAcertou($acertou)
-    {
-        $this->acertou = $acertou;
-    }
-
     /**
-     * Get the value of resposta
-     */
-    public function getResposta()
-    {
-        return $this->resposta;
-    }
-
-    /**
-     * Set the value of resposta
+     * Set the value of idRespostaUsuario
      *
      * @return  self
      */
-    public function setResposta($resposta)
+    public function setIdRespostaUsuario($idRespostaUsuario)
     {
-        $this->resposta = $resposta;
+        $this->idRespostaUsuario = $idRespostaUsuario;
 
         return $this;
     }
 
     /**
-     * Get the value of usuario
+     * Get the value of idQuestao
      */
-    public function getUsuario()
+    public function getIdQuestao()
     {
-        return $this->usuario;
+        return $this->idQuestao;
     }
 
     /**
-     * Set the value of usuario
+     * Set the value of idQuestao
      *
      * @return  self
      */
-    public function setUsuario($usuario)
+    public function setIdQuestao($idQuestao)
     {
-        $this->usuario = $usuario;
+        $this->idQuestao = $idQuestao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idAlternativa
+     */
+    public function getIdAlternativa()
+    {
+        return $this->idAlternativa;
+    }
+
+    /**
+     * Set the value of idAlternativa
+     *
+     * @return  self
+     */
+    public function setIdAlternativa($idAlternativa)
+    {
+        $this->idAlternativa = $idAlternativa;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idEquipeUsuario
+     */
+    public function getIdEquipeUsuario()
+    {
+        return $this->idEquipeUsuario;
+    }
+
+    /**
+     * Set the value of idEquipeUsuario
+     *
+     * @return  self
+     */
+    public function setIdEquipeUsuario($idEquipeUsuario)
+    {
+        $this->idEquipeUsuario = $idEquipeUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of acertou
+     */
+    public function getAcertou()
+    {
+        return $this->acertou;
+    }
+
+    /**
+     * Set the value of acertou
+     *
+     * @return  self
+     */
+    public function setAcertou($acertou)
+    {
+        $this->acertou = $acertou;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of questao
+     */
+    public function getQuestao()
+    {
+        return $this->questao;
+    }
+
+    /**
+     * Set the value of questao
+     *
+     * @return  self
+     */
+    public function setQuestao($questao)
+    {
+        $this->questao = $questao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of equipeUsuario
+     */
+    public function getEquipeUsuario()
+    {
+        return $this->equipeUsuario;
+    }
+
+    /**
+     * Set the value of equipeUsuario
+     *
+     * @return  self
+     */
+    public function setEquipeUsuario($equipeUsuario)
+    {
+        $this->equipeUsuario = $equipeUsuario;
 
         return $this;
     }

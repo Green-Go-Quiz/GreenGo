@@ -3,8 +3,7 @@
 # Objetivo: classe DAO para o model de QuizQuestao
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../models/UsuarioModel.php");
-include_once(__DIR__ . "/../models/RespostaModel.php");
+include_once(__DIR__ . "/../models/EquipeUsuario.php");
 include_once(__DIR__ . "/../models/RespostaUsuarioModel.php");
 
 
@@ -14,31 +13,41 @@ class RespostaUsuarioDAO
     {
         $respostaUsuario = new RespostaUsuario();
         $respostaUsuario->setIdRespostaUsuario($row['idRespostaUsuario']);
-        $respostaUsuario->setIdResposta($row['idResposta']);
-        $respostaUsuario->setIdUsuario($row['idUsuario']);
+        $respostaUsuario->setIdQuestao($row['idQuestao']);
+        $respostaUsuario->setIdAlternativa($row['idAlternativa']);
+        $respostaUsuario->setIdEquipeUsuario($row['idEquipeUsuario']);
+        $respostaUsuario->setAcertou($row['acertou']);
 
-        if (isset($row['respostaCerta'])) {
-            $resposta = new Resposta();
-            $resposta->setIdResposta($row['idResposta']);
-            $resposta->setIdQuestao($row['idQuestao']);
-            $resposta->setQuantidadeAlt($row['quantidadeAlt']);
-            $resposta->setRespostaCerta($row['respostaCerta']);
-            $resposta->setDescricaoR($row['descricaoR']);
 
-            $respostaUsuario->setResposta($resposta);
-        }
         if (isset($row['nomeUsuario'])) {
-            $usuario = new Usuario();
-            $usuario->setIdUsuario($row['idUsuario']); //não entendi pq tem que passar o id da usuario ???
-            $usuario->setNomeUsuario($row['nomeUsuario']);
-            $usuario->setGenero($row['genero']);
-            $usuario->setEscolaridade($row['escolaridade']);
-            $usuario->setLogin($row['loginUsuario']);
-            $usuario->setEmail($row['email']);
-            $usuario->setSenha($row['senha']);
-            $usuario->setTipoUsuario($row['tipoUsuario']);
+            $equipeUsuario = new EquipeUsuario();
+            $equipeUsuario->setIdEquipeUsuario($row['idEquipeUsuario']);
+            $equipeUsuario->setIdUsuario($row['idUsuario']);
+            $equipeUsuario->setIdEquipe($row['idEquipe']);
+            $equipeUsuario->setPontuacaoUsuario($row['pontuacaoUsuario']);
 
-            $respostaUsuario->setUsuario($usuario);
+            $respostaUsuario->setEquipeUsuario($equipeUsuario);
+        }
+
+        if (isset($row['descricaoQ'])) {
+            $questao = new Questao();
+            $questao->setIdQuestao($row['idQuestao']);
+            $questao->setDescricaoQ($row['descricaoQ']);
+            $questao->setGrauDificuldade($row['grauDificuldade']);
+            $questao->setPontuacao($row['pontuacao']);
+            $questao->setImagem($row['imagem']);
+
+            $respostaUsuario->setQuestao($questao);
+        }
+
+        if (isset($row['descricaoAlternativa'])) {
+            $alternativa = new Alternativa();
+            $alternativa->setIdAlternativa($row['idAlternativa']);
+            $alternativa->setDescricaoAlternativa($row['descricaoAlternativa']);
+            $alternativa->setAlternativaCerta($row['alternativaCerta']);
+            $alternativa->setIdQuestao($row['idQuestao']);
+
+            $respostaUsuario->setQuestao($questao);
         }
 
         return $respostaUsuario;
