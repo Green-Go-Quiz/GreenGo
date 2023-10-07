@@ -175,4 +175,18 @@ class Quiz
 
         return $this;
     }
+    
+    public function getNomeQuizTruncada()
+{
+       $Nome = $this->nomeQuiz;
+
+    // Verifica se a descrição é maior que 125 caracteres
+    if (strlen($Nome) > 20) {
+        // Trunca a descrição para 125 caracteres e adiciona três pontos (...).
+        $Nome = substr($Nome, 0, 20) . '...';
+    }
+
+    return $Nome;
+}
+
 }
