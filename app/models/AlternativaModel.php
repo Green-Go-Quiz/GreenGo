@@ -7,6 +7,7 @@ class Alternativa
     private $idAlternativa;
     private $descricaoAlternativa;
     private $alternativaCerta;
+    private $idQuestao;
     private $questao;
 
     // Getters e Setters
@@ -86,6 +87,26 @@ class Alternativa
     public function setQuestao($questao)
     {
         $this->questao = $questao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idQuestao
+     */
+    public function getIdQuestao()
+    {
+        return $this->idQuestao;
+    }
+
+    /**
+     * Set the value of idQuestao
+     *
+     * @return  self
+     */
+    public function setIdQuestao($idQuestao)
+    {
+        $this->idQuestao = $idQuestao;
 
         return $this;
     }

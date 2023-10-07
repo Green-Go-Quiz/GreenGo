@@ -3,7 +3,7 @@
 # Objetivo: classe DAO para o model de QuizQuestao
 
 include_once(__DIR__ . "/../connection/Connection.php");
-include_once(__DIR__ . "/../models/EquipeUsuario.php");
+include_once(__DIR__ . "/../models/EquipeUsuarioModel.php");
 include_once(__DIR__ . "/../models/RespostaUsuarioModel.php");
 
 
@@ -74,16 +74,20 @@ class RespostaUsuarioDAO
         return $this->mapRespostaUsuario($result);
     }
 
-    public function insertRespostaUsuario(int $idResposta, int $idUsuario)
+    public function insertRespostaUsuario(RespostaUsuario $respostaUsuario, int $idQuestao, int $idAlternativa, int $idEquipeUsuario)
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO resposta_usuario (idResposta, idUsuario) VALUES (:idResposta, :idUsuario)";
+        $sql = "INSERT INTO resposta_usuario (idQuestao, idAlternativa,idEquipeUsuario, acertou) VALUES (:idQuestao, :idAlternativa, :idEquipeUsuario, :acertou)";
 
         $stm = $conn->prepare($sql);
 
-        $stm->bindValue(":idResposta", $idResposta);
-        $stm->bindValue(":idUsuario", $idUsuario);
+        $stm->bindValue(":idQuestao", $idQuestao);
+        $stm->bindValue(":idAlternativa", $idAlternativa);
+        $stm->bindValue(":idEquipeUsuario", $idEquipeUsuario);
+        $stm->bindValue(":acertou", $respostaUsuario->getAcertou());
+
+
         $stm->execute();
     }
 
