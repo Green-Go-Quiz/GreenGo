@@ -34,15 +34,19 @@
                             </p>
 
                         </div>
+                        <div class="card-footer">
                         <div class="d-flex justify-content-between align-items-center">
+                       
                             <div class="btn-group">
                                 <a href="<?= BASEURL ?>/controllers/PartidaQuizController.php?action=create&id=<?= $partida->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies">Quizzes</a>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
+         
         <div class="text-left">
             <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
         </div>

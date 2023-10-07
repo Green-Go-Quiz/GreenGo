@@ -42,10 +42,13 @@
                                 </p>
 
                             </div>
+                            <div class="card-footer">
+                      
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="<?= BASEURL ?>/controllers/PartidaQuizController.php?action=listarQuiz&id=<?= $partidaQuiz->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -54,6 +57,7 @@
             }
             ?>
         </div>
+        
         <div class="text-left">
             <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
         </div>
