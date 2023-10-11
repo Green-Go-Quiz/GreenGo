@@ -54,10 +54,9 @@
 
 .teste {
   font-weight: 500;
-  color:#000000;
+  color: #000000;
   font-family: "Poppins";
 }
-
 
 .dadoAtributo {
   font-weight: 500;
@@ -112,31 +111,48 @@
 }
 
 .botaoAlterar {
-  
   background-color: var(--cinzinha);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
   font-family: "Poppins-semibold";
   border: 1px solid var(--verdao); /* Adicionar borda verde escura */
- 
 }
 
 .botaoAlterar:hover {
-  
   background-color: #9fb2b4;
   /* Ou qualquer outra cor mais escura que você desejar */
   transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
 
+.botaoVoltar {
+  background-color: var(--cinzinha);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+.botaoVoltar:hover {
+  background-color: #9fb2b4;
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
 }
 
 .botaoExcluir {
-
   background-color: #f0d8d8;
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
   font-family: "Poppins-semibold";
   border: 1px solid var(--verdao); /* Adicionar borda verde escura */
- 
 }
 
 .botaoExcluir:hover {
@@ -146,7 +162,6 @@
 }
 
 .botaoQuestoes {
-
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */
@@ -161,7 +176,6 @@
 }
 
 .botaoEspecies {
-
   background-color: var(--verdinho);
   color: var(--verdao);
   border-radius: 7px; /* Adicionar bordas redondas */

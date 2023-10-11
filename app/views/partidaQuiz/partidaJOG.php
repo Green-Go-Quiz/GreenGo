@@ -4,6 +4,8 @@
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
     <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/quiz.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/list.css">
+
 
 </head>
 
@@ -68,12 +70,12 @@
             ?>
 
             <div class="text-left">
-                <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+                <a href="javascript:history.back()" class="btn btn-secondary botaoVoltar">Voltar</a>
+                <button type="submit" class="btn btn-secondary botaoGravar">Gravar</button>
+
             </div>
 
-            <div class="text-left">
-                <button type="submit" class="btn btn-secondary">Gravar</button>
-            </div>
+
         </form>
 
     </div>

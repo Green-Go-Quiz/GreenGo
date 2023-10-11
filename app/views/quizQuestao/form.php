@@ -126,6 +126,9 @@
                 </table>
             </div>
         </div>
+        <div class="text-left">
+            <a href="javascript:history.back()" class="btn botaoVoltar btn-secondary">Voltar</a>
+        </div>
     </div>
     </div>
 </body>

@@ -27,42 +27,42 @@
 
             <?php foreach ($dados['lista'] as $quiz) : ?>
                 <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="card cardInserido h-100">
-                            <div class="card-body">
+                    <div class="card cardInserido h-100">
+                        <div class="card-body">
                             <h5 class="card-title nomeCard">><?= $quiz->getNomeQuizTruncada(); ?></h3>
-                            <p>
-                            <span class="nomeAtributo labelQuestao">Nome do Quiz:</span>
-                            <span class="dadoAtributo"><?= $quiz->getNomeQuiz(); ?></span>
-                            </p>
-                            <p>
-                            <span class="nomeAtributo labelQuestao">Nome da Zona:</span>
-                            <span class="dadoAtributo"><?= $quiz->getZona()->getNomeZona(); ?></span>
-                            </p>
-                            <p>
-                            <span class="nomeAtributo labelQuestao">Máximo de Questões:</span>
-                            <span class="dadoAtributo"><?= $quiz->getMaximoPergunta(); ?></span>
-                            </p>
-                            <p>
-                            <span class="nomeAtributo labelQuestao">Limite de Tempo:</span>
-                            <span class="dadoAtributo"><?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></span>
-                            </p>
-                            <?php if ($quiz->getComTempo() == 1) : ?>
                                 <p>
-                                <span class="nomeAtributo labelQuestao">Tempo:</span>
-                                <span class="dadoAtributo"><?= $quiz->getQuantTempo() . " min"; ?></span>
+                                    <span class="nomeAtributo labelQuestao">Nome do Quiz:</span>
+                                    <span class="dadoAtributo"><?= $quiz->getNomeQuiz(); ?></span>
                                 </p>
-                            <?php endif; ?>
+                                <p>
+                                    <span class="nomeAtributo labelQuestao">Nome da Zona:</span>
+                                    <span class="dadoAtributo"><?= $quiz->getZona()->getNomeZona(); ?></span>
+                                </p>
+                                <p>
+                                    <span class="nomeAtributo labelQuestao">Máximo de Questões:</span>
+                                    <span class="dadoAtributo"><?= $quiz->getMaximoPergunta(); ?></span>
+                                </p>
+                                <p>
+                                    <span class="nomeAtributo labelQuestao">Limite de Tempo:</span>
+                                    <span class="dadoAtributo"><?= $quiz->getComTempo() == 1 ? 'Sim' : 'Não'; ?></span>
+                                </p>
+                                <?php if ($quiz->getComTempo() == 1) : ?>
+                                    <p>
+                                        <span class="nomeAtributo labelQuestao">Tempo:</span>
+                                        <span class="dadoAtributo"><?= $quiz->getQuantTempo() . " min"; ?></span>
+                                    </p>
+                                <?php endif; ?>
 
 
                         </div>
                         <div class="card-footer">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
-                                <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
-                                <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=edit&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-primary botaoAlterar">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuizController.php?action=delete&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuizQuestaoController.php?action=create&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoQuestoes">Questões</a>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
 
         </div>
         <div class="text-left">
-            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+            <a href="javascript:history.back()" class="btn botaoVoltar btn-secondary">Voltar</a>
         </div>
     </div>
 

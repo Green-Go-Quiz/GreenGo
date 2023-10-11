@@ -157,7 +157,7 @@
             </div>
         </div>
         <div class="text-left">
-            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+            <a href="javascript:history.back()" class="btn btn-secondary botaoVoltar">Voltar</a>
         </div>
     </div>
 

@@ -4,6 +4,7 @@
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
     <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/list.css">
+
 </head>
 
 <body>
@@ -24,9 +25,9 @@
             </div>
 
             <?php foreach ($dados['lista'] as $questao) : ?>
-                     <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="card cardInserido h-100">
-                            <div class="card-body">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card cardInserido h-100">
+                        <div class="card-body">
                             <h5 class="card-title nomeCard"><?= $questao->getDescricaoQTruncada(); ?></h5>
                             <p>
                                 <span class="nomeAtributo labelQuestao">Grau de Dificuldade:</span>
@@ -34,7 +35,7 @@
                             </p>
                             <p>
                             <p class="nomeAtributo labelQuestao">Pontuação:</span>
-                            <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
+                                <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
                             </p>
                             <p>
                             <p class="nomeAtributo labelQuestao">Imagem:<br></span>
@@ -43,30 +44,30 @@
                             </p>
                             <p>
                             <p class="nomeAtributo labelQuestao">Alternativas:<br></span>
-                            <span class="dadoAtributo"<?= $questao->getAlternativasTextoTratada();?></span>
+                                <span class="dadoAtributo" <?= $questao->getAlternativasTextoTratada(); ?></span>
                             </p>
                             <p>
                             <p class="nomeAtributo labelQuestao">Alternativa Correta:<br></span>
-                            <span class="dadoAtributo"><?= $questao->getAlternativaCertaTextoTratada(); ?></span>
+                                <span class="dadoAtributo"><?= $questao->getAlternativaCertaTextoTratada(); ?></span>
                             </p>
 
 
                         </div>
                         <div class="card-footer">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
-                                <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
-                                <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=edit&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoAlterar">Alterar</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoController.php?action=delete&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-secondary botaoExcluir" onclick="return confirm('Tem certeza que deseja excluir esta questão?')">Excluir</a>
+                                    <a href="<?= BASEURL ?>/controllers/QuestaoEspecieController.php?action=create&id=<?= $questao->getIdQuestao() ?>" class="btn btn-sm btn-success botaoEspecies">Espécies</a>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="text-left">
-            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+            <a href="javascript:history.back()" class="btn btn-secondary botaoVoltar">Voltar</a>
         </div>
     </div>
     <!--/div-->

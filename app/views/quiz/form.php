@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/navADMMeninas.php"); ?>
