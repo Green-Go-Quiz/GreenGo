@@ -1,5 +1,5 @@
 <footer class="footer">
     <div class="container">
-        &copy; 2023 Sua Empresa - Todos os direitos reservados
+        &copy; 2023 Green Go - Todos os direitos reservados
     </div>
 </footer>
