@@ -184,3 +184,15 @@
 body {
   background-color: var(--branco);
 }
+
+.container {
+  flex: 1; /* O conteúdo ocupa todo o espaço disponível, empurrando o footer para o final da página. */
+  /* Seu estilo personalizado para a seção principal da página aqui. */
+}
+
+.footer {
+  background-color: var(--verde);
+  padding: 20px 0;
+  color: var(--branco);
+  text-align: center;
+}

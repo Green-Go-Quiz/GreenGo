@@ -72,6 +72,7 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/grayscale.js"></script>
     <script src="js/registro.js"></script>
+
 </body>
 
 </html>

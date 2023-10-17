@@ -75,6 +75,8 @@ class JogarController extends Controller
 
         $respostas = array();
         foreach ($questoes as $questao) {
+            $idQuestao = $questao->getIdQuestao();
+
             //Validar se veio a resposta
             if (isset($_POST['altQuestao_' . $questao->getIdQuestao()])) {
                 //1- Criar o objeto RespostaUsuario
@@ -87,7 +89,7 @@ class JogarController extends Controller
                 $respostaUsuario->setIdEquipeUsuario(1);
                 $respostaUsuario->setIdAlternativa($idAlternativaResposta);
                 $respostaUsuario->setAcertou($questao->isAlternativaCertaById($idAlternativaResposta));
-                $respostas[$questao->getIdQuestao()] = $respostaUsuario;
+                $respostas[$idQuestao] = $respostaUsuario;
             }
         }
 
