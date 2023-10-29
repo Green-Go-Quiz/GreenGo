@@ -12,8 +12,12 @@ class Questao
     private $pontuacao;
     private $imagem;
 
+
     private $alternativas; //Campo que armazena um array de objetos Alternativa
 
+    //campo que armazena se o usuário respondeu corretamente a questão
+    private $acertou;
+    private $idAlternativaResposta = 0;
 
     /**
      * Get the value of idPergunta
@@ -124,15 +128,6 @@ class Questao
     }
 
 
-    public function getImagemPequena()
-    {
-        if ($this->imagem) {
-            $imagem = Image::make($this->imagem);
-            $imagem->fit(25, 25); // Redimensiona a imagem para 25x25 pixels
-            return $imagem->response();
-        }
-        return null;
-    }
 
 
 
@@ -241,5 +236,47 @@ class Questao
         }
 
         return $descricao;
+    }
+
+
+
+    /**
+     * Get the value of acertou
+     */
+    public function getAcertou()
+    {
+        return $this->acertou;
+    }
+
+    /**
+     * Set the value of acertou
+     *
+     * @return  self
+     */
+    public function setAcertou($acertou)
+    {
+        $this->acertou = $acertou;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idAlternativaResposta
+     */
+    public function getIdAlternativaResposta()
+    {
+        return $this->idAlternativaResposta;
+    }
+
+    /**
+     * Set the value of idAlternativaResposta
+     *
+     * @return  self
+     */
+    public function setIdAlternativaResposta($idAlternativaResposta)
+    {
+        $this->idAlternativaResposta = $idAlternativaResposta;
+
+        return $this;
     }
 }

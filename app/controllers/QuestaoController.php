@@ -10,6 +10,7 @@ require_once(__DIR__ . "/../dao/AlternativaDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
 
 
+
 class QuestaoController extends Controller
 {
     private QuestaoDAO $questaoDao;
@@ -18,6 +19,8 @@ class QuestaoController extends Controller
     private QuizDAO $quizDao;
     private array $camposAlternativas = ["alternativa1", "alternativa2", "alternativa3", "alternativa4"];
 
+
+
     public function __construct()
     {
 
@@ -25,6 +28,9 @@ class QuestaoController extends Controller
         $this->alternativaDao = new AlternativaDAO();
         $this->questaoService = new QuestaoService();
         $this->quizDao = new QuizDAO();
+
+
+
         $this->handleAction();
     }
 
@@ -140,7 +146,6 @@ class QuestaoController extends Controller
                     $imagemLogo = 'BASEURL_LOGO_PROJETO'; // Substitua pelo caminho real da imagem de fallback
                     echo '<p class="nomeAtributo labelQuestao">Imagem:<br><img src="' . $imagemLogo . '" class="imagemQuestao" alt="" width="100px"></p>';
                 }
-            
             }
         }
 

@@ -13,6 +13,9 @@ require_once(__DIR__ . "/../models/QuizModel.php");
 require_once(__DIR__ . "/../models/QuestaoModel.php");
 require_once(__DIR__ . "/../models/QuizQuestaoModel.php");
 require_once(__DIR__ . "/../models/EquipeUsuarioModel.php");
+require_once(__DIR__ . "/../dao/EquipeUsuarioDAO.php");
+require_once(__DIR__ . "/../dao/PartidaDAO.php");
+require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 
 
 
@@ -24,6 +27,9 @@ class JogarController extends Controller
     private AlternativaDAO $alternativaDao;
     private RespostaUsuarioDAO $respostaUsuarioDao;
     private RespostaUsuarioService $respostaUsuarioService;
+    private EquipeUsuarioDAO $equipeUsuarioDao;
+    private PartidaDAO $partidaDao;
+    private UsuarioDAO $usuarioDao;
 
     public function __construct()
     {
@@ -33,6 +39,9 @@ class JogarController extends Controller
         $this->alternativaDao = new AlternativaDAO();
         $this->respostaUsuarioDao = new RespostaUsuarioDAO();
         $this->respostaUsuarioService = new RespostaUsuarioService();
+        $this->equipeUsuarioDao = new EquipeUsuarioDAO();
+        $this->partidaDao = new PartidaDAO();
+        $this->usuarioDao = new UsuarioDAO();
 
         $this->handleAction();
     }
@@ -54,6 +63,41 @@ class JogarController extends Controller
 
 
         $this->loadView("partidaQuiz/partidaJOG.php", $dados, $msgErro, $msgSucesso);
+    }
+
+    protected function listarPontuacao(string $msgErro = "", string $msgSucesso = "")
+    {
+        $quiz = $this->findQuizById();
+        $questoes = $this->quizQuestaoDao->listByQuizJOG($quiz->getIdQuiz());
+
+        //Adicionar as alternativas em cada questão
+        foreach ($questoes as $questao) {
+            $listaAlt = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
+            $questao->setAlternativas($listaAlt);
+
+            //
+            $idEquipeUsuario = 1;
+            $respostasUsuario = $this->respostaUsuarioDao->findRespostaUsuario($questao->getIdQuestao(), $idEquipeUsuario, $quiz->getIdQuiz());
+
+            if ($respostasUsuario) {
+                $questao->setAcertou($respostasUsuario->getAcertou());
+                $questao->setIdAlternativaResposta($respostasUsuario->getIdAlternativa());
+            } else
+                $questao->setAcertou(0);
+        }
+
+        //$idResposta = $this->respostaUsuarioDao->findById();
+        //$respostasUsuario = $this->respostaUsuarioDao->findByIdRespostaUsuario(int $idResposta, int $idUsuario); // Substitua $userId pelo ID do usuário atual
+
+
+        //$dados["listaQuestoesQuiz"] = $this->quizQuestaoDao->listByQuiz($quiz->getIdQuiz());
+
+        $dados["questoes"] = $questoes;
+        $dados["quiz"] = $quiz;
+        // $dados["respostasUsuario"] = $respostasUsuario;
+
+
+        $this->loadView("partidaQuiz/pontuacaoPartidaJOG.php", $dados, $msgErro, $msgSucesso);
     }
 
     protected function save()
@@ -86,6 +130,11 @@ class JogarController extends Controller
                 //2- Adicionar o objeto no Array $respostas
                 $respostaUsuario = new RespostaUsuario();
                 $respostaUsuario->setIdQuestao($questao->getIdQuestao());
+                $respostaUsuario->setIdQuiz($quiz->getIdQuiz());
+
+
+                ///TODO equipe usuario, QUEM É O USUARIO DE ACORDO COM QUEM TA LOGADO??
+
                 $respostaUsuario->setIdEquipeUsuario(1);
                 $respostaUsuario->setIdAlternativa($idAlternativaResposta);
                 $respostaUsuario->setAcertou($questao->isAlternativaCertaById($idAlternativaResposta));
@@ -98,32 +147,41 @@ class JogarController extends Controller
 
         //Chamar o controller para verificar se todas as questoes foram respondidas
         $erros = $this->respostaUsuarioService->validarRespostaPreenchida($respostas, $questoes);
+        //print_r($erros);
+        //exit;
 
-        echo "<pre>" . print_r($erros, true) . "</pre>";
-        exit;
+
 
         //Persistir os dados
-
         if (empty($erros)) {
+            foreach ($respostas as $respostaUsuario) {
+                $this->respostaUsuarioDao->insertRespostaUsuario($respostaUsuario);
+            }
+
+            /*
             // Persiste o objeto
             try {
-                $this->respostaUsuarioDao->insertRespostaUsuario($respostaUsuario, $respostaUsuario->getIdQuestao(), $respostaUsuario->getIdAlternativa(), $respostaUsuario->getIdEquipeUsuario());
+                $this->respostaUsuarioDao->insertRespostaUsuario($respostaUsuario);
                 $msg = "Quiz salvo com sucesso.";
                 $this->listarQuestao("", $msg);
                 exit;
             } catch (PDOException $e) {
                 $erros[] = "Você não respondeu a todas as perguntas" . $e;
             }
+            */
+        } else { //Erro de validacão
+            $msgErro = implode("<br>", $erros);
+            $this->listarQuestao($msgErro);
         }
 
-        foreach ($respostas as $respostaUsuario) {
+        /*foreach ($respostas as $respostaUsuario) {
             $this->respostaUsuarioDao->insertRespostaUsuario(
                 $respostaUsuario->getIdQuestao(),
                 $respostaUsuario->getIdAlternativa(),
                 $respostaUsuario->getEquipeUsuario(),
                 $respostaUsuario->getAcertou()
             );
-        }
+        }*/
 
         //1- Chamar o respostaUsuarioDAO e passar o array de respostas
         //1.1 - No DAO, deve-se fazer um INSERT para cada objeto do array

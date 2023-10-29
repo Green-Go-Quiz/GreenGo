@@ -4,6 +4,7 @@ class RespostaUsuario
 {
     private $idRespostaUsuario;
     private $idQuestao;
+    private $idQuiz;
     private $idAlternativa;
     private $idEquipeUsuario;
     private $acertou;
@@ -148,6 +149,26 @@ class RespostaUsuario
     public function setEquipeUsuario($equipeUsuario)
     {
         $this->equipeUsuario = $equipeUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idQuiz
+     */
+    public function getIdQuiz()
+    {
+        return $this->idQuiz;
+    }
+
+    /**
+     * Set the value of idQuiz
+     *
+     * @return  self
+     */
+    public function setIdQuiz($idQuiz)
+    {
+        $this->idQuiz = $idQuiz;
 
         return $this;
     }

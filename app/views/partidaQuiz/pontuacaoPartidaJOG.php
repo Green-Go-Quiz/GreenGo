@@ -4,14 +4,14 @@
 <head>
     <?php require_once(__DIR__ . "/../../bootstrap/header.php"); ?>
 
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/jogo.css">
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>/views/css/pontuacao.css">
 </head>
 
 <body>
     <?php require_once(__DIR__ . "/../../bootstrap/navJOGADOR.php"); ?>
 
     <div class="container mt-4">
-        <h1 class="tituloPagina text-center">Quiz: <?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></h1>
+        <h1 class="tituloPagina text-center">Sua Pontuação no Quiz: <?= $dados['quiz'] ? $dados['quiz']->getNomeQuiz() : '---'; ?></h1>
 
         <?php if ($msgErro) : ?>
             <div class="alert alert-danger">
@@ -26,11 +26,19 @@
             $questoes = $dados['questoes'];
             if ($questoes) :
                 foreach ($questoes as $idxQuestao => $questao) :
+
             ?>
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <h3 id="quest" class="text-left tituloQuestao">
                                 Questão <span id="questionNumber"><?= $idxQuestao + 1 ?></span>
+                                <?php
+                                if ($questao->getAcertou()) {
+                                    echo '<span class="text-success"> ✅ Acertou!</span>';
+                                } else {
+                                    echo '<span class="text-danger"> ❌ Errou</span>';
+                                }
+                                ?>
                             </h3>
                         </div>
                     </div>
@@ -49,7 +57,6 @@
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group-toggle" data-toggle="buttons">
@@ -64,19 +71,28 @@
                                     if ($idxAlt === $halfTotal) {
                                         echo '</div></div><div class="col-md-6"><div class="btn-group-toggle" data-toggle="buttons">';
                                     }
+
+
                                 ?>
-                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> <?= $alternativa->getDescricaoAlternativa(); ?>
-                                        <input type="radio" id="altQuestao_<?= $questao->getIdQuestao() ?>" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>">
-                                    </label>
-                                <?php endforeach; ?>
+                                    <?php if ($alternativa->getAlternativaCerta()) : ?>
+                                        <label class="btn botaoCerto descricaoAlternativa mb-3 d-block btn-lg disabled "> <?= $alternativa->getDescricaoAlternativa(); ?>
+                                        <?php elseif (!$questao->getAcertou() && $alternativa->getIdAlternativa() == $questao->getIdAlternativaResposta()) : ?>
+                                            <label class="btn botaoErrado descricaoAlternativa mb-3 d-block btn-lg disabled "> <?= $alternativa->getDescricaoAlternativa(); ?>
+                                            <?php else : ?>
+                                                <label class="btn botaoAlternativa descricaoAlternativa mb-3 d-block btn-lg disabled "> <?= $alternativa->getDescricaoAlternativa(); ?>
+                                                <?php endif; ?>
+
+                                                <input type="radio" id="altQuestao_<?= $questao->getIdQuestao() ?>" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>" disabled>
+                                                </label>
+                                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-
             <?php
                 endforeach;
             endif;
             ?>
+
 
             <div class="text-left mt-4 mb-4">
                 <a href="javascript:history.back()" class="btn btn-secondary btn-lg botaoVoltar">Voltar</a>

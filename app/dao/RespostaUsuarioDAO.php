@@ -74,17 +74,19 @@ class RespostaUsuarioDAO
         return $this->mapRespostaUsuario($result);
     }
 
-    public function insertRespostaUsuario(RespostaUsuario $respostaUsuario, int $idQuestao, int $idAlternativa, int $idEquipeUsuario)
+    public function insertRespostaUsuario(RespostaUsuario $respostaUsuario)
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO resposta_usuario (idQuestao, idAlternativa,idEquipeUsuario, acertou) VALUES (:idQuestao, :idAlternativa, :idEquipeUsuario, :acertou)";
+        $sql = "INSERT INTO resposta_usuario (idQuestao, idQuiz, idAlternativa, idEquipeUsuario, acertou)" .
+            " VALUES (:idQuestao, :idQuiz, :idAlternativa, :idEquipeUsuario, :acertou)";
 
         $stm = $conn->prepare($sql);
 
-        $stm->bindValue(":idQuestao", $idQuestao);
-        $stm->bindValue(":idAlternativa", $idAlternativa);
-        $stm->bindValue(":idEquipeUsuario", $idEquipeUsuario);
+        $stm->bindValue(":idQuestao", $respostaUsuario->getIdQuestao());
+        $stm->bindValue(":idQuiz", $respostaUsuario->getidQuiz());
+        $stm->bindValue(":idAlternativa", $respostaUsuario->getIdAlternativa());
+        $stm->bindValue(":idEquipeUsuario", $respostaUsuario->getIdEquipeUsuario());
         $stm->bindValue(":acertou", $respostaUsuario->getAcertou());
 
 
@@ -110,19 +112,26 @@ class RespostaUsuarioDAO
         return $this->mapRespostaUsuario($result);
     }
 
-    public function findByIdRespostaUsuario(int $idResposta, int $idUsuario)
+    public function findRespostaUsuario(int $idQuestao, int $idEquipeUsuario, int $idQuiz)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM resposta_usuario WHERE idResposta = :idResposta AND idUsuario = :idUsuario";
+        $sql = "SELECT * FROM resposta_usuario 
+                WHERE idQuestao = :idQuestao AND idEquipeUsuario = :idEquipeUsuario AND idQuiz = :idQuiz";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue(":idResposta", $idResposta);
-        $stm->bindValue(":idUsuario", $idUsuario);
+        $stm->bindValue(":idQuestao", $idQuestao);
+        $stm->bindValue(":idEquipeUsuario", $idEquipeUsuario);
+        $stm->bindValue(":idQuiz", $idQuiz);
+
         $stm->execute();
 
         $result = $stm->fetch(PDO::FETCH_ASSOC);
 
-        return $result ? $this->mapRespostaUsuario($result) : null;
+        if (!$result) {
+            return null;
+        }
+
+        return $this->mapRespostaUsuario($result);
     }
 }

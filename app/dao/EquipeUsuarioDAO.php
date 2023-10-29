@@ -4,9 +4,13 @@
 include_once(__DIR__ . "/../connection/Connection.php");
 include_once(__DIR__ . "/../models/UsuarioModel.php");
 
-class UsuarioDAO
+class EquipeUsuarioDAO
 {
     private const SQL_USUARIO = "SELECT * FROM usuario u";
+    private const SQL_EQUIPE_USUARIO = "SELECT e.idEquipe,pe.idPartida, usuario.* FROM partida_usuario pu 
+    JOIN usuario ON pu.idUsuario = usuario.idUsuario 
+    JOIN partida_equipe pe ON pu.idPartidaEquipe = pe.idPartidaEquipe 
+    JOIN equipe e ON pe.idEquipe = e.idEquipe";
 
     private function mapUsuarios($resultSql)
     {
@@ -30,8 +34,8 @@ class UsuarioDAO
     public function list()
     {
         $conn = Connection::getConn();
-        $sql = UsuarioDAO::SQL_USUARIO .
-            " ORDER BY u.nomeUsuario";
+        $sql = self::SQL_USUARIO;
+        " ORDER BY u.nomeUsuario";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
@@ -56,6 +60,49 @@ class UsuarioDAO
             " encontrado para o ID " . $idUsuario);
     }
 
+    public function findUsers($idEquipe, $idPartida)
+    {
+        $conn = Connection::getConn();
+
+        $sql = UsuarioDAO::SQL_EQUIPE_USUARIO .
+            " WHERE e.idEquipe = ? AND pe.idPartida = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idEquipe, $idPartida]);
+        $result = $stmt->fetchAll();
+
+        $usuarios = $this->mapUsuarios($result);
+
+        return $usuarios;
+    }
+
+    public function findPartida($idEquipe)
+    {
+        $conn = Connection::getConn();
+
+        $sql = UsuarioDAO::SQL_EQUIPE_USUARIO .
+            " WHERE e.idEquipe = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idEquipe]);
+        $result = $stmt->fetchAll();
+
+        $usuarios = $this->mapUsuarios($result);
+
+        return $usuarios;
+    }
+
+    public function findUserByType($tipo)
+    {
+        $conn = Connection::getConn();
+        $sql = UsuarioDAO::SQL_USUARIO .
+            " WHERE u.tipoUsuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$tipo]);
+        $result = $stm->fetchAll();
+        return $this->mapUsuarios($result);
+    }
+
     public function findByLoginSenha(string $login, string $senha)
     {
         $conn = Connection::getConn();
@@ -64,9 +111,7 @@ class UsuarioDAO
         $stmt->execute([$login, $login]);
         $result = $stmt->fetchAll();
 
-
         $usuarios = $this->mapUsuarios($result);
-
         foreach ($usuarios as $usuario) {
             $hashSenhaArmazenada = $usuario->getSenha();
             if (password_verify($senha, $hashSenhaArmazenada)) {
@@ -83,35 +128,16 @@ class UsuarioDAO
         $senha = $usuario->getSenha();
 
         $usuario = $this->findByLoginSenha($email_or_login, $senha);
+
         if ($usuario == null) {
             $aviso = "E-mail ou Senha incorretos!!!";
             header('location: login.php?aviso=' . urlencode($aviso));
             exit;
         } else {
-            $this->createSession($usuario);
+            return $usuario;
         }
     }
 
-    public function createSession(Usuario $usuario)
-    {
-
-        session_start();
-        $_SESSION['ID'] = $usuario->getIdUsuario();
-        $_SESSION['NOME'] = $usuario->getNomeUsuario();
-        $_SESSION['TIPO'] = $usuario->getTipoUsuario();
-
-        $tipo = $usuario->getTipoUsuario();
-
-
-
-        if ($tipo == 1) {
-            header("location: ../indexJOG.php");
-        } else if ($tipo == 2) {
-            header("location: ../indexADM.php");
-        } else {
-            echo ("implementar professor!");
-        }
-    }
 
     public function manterSessaoADM($nomeADM)
     {

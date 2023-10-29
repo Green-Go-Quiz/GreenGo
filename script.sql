@@ -642,7 +642,6 @@ CREATE TABLE IF NOT EXISTS resposta_usuario (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)  
 ENGINE = InnoDB;
-ALTER TABLE resposta_usuario ADD CONSTRAINT uk_resposta_usuario UNIQUE(idQuestao, idEquipeUsuario);
 
 ALTER TABLE resposta_usuario ADD
   CONSTRAINT fk_resposta_usuario_equipe_usuario
@@ -650,6 +649,14 @@ ALTER TABLE resposta_usuario ADD
     REFERENCES equipe_usuario (idEquipeUsuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
+
+ALTER TABLE resposta_usuario ADD COLUMN idQuiz INT NOT NULL;
+ALTER TABLE resposta_usuario ADD CONSTRAINT fk_resposta_usuario_quiz FOREIGN KEY (idQuiz)
+ REFERENCES quiz (idQuiz)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;;
+
+ALTER TABLE resposta_usuario ADD CONSTRAINT uk_resposta_usuario UNIQUE(idQuestao, idEquipeUsuario, idQuiz);
 
 -- -----------------------------------------------------
 -- POPULARIZANDO O BANCO

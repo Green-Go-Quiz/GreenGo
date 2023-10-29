@@ -50,12 +50,14 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
-                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>" class="btn btn-sm btn-success botaoEspecies">Jogar</a>
+                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies mx-auto">Jogar</a>
+                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarPontuacao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoPontuacao mx-auto">Pontuação</a>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
             <?php
