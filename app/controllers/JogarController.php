@@ -49,6 +49,7 @@ class JogarController extends Controller
     protected function listarQuestao(string $msgErro = "", string $msgSucesso = "")
     {
         $quiz = $this->findQuizById();
+        $idPartida = $_GET['idPartida'];
         $questoes = $this->quizQuestaoDao->listByQuizJOG($quiz->getIdQuiz());
         //Adicionar as alternativas em cada questão
         foreach ($questoes as $questao) {
@@ -60,6 +61,7 @@ class JogarController extends Controller
 
         $dados["questoes"] = $questoes;
         $dados["quiz"] = $quiz;
+        $dados["idPartida"] = $idPartida;
 
 
         $this->loadView("partidaQuiz/partidaJOG.php", $dados, $msgErro, $msgSucesso);
@@ -70,13 +72,24 @@ class JogarController extends Controller
         $quiz = $this->findQuizById();
         $questoes = $this->quizQuestaoDao->listByQuizJOG($quiz->getIdQuiz());
 
+
+        $idPartida = $_GET['idPartida'];
+        session_start();
+        $idUsuarioLogado = $_SESSION['ID'];
+
+        $idEquipeUsuario = $this->equipeUsuarioDao->findIdEquipeUsuario($idUsuarioLogado, $idPartida);
+        if (!$idEquipeUsuario) {
+            echo "Erro ao carregar o ID do usuário na equipe.";
+            exit;
+        }
+
         //Adicionar as alternativas em cada questão
+        $pontuacaoTotal = 0;
         foreach ($questoes as $questao) {
             $listaAlt = $this->alternativaDao->findAllByQuestao($questao->getIdQuestao());
             $questao->setAlternativas($listaAlt);
 
             //
-            $idEquipeUsuario = 1;
             $respostasUsuario = $this->respostaUsuarioDao->findRespostaUsuario($questao->getIdQuestao(), $idEquipeUsuario, $quiz->getIdQuiz());
 
             if ($respostasUsuario) {
@@ -84,6 +97,9 @@ class JogarController extends Controller
                 $questao->setIdAlternativaResposta($respostasUsuario->getIdAlternativa());
             } else
                 $questao->setAcertou(0);
+
+            if ($questao->getAcertou())
+                $pontuacaoTotal += $questao->getPontuacao();
         }
 
         //$idResposta = $this->respostaUsuarioDao->findById();
@@ -94,6 +110,8 @@ class JogarController extends Controller
 
         $dados["questoes"] = $questoes;
         $dados["quiz"] = $quiz;
+        $dados["pontuacao"] = $pontuacaoTotal;
+        $dados['idPartida'] = $idPartida;
         // $dados["respostasUsuario"] = $respostasUsuario;
 
 
@@ -102,8 +120,19 @@ class JogarController extends Controller
 
     protected function save()
     {
+
         $quiz = $this->findQuizById();
         $questoes = $this->quizQuestaoDao->listByQuizJOG($quiz->getIdQuiz());
+
+        $idPartida = $_GET['idPartida'];
+        session_start();
+        $idUsuarioLogado = $_SESSION['ID'];
+
+        $idEquipeUsuario = $this->equipeUsuarioDao->findIdEquipeUsuario($idUsuarioLogado, $idPartida);
+        if (!$idEquipeUsuario) {
+            echo "Erro ao carregar o ID do usuário na equipe.";
+            exit;
+        }
 
         //Adicionar as alternativas em cada questão
         foreach ($questoes as $questao) {
@@ -133,9 +162,7 @@ class JogarController extends Controller
                 $respostaUsuario->setIdQuiz($quiz->getIdQuiz());
 
 
-                ///TODO equipe usuario, QUEM É O USUARIO DE ACORDO COM QUEM TA LOGADO??
-
-                $respostaUsuario->setIdEquipeUsuario(1);
+                $respostaUsuario->setIdEquipeUsuario($idEquipeUsuario);
                 $respostaUsuario->setIdAlternativa($idAlternativaResposta);
                 $respostaUsuario->setAcertou($questao->isAlternativaCertaById($idAlternativaResposta));
                 $respostas[$idQuestao] = $respostaUsuario;
@@ -157,6 +184,9 @@ class JogarController extends Controller
             foreach ($respostas as $respostaUsuario) {
                 $this->respostaUsuarioDao->insertRespostaUsuario($respostaUsuario);
             }
+
+            $url = BASEURL . "/controllers/JogarController.php?action=listarPontuacao&id=" . $quiz->getIdQuiz() . "&idPartida=" . $idPartida;
+            header("location: " . $url);
 
             /*
             // Persiste o objeto

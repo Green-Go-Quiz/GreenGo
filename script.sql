@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `alternativa` (
   CONSTRAINT `fk_alternativa_questao1`
     FOREIGN KEY (`idQuestao`)
     REFERENCES `questao` (`idQuestao`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

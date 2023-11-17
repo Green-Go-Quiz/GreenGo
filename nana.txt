@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+           
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Go</title>
+
+    <!--FAVICON-->
+    <!--link rel="icon" href="../public/favicon.svg--">
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/GreenGo/app/views/css/cabecalho.css">
+    <!--scripts-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Progress bar -->
+
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <link rel="stylesheet" href="/GreenGo/app/views/css/jogo.css">
+</head>
+
+<body>
+    <div class="col-xs-12" id="nav-container">
+    <div id="itensmenu">
+        <nav class="navbar navbar-expand-lg " id="menu">
+            <a href="/GreenGo/app/views/projetoADM.php" class="nav-brand">
+                <div class="row justify-content-md-left">
+                    <div id="imgmenu">
+                        <img class="img-responsive" src="../public/logo-green.svg" id="logo">
+                    </div>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> <img src="../public/menu.svg" id="menuicon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+                <div class="navbar-nav">
+
+                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">Projeto</a>
+                    <a class="nav-item nav-link" id="projeto-menu" href="../controllers/PartidaQuizController.php?action=listar">Jogar</a>
+
+                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> Jogador </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+    <div class="container mt-4">
+        <h1 class="tituloPagina text-center">Quiz: Campo Florido</h1>
+
+                    <div class="alert alert-danger">
+                Não esqueça de responder a Pergunta 2, ela é obrigatória!<br>Não esqueça de responder a Pergunta 3, ela é obrigatória!<br>Não esqueça de responder a Pergunta 4, ela é obrigatória!<br>Não esqueça de responder a Pergunta 5, ela é obrigatória!<br>Não esqueça de responder a Pergunta 6, ela é obrigatória!            </div>
+        
+        <form action="JogarController.php?action=save&id=15" method="POST">
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">1</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Qual das seguintes espécies é conhecida por sua incrível adaptação ao ambiente desértico?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_f1ba0b47-fd9e-9582-26a7-e8ddf2d45634.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Cactacea aculeata                                        <input type="radio" id="altQuestao_4" name="altQuestao_4" value="13" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Ficus umbellata                                        <input type="radio" id="altQuestao_4" name="altQuestao_4" value="14" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Salix arenaria                                        <input type="radio" id="altQuestao_4" name="altQuestao_4" value="15" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Pinus monticola                                        <input type="radio" id="altQuestao_4" name="altQuestao_4" value="16" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">2</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Qual das seguintes alternativas é uma espécie de briófita comum em áreas úmidas e pantanosas?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_de8de40e-5f79-c539-cae0-5d663e947cae.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Musgo-d'água (Fontinalis antipyretica)                                        <input type="radio" id="altQuestao_5" name="altQuestao_5" value="17" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Samambaia-real (Osmunda regalis)                                        <input type="radio" id="altQuestao_5" name="altQuestao_5" value="18" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Bambu (Bambusoideae)                                        <input type="radio" id="altQuestao_5" name="altQuestao_5" value="19" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Trevo-de-quatro-folhas (Oxalis tetraphylla)                                        <input type="radio" id="altQuestao_5" name="altQuestao_5" value="20" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">3</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Qual é o nome científico da pitangueira?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_519dd1fb-50d9-6ef1-5583-37e53113a3a9.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Eugenia uniflora                                        <input type="radio" id="altQuestao_14" name="altQuestao_14" value="77" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Citrus sinensis                                        <input type="radio" id="altQuestao_14" name="altQuestao_14" value="78" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Morus alba                                        <input type="radio" id="altQuestao_14" name="altQuestao_14" value="79" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Solanum lycopersicum                                        <input type="radio" id="altQuestao_14" name="altQuestao_14" value="80" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">4</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Qual é o nome científico do girassol?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_67c43e3b-be9f-f543-fe88-1d62ef4c6222.JPG" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Helianthus annuus                                        <input type="radio" id="altQuestao_15" name="altQuestao_15" value="81" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Rosa chinensis                                        <input type="radio" id="altQuestao_15" name="altQuestao_15" value="82" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Bellis perennis                                        <input type="radio" id="altQuestao_15" name="altQuestao_15" value="83" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Ficus benjamina                                        <input type="radio" id="altQuestao_15" name="altQuestao_15" value="84" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">5</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Onde ocorre a fotossíntese nas plantas?</h4>
+                            </div>
+                                                    </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Nas folhas                                        <input type="radio" id="altQuestao_200" name="altQuestao_200" value="45" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Nas raízes                                        <input type="radio" id="altQuestao_200" name="altQuestao_200" value="46" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> No caule                                        <input type="radio" id="altQuestao_200" name="altQuestao_200" value="47" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Nos frutos                                        <input type="radio" id="altQuestao_200" name="altQuestao_200" value="48" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">6</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">O que é a clorofila?</h4>
+                            </div>
+                                                    </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Um tipo de fungo                                        <input type="radio" id="altQuestao_400" name="altQuestao_400" value="53" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Um pigmento verde presente nas plantas                                        <input type="radio" id="altQuestao_400" name="altQuestao_400" value="54" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Uma parte das raízes das plantas                                        <input type="radio" id="altQuestao_400" name="altQuestao_400" value="55" > </label>
+                                                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> Um tipo de inseto                                        <input type="radio" id="altQuestao_400" name="altQuestao_400" value="56" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+            
+            <div class="text-left mt-4 mb-4">
+                <a href="javascript:history.back()" class="btn btn-secondary btn-lg botaoVoltar">Voltar</a>
+                <button type="submit" class="btn btn-secondary btn-lg botaoGravar">Gravar</button>
+            </div>
+
+        </form>
+    </div>
+    <footer class="footer">
+    <div class="container">
+        &copy; 2023 Green Go - Todos os direitos reservados
+    </div>
+</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="js/quiz.js"></script>
+
+</body>
+
+</html>

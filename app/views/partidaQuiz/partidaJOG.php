@@ -21,7 +21,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="JogarController.php?action=save&id=<?php echo $dados["quiz"]->getIdQuiz() ?>" method="POST">
+        <form action="JogarController.php?action=save&id=<?php echo $dados["quiz"]->getIdQuiz() ?>&idPartida=<?= $dados["idPartida"] ?>" method="POST">
             <?php
             $questoes = $dados['questoes'];
             if ($questoes) :
@@ -65,9 +65,12 @@
                                         echo '</div></div><div class="col-md-6"><div class="btn-group-toggle" data-toggle="buttons">';
                                     }
                                 ?>
-                                    <label class="btn botaoAlternativa descricaoAlternativa  mb-3 d-block btn-lg"> <?= $alternativa->getDescricaoAlternativa(); ?>
-                                        <input type="radio" id="altQuestao_<?= $questao->getIdQuestao() ?>" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>">
-                                    </label>
+                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> <?= $alternativa->getDescricaoAlternativa(); ?>
+                                        <input type="radio" id="altQuestao_<?= $questao->getIdQuestao() ?>" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>" <?php
+                                                                                                                                                                                                                if (isset($respostas[$questao->getIdQuestao()]) && $alternativa->getIdAlternativa() == $respostas[$questao->getIdQuestao()]->getIdAlternativa()) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                ?>> </label>
                                 <?php endforeach; ?>
                             </div>
                         </div>

@@ -7,6 +7,8 @@ if (!isset($_SESSION["tempo"])) {
 require_once(__DIR__ . "/../controllers/Controller.php");
 require_once(__DIR__ . "/../dao/QuizQuestaoDAO.php");
 require_once(__DIR__ . "/../dao/PartidaQuizDAO.php");
+require_once(__DIR__ . "/../dao/EquipeUsuarioDAO.php");
+require_once(__DIR__ . "/../dao/RespostaUsuarioDAO.php");
 require_once(__DIR__ . "/../dao/QuizDAO.php");
 require_once(__DIR__ . "/../dao/ZonaDAO.php");
 require_once(__DIR__ . "/../dao/PartidaDAO.php");
@@ -24,6 +26,8 @@ class PartidaQuizController extends Controller
     private PartidaDAO $partidaDao;
     private QuizDAO $quizDao;
     private ZonaDAO $zonaDao;
+    private EquipeUsuarioDAO $equipeUsuarioDao;
+    private RespostaUsuarioDAO $respostaUsuarioDao;
 
     private PartidaQuiz $partidaQuiz; // Adicione esta linha
 
@@ -37,6 +41,10 @@ class PartidaQuizController extends Controller
         $this->zonaDao = new ZonaDAO();
         $this->partidaQuiz = new PartidaQuiz();
         $this->partida = new Partida();
+        $this->respostaUsuarioDao = new RespostaUsuarioDAO();
+        $this->equipeUsuarioDao = new EquipeUsuarioDAO();
+
+
         $this->tempoPartida = $this->partida->getTempoPartida();
 
         $this->handleAction();
@@ -64,6 +72,25 @@ class PartidaQuizController extends Controller
     {
         $partida = $this->findPartidaById();
         $quizzes = $this->partidaQuizDao->listByPartida($partida->getIdPartida());
+
+        //Verificar o ID do jogador na partida
+        if (session_status() != PHP_SESSION_ACTIVE)
+            session_start();
+        $idUsuarioLogado = $_SESSION['ID'];
+
+        $idEquipeUsuario = $this->equipeUsuarioDao->findIdEquipeUsuario($idUsuarioLogado, $partida->getIdPartida());
+        if (!$idEquipeUsuario) {
+            echo "Erro ao carregar o ID do usuário na equipe.";
+            exit;
+        }
+
+        //Verificar se o quiz já foi jogado
+        foreach ($quizzes as $q) {
+            $quantidade =  $this->respostaUsuarioDao->findQuantidadeRespostaUsuario($idEquipeUsuario, $q->getIdQuiz());
+            $q->setJogado($quantidade > 0);
+        }
+
+
         $dados["quizzes"] = $quizzes;
         $dados["partida"] = $partida;
 

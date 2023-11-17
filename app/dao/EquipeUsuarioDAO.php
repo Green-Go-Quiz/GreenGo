@@ -31,6 +31,26 @@ class EquipeUsuarioDAO
         return $usuarios;
     }
 
+    public function findIdEquipeUsuario($idUsuario, $idPartida)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT eq.idEquipeUsuario 
+               FROM equipe_usuario eq
+               JOIN equipe e ON (e.idEquipe = eq.idEquipe)
+               JOIN partida_equipe pe ON (pe.idEquipe = e.idEquipe AND pe.idPartida = ?)
+               WHERE eq.idUsuario = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idPartida, $idUsuario]);
+        $result = $stm->fetchAll();
+
+        if ($result)
+            return $result[0]['idEquipeUsuario'];
+
+        return null;
+    }
+
     public function list()
     {
         $conn = Connection::getConn();
@@ -42,6 +62,7 @@ class EquipeUsuarioDAO
         return $this->mapUsuarios($result);
     }
 
+    /*
     public function findById($idUsuario)
     {
         $conn = Connection::getConn();
@@ -201,4 +222,5 @@ class EquipeUsuarioDAO
         $stmt = $conn->prepare($sql);
         $stmt->execute([$usuario->getIdUsuario()]);
     }
+    */
 }

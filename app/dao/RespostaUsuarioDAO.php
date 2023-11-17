@@ -134,4 +134,23 @@ class RespostaUsuarioDAO
 
         return $this->mapRespostaUsuario($result);
     }
+
+
+    public function findQuantidadeRespostaUsuario(int $idEquipeUsuario, int $idQuiz)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT count(*) as quantidade FROM resposta_usuario 
+                WHERE idEquipeUsuario = :idEquipeUsuario AND idQuiz = :idQuiz";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":idEquipeUsuario", $idEquipeUsuario);
+        $stm->bindValue(":idQuiz", $idQuiz);
+
+        $stm->execute();
+
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $result['quantidade'];
+    }
 }

@@ -52,8 +52,12 @@
                             <div class="card-footer">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
-                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies mx-auto">Jogar</a>
-                                        <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarPontuacao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoPontuacao mx-auto">Pontuação</a>
+                                        <?php if (!$quiz->getJogado()) : ?>
+                                            <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarQuestao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies mx-auto">Jogar</a>
+                                        <?php else : ?>
+                                            <a href="<?= BASEURL ?>/controllers/JogarController.php?action=listarPontuacao&id=<?= $quiz->getIdQuiz() ?>&idPartida=<?= $dados['partida']->getIdPartida() ?>" class="btn btn-sm btn-success botaoPontuacao mx-auto">Pontuação</a>
+                                        <?php endif; ?>
+
                                     </div>
                                 </div>
                             </div>

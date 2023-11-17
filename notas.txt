@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+           
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Go</title>
+
+    <!--FAVICON-->
+    <!--link rel="icon" href="../public/favicon.svg--">
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/GreenGo/app/views/css/cabecalho.css">
+    <!--scripts-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Progress bar -->
+
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <link rel="stylesheet" href="/GreenGo/app/views/css/jogo.css">
+</head>
+
+<body>
+    <div class="col-xs-12" id="nav-container">
+    <div id="itensmenu">
+        <nav class="navbar navbar-expand-lg " id="menu">
+            <a href="/GreenGo/app/views/projetoADM.php" class="nav-brand">
+                <div class="row justify-content-md-left">
+                    <div id="imgmenu">
+                        <img class="img-responsive" src="../public/logo-green.svg" id="logo">
+                    </div>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> <img src="../public/menu.svg" id="menuicon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+                <div class="navbar-nav">
+
+                    <a class="nav-item nav-link" id="projeto-menu" href="../views/projeto.php">Projeto</a>
+                    <a class="nav-item nav-link" id="projeto-menu" href="../controllers/PartidaQuizController.php?action=listar">Jogar</a>
+
+                    <a class="nav-item nav-link" id="botaoentrar" href="../views/users/login.php"> Jogador </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+    <div class="container mt-4">
+        <h1 class="tituloPagina text-center">Quiz: Amaro Macedo: Conheça as Plantas</h1>
+
+                    <div class="alert alert-danger">
+                Não esqueça de responder a Pergunta 3, ela é obrigatória!<br>Não esqueça de responder a Pergunta 4, ela é obrigatória!<br>Não esqueça de responder a Pergunta 5, ela é obrigatória!            </div>
+        
+        <form action="JogarController.php?action=save&id=29&idPartida=31" method="POST">
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">1</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Que árvore é esta?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_39d5ef97-3c6f-177c-d79c-9c675a8dd64d.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Palmeira                                        <input type="radio" id="altQuestao_2" name="altQuestao_2" value="5" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Ipê                                        <input type="radio" id="altQuestao_2" name="altQuestao_2" value="6" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Pinheiro                                        <input type="radio" id="altQuestao_2" name="altQuestao_2" value="7" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Coqueiro                                        <input type="radio" id="altQuestao_2" name="altQuestao_2" value="8" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">2</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Por que as plantas são verdes?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/logo\icon.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Por conta do solo                                        <input type="radio" id="altQuestao_3" name="altQuestao_3" value="9" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Por conta da clorofila                                        <input type="radio" id="altQuestao_3" name="altQuestao_3" value="10" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Somente árvores frutífera são verdes                                        <input type="radio" id="altQuestao_3" name="altQuestao_3" value="11" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Por conta da influência lunar                                        <input type="radio" id="altQuestao_3" name="altQuestao_3" value="12" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">3</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">O que são gimnospermas?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_413e1619-b48d-a2e9-5922-bd0a40ed4c37.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> São plantas com flores que produzem sementes dentro de frutos                                        <input type="radio" id="altQuestao_9" name="altQuestao_9" value="57" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> São plantas que produzem sementes nuas, ou seja, sem frutos                                        <input type="radio" id="altQuestao_9" name="altQuestao_9" value="58" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> São plantas que não produzem sementes                                        <input type="radio" id="altQuestao_9" name="altQuestao_9" value="59" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> São plantas aquáticas                                        <input type="radio" id="altQuestao_9" name="altQuestao_9" value="60" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">4</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">Quais são os grupos principais de gimnospermas?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_053ce7a0-ac51-f489-0904-6f8de61d5603.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Coníferas, cicadáceas, gnetófitas e ginkgófitas                                        <input type="radio" id="altQuestao_11" name="altQuestao_11" value="65" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Rosa, margarida, girassol e lírio                                        <input type="radio" id="altQuestao_11" name="altQuestao_11" value="66" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Orquídeas, samambaias, musgos e hepáticas                                        <input type="radio" id="altQuestao_11" name="altQuestao_11" value="67" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Bananeira, abacateiro, pereira e maçãzeira                                        <input type="radio" id="altQuestao_11" name="altQuestao_11" value="68" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+                                <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 id="quest" class="text-left tituloQuestao">
+                                Questão <span id="questionNumber">5</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-left mb-4">
+                                <h4 class="descricaoQuestao">O que caracteriza as suculentas em termos de armazenamento de água?</h4>
+                            </div>
+                            <img src="/GreenGo/app/../arquivos/imagem_340e01f3-0384-69ff-599e-9982a7df1d27.jpg" alt="Question Image" class="imagemPequena img-fluid mx-auto d-block mb-4">                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Elas não armazenam água                                        <input type="radio" id="altQuestao_17" name="altQuestao_17" value="89" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Elas armazenam água em suas raízes                                        <input type="radio" id="altQuestao_17" name="altQuestao_17" value="90" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Elas armazenam água em suas folhas, caules ou raízes                                        <input type="radio" id="altQuestao_17" name="altQuestao_17" value="91" > </label>
+                                                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> Elas armazenam água em suas flores                                        <input type="radio" id="altQuestao_17" name="altQuestao_17" value="92" > </label>
+                                                            </div>
+                        </div>
+                    </div>
+
+            
+            <div class="text-left mt-4 mb-4">
+                <a href="javascript:history.back()" class="btn btn-secondary btn-lg botaoVoltar">Voltar</a>
+                <button type="submit" class="btn btn-secondary btn-lg botaoGravar">Gravar</button>
+            </div>
+
+        </form>
+    </div>
+    <footer class="footer">
+    <div class="container">
+        &copy; 2023 Green Go - Todos os direitos reservados
+    </div>
+</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="js/quiz.js"></script>
+
+</body>
+
+</html>

@@ -10,6 +10,7 @@ class Quiz
     private $quantTempo;
     private $questoes; // Array para armazenar as questões relacionadas
     private $idZona;
+    private $jogado; // Atributo que indica se o quiz já foi jogado pelo usuário logado
 
     // Propriedade relacionada com a tabela "zona"
     private $zona;
@@ -175,18 +176,38 @@ class Quiz
 
         return $this;
     }
-    
-    public function getNomeQuizTruncada()
-{
-       $Nome = $this->nomeQuiz;
 
-    // Verifica se a descrição é maior que 125 caracteres
-    if (strlen($Nome) > 20) {
-        // Trunca a descrição para 125 caracteres e adiciona três pontos (...).
-        $Nome = substr($Nome, 0, 20) . '...';
+    public function getNomeQuizTruncada()
+    {
+        $Nome = $this->nomeQuiz;
+
+        // Verifica se a descrição é maior que 125 caracteres
+        if (strlen($Nome) > 20) {
+            // Trunca a descrição para 125 caracteres e adiciona três pontos (...).
+            $Nome = substr($Nome, 0, 20) . '...';
+        }
+
+        return $Nome;
     }
 
-    return $Nome;
-}
 
+    /**
+     * Get the value of jogado
+     */
+    public function getJogado()
+    {
+        return $this->jogado;
+    }
+
+    /**
+     * Set the value of jogado
+     *
+     * @return  self
+     */
+    public function setJogado($jogado)
+    {
+        $this->jogado = $jogado;
+
+        return $this;
+    }
 }

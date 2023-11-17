@@ -55,6 +55,9 @@
             </tbody>
         </table>
     </div>
+    <div class="text-left mt-4 mb-4">
+        <a href="<?= BASEURL ?>/controllers/PartidaQuizController.php?action=listarQuiz&id=<?= $partidaQuiz->getIdPartida() ?>" class="btn btn-sm btn-success botaoEspecies">Voltar</a>
+    </div>
 </body>
 
 
