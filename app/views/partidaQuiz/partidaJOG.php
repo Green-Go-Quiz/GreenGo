@@ -65,12 +65,14 @@
                                         echo '</div></div><div class="col-md-6"><div class="btn-group-toggle" data-toggle="buttons">';
                                     }
                                 ?>
-                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block" active> <?= $alternativa->getDescricaoAlternativa(); ?>
+                                    <label class="btn btn-light descricaoAlternativa mb-3 d-block">
+                                        <?= $alternativa->getDescricaoAlternativa(); ?>
                                         <input type="radio" id="altQuestao_<?= $questao->getIdQuestao() ?>" name="altQuestao_<?= $questao->getIdQuestao() ?>" value="<?= $alternativa->getIdAlternativa() ?>" <?php
                                                                                                                                                                                                                 if (isset($respostas[$questao->getIdQuestao()]) && $alternativa->getIdAlternativa() == $respostas[$questao->getIdQuestao()]->getIdAlternativa()) {
                                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                ?>> </label>
+                                                                                                                                                                                                                ?>>
+                                    </label>
                                 <?php endforeach; ?>
                             </div>
                         </div>
