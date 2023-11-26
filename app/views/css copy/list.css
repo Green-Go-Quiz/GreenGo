@@ -1,0 +1,225 @@
+:root {
+  --principal: hsl(150, 46%, 37%);
+  --verdao: #04574d;
+  --verdinho: #9acfb7;
+  --verde: #80d395;
+  --branco: #ebf0f1;
+  --branquinho: #ebf0f14b;
+  --destaque: #f58c95;
+  --rosinha: #f0b6bc;
+  --cinza: #586660;
+  --cinzinha: #d3dadb;
+
+  width: 100%;
+  height: 100%;
+
+  font-family: Poppins-regular, Roboto;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fontes/Poppins-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-regular";
+  src: url("../fontes/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-medium";
+  src: url("../fontes/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-semibold";
+  src: url("../fontes/Poppins-SemiBold.ttf");
+}
+
+.tituloPagina {
+  font-weight: 600;
+  color: var(--principal);
+  font-family: "Poppins";
+}
+.nomeCard {
+  font-weight: 900;
+  color: var(--verdao);
+  font-family: "Poppins";
+}
+
+.nomeAtributo {
+  font-weight: 700;
+  color: var(--verdao);
+  font-family: "Poppins";
+}
+
+.teste {
+  font-weight: 500;
+  color: #000000;
+  font-family: "Poppins";
+}
+
+.dadoAtributo {
+  font-weight: 500;
+  color: var(--verdao);
+  font-family: "Poppins-regular";
+}
+
+.nomeBotaoEspecifico {
+  font-weight: 900;
+  font-size: 25px;
+  color: var(--verdao);
+  font-family: "Poppins";
+}
+
+/* Remover bordas dos cards */
+.cardInserido {
+  border: none;
+  background-color: var(
+    --branco
+  ); /* Definir a cor de fundo padrão como cinzinha */
+  transition: background-color 0.9s ease; /* Adicione a transição para a propriedade de cor de fundo */
+  border-radius: 7px; /* Adicionar bordas redondas */
+}
+.cardInserido:hover {
+  background-color: rgba(240, 182, 188, 0.5); /* rgba color with 50% opacity */
+}
+
+/* Estilizar o botão específico no card */
+.botaoEspecifico {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(154, 207, 183, 0.4); /* rgba color with 30% opacity */
+  transition: background-color 0.8s ease, transform 0.8s ease;
+  border: 6px dotted var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  white-space: normal; /* Permite que o texto quebre em várias linhas */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.botaoEspecifico:hover {
+  background-color: rgba(154, 207, 183, 0.7);
+  border: 6px dotted var(--verdao);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoAlterar {
+  background-color: var(--cinzinha);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoAlterar:hover {
+  background-color: #9fb2b4;
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoVoltar {
+  background-color: var(--cinzinha);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+.botaoVoltar:hover {
+  background-color: #9fb2b4;
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+
+.botaoExcluir {
+  background-color: #f0d8d8;
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoExcluir:hover {
+  background-color: var(--rosinha);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoQuestoes {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoQuestoes:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoEspecies {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoEspecies:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoPontuacao {
+  background-color: var(--verde);
+  color: var(--verdao);
+  border-radius: 7px; /* Adicionar bordas redondas */
+  font-family: "Poppins-semibold";
+  border: 1px solid var(--verdao); /* Adicionar borda verde escura */
+}
+
+.botaoPontuacao:hover {
+  background-color: var(--verdao);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+body {
+  background-color: var(--branco);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Pelo menos a altura total da janela de visualização */
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1; /* O conteúdo ocupa todo o espaço disponível, empurrando o footer para o final da página. */
+  /* Seu estilo personalizado para a seção principal da página aqui. */
+}
+
+.footer {
+  background-color: var(--verde);
+  padding: 20px 0;
+  color: var(--branco);
+  text-align: center;
+}

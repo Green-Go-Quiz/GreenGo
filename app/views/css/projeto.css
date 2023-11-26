@@ -130,6 +130,8 @@ p{
     margin-left: 10px;
 }
 
+
+
 .subtitulo{
     color: var(--principal);
     font-family: Poppins;
@@ -138,6 +140,7 @@ p{
     margin-left: 10px;
     margin-bottom: 30px;
 }
+
 
 iframe.maps{
     width: 100% !important;

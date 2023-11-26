@@ -37,12 +37,15 @@
                             <p class="nomeAtributo labelQuestao">Pontuação:</span>
                                 <span class="dadoAtributo"><?= $questao->getPontuacao(); ?></span>
                             </p>
-                            <p>
+
                             <p class="nomeAtributo labelQuestao">Imagem:<br></span>
-                                <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px">
+                                <?php if ($questao->getImagem() !== null && $questao->getImagem() !== '') : ?>
+                                    <img src="<?= BASEURL_ARQUIVOS . "/" . $questao->getImagem(); ?>" class="imagemQuestao" alt="" width="100px">
+                                <?php else : ?>
+                                    <img src="" class="imagemQuestao" alt="Imagem Padrão t" width="100px">
+                                    <!--https://images.vexels.com/media/users/3/201075/isolated/preview/b893c17e341ed4f2734565958a642a77-iacute-cone-de-planta-em-vaso-by-vexels.png-->
+                                <?php endif; ?>
                             </p>
-                            </p>
-                            <p>
                             <p class="nomeAtributo labelQuestao">Alternativas:<br></span>
                                 <span class="dadoAtributo" <?= $questao->getAlternativasTextoTratada(); ?></span>
                             </p>

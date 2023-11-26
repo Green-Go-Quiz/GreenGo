@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<?php
 
-/*session_start();
-
-if(isset($_SESSION['adm'])){
-    $nomeADM = $_SESSION['adm'];
-} 
-else if(isset($_SESSION['normal'])){
-    header("location: users/login.php");
-}
-else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
-    header("Location: users/login.php");
-    exit;
-}*/
-?>
 
 <head>
     <?php include_once("../bootstrap/header.php"); ?>
@@ -35,24 +21,13 @@ else if (!isset($_SESSION['adm']) && !isset($_SESSION['normal'])) {
                         <div class="row">
                             <div class="col">
 
-                                <!--SÓ HÁ UM MODO DE JOGO POR HORA
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                                        JOGAR
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="modosolo">Modo solo</a>
-                                        <a class="dropdown-item" href="emequipe">Em equipe</a>
-                                    </div>
-                                </div>
-                                -->
-
                             </div>
                         </div>
                     </div>
-                    <div class="img-responsive">
-                        <a href="..\controllers\EspecieControllerADM.php?action=EspeciesMapa"><img src="../public/mapa 1.svg" class="img-fluid" alt="logo-index" id="mapa-da-home"></a>
+                 
+                    <div class="col-md-6">
+                <img src="../public/mapa 1.svg" class="img-fluid" alt="logo-index" id="mapa-da-home"></a>
+            </div>
                     </div>
                 </div>
             </div>

@@ -184,9 +184,13 @@ class QuestaoController extends Controller
     public function delete()
     {
 
-
+        echo "Deleting";
+    
+        $dados["id"] = 0;
+   $dados['questao'] = $this->questaoDao->list();
+   $this->loadView("quiz/excluir.php", $dados);
         //   var_dump($_GET['id']);
-        $questao = $this->findQuestaoById();
+        /*$questao = $this->findQuestaoById();
         if ($questao) {
 
             $this->questaoDao->deleteImage($questao->getImagem());
@@ -196,7 +200,7 @@ class QuestaoController extends Controller
             $this->list("", "Questão excluída com sucesso!");
         } else {
             $this->list("Questão não encontrada!");
-        }
+        }*/
     }
 
 

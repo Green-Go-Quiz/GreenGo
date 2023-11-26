@@ -1,0 +1,132 @@
+:root {
+  --principal: hsl(150, 46%, 37%);
+  --verdao: #04574d;
+  --verdinho: #9acfb7;
+  --branco: #ebf0f1;
+  --branquinho: #ebf0f14b;
+  --destaque: #f58c95;
+  --vermelho: #f57a7a;
+  --rosa: #ffafb7;
+  --rosinha: #f0b6bc;
+  --cinza: #586660;
+  --cinzinha: #d3dadb;
+
+  width: 100%;
+  height: 100%;
+
+  font-family: Poppins-regular, Roboto;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fontes/Poppins-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-regular";
+  src: url("../fontes/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-medium";
+  src: url("../fontes/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Poppins-semibold";
+  src: url("../fontes/Poppins-SemiBold.ttf");
+}
+
+body {
+  background-color: var(--branco);
+}
+
+.tituloPagina {
+  font-weight: 600;
+  color: var(--principal);
+  font-family: "Poppins";
+}
+
+.tituloQuestao {
+  font-weight: 500;
+  color: var(--principal);
+  font-family: "Poppins";
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.descricaoQuestao {
+  font-weight: 700;
+  color: var(--verdao);
+  font-family: "Poppins-medium";
+  margin-bottom: 10px;
+}
+
+.descricaoAlternativa {
+  font-weight: 500;
+  color: var(--verdao);
+  font-family: "Poppins-medium";
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.imagemPequena {
+  width: 300px;
+  height: 300px;
+  border-radius: 3%; /* Torna a imagem redonda */
+  border: 1.3px solid var(--principal); /* Adiciona um contorno preto de 2px */
+}
+
+/* Remover bordas dos cards */
+.botaoAlternativa {
+  border: none;
+  background-color: var(
+    --cinzinha
+  ); /* Definir a cor de fundo padrão como cinzinha */
+  transition: background-color 0.9s ease; /* Adicione a transição para a propriedade de cor de fundo */
+  border-radius: 7px; /* Adicionar bordas redondas */
+}
+
+.botaoVoltar {
+  background-color: var(--cinzinha);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+.botaoVoltar:hover {
+  background-color: #9fb2b4;
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar:hover {
+  background-color: var(--principal);
+  /* Ou qualquer outra cor mais escura que você desejar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+.botaoGravar {
+  background-color: var(--verdinho);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+
+.botaoCerto {
+  border: none;
+  background-color: var(
+    --verdinho
+  ); /* Definir a cor de fundo padrão como cinzinha */
+  transition: background-color 0.9s ease; /* Adicione a transição para a propriedade de cor de fundo */
+  border-radius: 7px; /* Adicionar bordas redondas */
+}
+
+.botaoErrado {
+  background-color: var(--vermelho);
+  color: var(--verdao);
+  font-family: "Poppins-semibold";
+}
+.footer {
+  background-color: var(--principal); /* Cor de fundo verde */
+  padding: 20px 0; /* Espaçamento interno para o conteúdo do rodapé */
+  color: var(--branco); /* Cor do texto branca */
+  text-align: center; /* Alinhar o texto ao centro */
+}

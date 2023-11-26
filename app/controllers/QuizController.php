@@ -115,14 +115,20 @@ class QuizController extends Controller
 
 
     public function delete()
-    {
-        $quiz = $this->findQuizById();
+    {          
+       echo "Deleting";
+    
+             $dados["id"] = 0;
+        $dados['zonas'] = $this->zonaDao->list();
+        $this->loadView("quiz/excluir.php", $dados);
+
+        /*$quiz = $this->findQuizById();
         if ($quiz) {
             $this->quizDao->deleteById($quiz->getIdQuiz());
             $this->list("", "Quiz excluído com sucesso!");
         } else {
             $this->list("Quiz não encontrado!");
-        }
+        }*/
     }
 
     private function findQuizById()
